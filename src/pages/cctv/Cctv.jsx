@@ -119,17 +119,7 @@ export default function Cctv() {
               </p>
 
               {/* CTA buttons */}
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <button className="rounded-lg bg-green-900 px-8 py-4 text-base font-bold text-white
-                                   shadow-lg shadow-green-900/10 transition-all
-                                   hover:bg-green-800 hover:shadow-xl active:scale-95">
-                  Get Security Audit
-                </button>
-                <button className="rounded-lg border-2 border-gray-200 px-8 py-4 text-base font-bold
-                                   text-green-900 transition-all hover:bg-gray-50 active:scale-95">
-                  Watch Demo
-                </button>
-              </div>
+           
 
               {/* Trust micro-stats – desktop only */}
               <div className="mt-12 hidden gap-10 lg:flex">

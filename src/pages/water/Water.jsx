@@ -26,14 +26,7 @@ const Water = () => {
                 automated systems for bottle and sachet water production that prioritize purity, efficiency,
                 and sustainability.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-[#006d37] text-white px-8 py-4 rounded-full font-bold shadow-[0px_20px_40px_rgba(0,109,55,0.15)] hover:-translate-y-0.5 transition-transform">
-                  Get Started
-                </button>
-                <button className="bg-[#e0e3e5] text-[#191c1e] px-8 py-4 rounded-full font-bold hover:bg-[#e6e8ea] transition-colors">
-                  View Systems
-                </button>
-              </div>
+             
             </div>
 
             {/* Right image */}

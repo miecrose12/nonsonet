@@ -148,14 +148,7 @@ const Ipbx = () => {
               </p>
 
               {/* Buttons */}
-              <div className="flex flex-wrap gap-4 pt-4">
-                <button className="px-8 py-4 bg-emerald-600 text-white font-bold rounded-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 active:scale-95">
-                  Explore Solutions
-                </button>
-                <button className="px-8 py-4 bg-slate-200 text-slate-900 font-bold rounded-full hover:bg-slate-300 transition-colors duration-300">
-                  Watch Demo
-                </button>
-              </div>
+           
             </div>
 
             {/* Right Image Section */}

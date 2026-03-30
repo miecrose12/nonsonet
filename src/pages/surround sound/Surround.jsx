@@ -34,13 +34,7 @@ const Surround = () => {
               </p>
 
               {/* CTA Buttons */}
-              <div className="surround3-button-group">
-                <button className="surround3-btn-primary">Experience The Sound</button>
-                <button className="surround3-btn-secondary">
-                  View Systems{' '}
-                  <span className="surround3-material-icons">arrow_forward</span>
-                </button>
-              </div>
+             
             </div>
 
             {/* Right Image Section */}

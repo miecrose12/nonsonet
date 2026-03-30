@@ -132,21 +132,7 @@ export default function Door() {
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap gap-4 pt-2">
-                <button
-                  className="bg-green-700 text-white px-10 py-4 rounded-full font-bold text-lg
-                             shadow-lg shadow-green-700/20 hover:shadow-[0_20px_40px_-10px_rgba(0,109,55,0.35)]
-                             hover:-translate-y-1 transition-all duration-300 active:scale-95"
-                >
-                  Explore Systems
-                </button>
-                <button
-                  className="bg-white border border-gray-200 text-gray-900 px-10 py-4 rounded-full
-                             font-bold text-lg hover:bg-gray-50 transition-all duration-300 active:scale-95"
-                >
-                  View Live Demo
-                </button>
-              </div>
+              
 
               {/* Trust row — desktop only */}
               <div className="hidden lg:flex items-center gap-8 pt-4">

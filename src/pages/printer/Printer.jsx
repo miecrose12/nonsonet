@@ -112,15 +112,7 @@ const Printer = () => {
                 Optimize your entire document lifecycle with a centralized, secure, and sustainable print infrastructure. We transform printing from a hidden cost into a strategic asset.
               </p>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-                <button className="bg-primary text-white px-8 py-4 rounded-full font-headline font-bold shadow-lg shadow-primary/20 hover:translate-y-[-2px] hover:shadow-primary/40 transition-all duration-300 active:translate-y-0">
-                  Book a Print Assessment
-                </button>
-                <button className="bg-gray-100 text-gray-900 px-8 py-4 rounded-full font-headline font-bold hover:bg-gray-200 transition-all duration-300 border border-gray-200">
-                  View Case Studies
-                </button>
-              </div>
+          
             </div>
 
             {/* Right Image */}

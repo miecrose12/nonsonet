@@ -111,14 +111,6 @@ export default function Forecourt() {
                   Nonsonet partners with FuelTorque to deliver a unified, high-performance ecosystem
                   for modern fuel retailers, combining robust hardware with cloud-first management.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-emerald-700 text-white px-8 py-4 rounded-full font-[Manrope] font-bold text-lg shadow-xl hover:opacity-95 transition-all">
-                    Explore Solutions
-                  </button>
-                  <button className="bg-[#e0e3e5] text-[#191c1e] px-8 py-4 rounded-full font-[Manrope] font-bold text-lg hover:bg-[#e6e8ea] transition-all">
-                    View Demo
-                  </button>
-                </div>
               </div>
 
               {/* Right */}

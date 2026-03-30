@@ -53,14 +53,6 @@ const HeroSection = () => (
           high-efficiency electrical power for a sustainable, resilient future.
         </p>
 
-        <div className="surround-hero__cta-row">
-          <button className="surround-btn surround-btn--primary surround-btn--lg">
-            Explore Solutions
-          </button>
-          <button className="surround-btn surround-btn--ghost surround-btn--lg">
-            View Case Studies
-          </button>
-        </div>
       </div>
 
       {/* Right image */}
