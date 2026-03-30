@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 function Landing() {
   const [formData, setFormData] = useState({
@@ -50,19 +49,19 @@ function Landing() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link
-                to="/services"
+              <a
+                href="/services"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#006d3d] text-white rounded-full font-semibold text-base transition-all hover:bg-[#00d27b] hover:text-[#00542e] hover:shadow-[0_8px_24px_rgba(0,109,61,0.28)] active:scale-95"
               >
                 Explore Solutions
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
-              <Link
-                to="/contact"
+              </a>
+              <a
+                href="/contact"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#e1e3e4] text-[#191c1d] rounded-full font-semibold text-base transition-all hover:bg-[#d9dadb] active:scale-95"
               >
                 Contact Us
-              </Link>
+              </a>
             </div>
 
             <div className="flex items-center gap-6 pt-8 border-t border-[#bbcbbc]/30">
@@ -255,13 +254,13 @@ function Landing() {
                 <p className="text-base text-[#666] flex-1">Automated fuel management and secure transaction systems.</p>
               </div>
              
-              <Link
-                to="/forecourt"
+              <a
+                href="/forcourt"
                 className="inline-flex items-center gap-2 mt-6 px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* Door Video Bell */}
@@ -273,13 +272,13 @@ function Landing() {
                   Real-time video monitoring with two-way communication and biometric integration for enhanced security.
                 </p>
               </div>
-              <Link
-                to="/door"
+              <a
+                href="/door"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* Managed Print - green */}
@@ -289,13 +288,13 @@ function Landing() {
                 <div className="text-2xl font-bold text-white mb-2">Managed Print Services</div>
                 <p className="text-base text-white/85 flex-1">Optimized document workflow and hardware maintenance.</p>
               </div>
-              <Link
-                to="/printer"
+              <a
+                href="/printer"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-white border border-white rounded-xl text-sm font-semibold transition-all hover:bg-white hover:text-[#16a34a]"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* Solar */}
@@ -305,13 +304,13 @@ function Landing() {
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Solar Inverter Systems</div>
                 <p className="text-base text-[#666] flex-1">Sustainable energy backup for critical IT infrastructure.</p>
               </div>
-              <Link
-                to="/solar"
+              <a
+                href="/solar"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* Surround Sound */}
@@ -321,13 +320,13 @@ function Landing() {
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Surround Sound</div>
                 <p className="text-base text-[#666] flex-1">Professional audio installations for corporate environments.</p>
               </div>
-              <Link
-                to="/surround"
+              <a
+                href="/surround"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* Water */}
@@ -337,13 +336,13 @@ function Landing() {
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Water Solutions</div>
                 <p className="text-base text-[#666] flex-1">Smart monitoring and treatment systems.</p>
               </div>
-              <Link
-                to="/water"
+              <a
+                href="/water"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* IP-PBX */}
@@ -355,13 +354,13 @@ function Landing() {
                   Enterprise-grade VoIP telephony with unified messaging, call recording, and seamless business communication.
                 </p>
               </div>
-              <Link
-                to="/ipbx"
+              <a
+                href="/ipbx"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
 
             {/* CCTV */}
@@ -373,13 +372,13 @@ function Landing() {
                   High-definition IP surveillance with AI motion detection, real-time alerts, and secure remote monitoring.
                 </p>
               </div>
-              <Link
-                to="/cctv"
+              <a
+                href="/cctv"
                 className="inline-flex items-center gap-2 mt-auto px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
               >
                 See more details
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
