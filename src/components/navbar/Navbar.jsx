@@ -166,7 +166,7 @@ function Navbar() {
               alt="LUCID Logo"
               className="navbar-logo-image"
             />
-            <span className="navbar-logo-text">Nonsonent-Technologies</span>
+            <span className="navbar-logo-text">Nonsonet-Technologies</span>
           </button>
 
           <div className="navbar-links-desktop">
