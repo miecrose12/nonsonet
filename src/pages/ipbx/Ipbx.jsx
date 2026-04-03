@@ -121,29 +121,52 @@ const Ipbx = () => {
       <main className="w-full min-h-screen bg-slate-50 font-sans text-slate-900">
         
         {/* ============================================
-            HERO SECTION
+            HERO SECTION (Dark gradient + all white text)
             ============================================ */}
-        <section className="relative overflow-hidden py-20 md:py-32 px-6">
+        <section 
+          className="relative overflow-hidden py-20 md:py-32 px-6"
+          style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+        >
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            {/* Left Content */}
+            {/* Left Content - ALL TEXT WHITE */}
             <div className="flex flex-col gap-8 z-10">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 rounded-full w-fit">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
-                <span className="text-xs font-bold tracking-widest uppercase text-emerald-600">
+              {/* Badge - Dark mode version */}
+              <div 
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full w-fit border border-white/20 shadow-inner"
+                style={{ backgroundColor: 'rgba(255,255,255,0.12)', color: '#ffffff' }}
+              >
+                <span 
+                  className="inline-block w-1.5 h-1.5 rounded-full bg-[#62f595] animate-pulse"
+                ></span>
+                <span className="text-xs font-bold tracking-widest uppercase">
                   Intelligent Innovation
                 </span>
               </div>
 
-              {/* Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-slate-900">
+              {/* Title - Pure white with emerald-to-white gradient on brand name */}
+              <h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight drop-shadow-md"
+                style={{ color: '#ffffff' }}
+              >
                 Revolutionize Your Business Communications with{' '}
-                <span className="text-emerald-600">Nonsonet Technologies</span>
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Nonsonet Technologies
+                </span>
               </h1>
 
-              {/* Description */}
-              <p className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
+              {/* Description - High-contrast white */}
+              <p 
+                className="text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-sm"
+                style={{ color: 'rgba(255,255,255,0.92)' }}
+              >
                 Experience the power of Unified Communication. Our IP-PBX systems integrate voice, video, and messaging into one seamless interface, designed for the modern enterprise.
               </p>
 
@@ -151,19 +174,26 @@ const Ipbx = () => {
            
             </div>
 
-            {/* Right Image Section */}
+            {/* Right Image Section - Enhanced for dark hero */}
             <div className="relative">
-              {/* Blur Background */}
-              <div className="absolute -top-20 -right-20 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-40 -z-10"></div>
+              {/* Blur Background - Adjusted opacity for dark theme */}
+              <div 
+                className="absolute -top-20 -right-20 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl -z-10"
+              ></div>
 
-              {/* Image Wrapper */}
-              <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl">
+              {/* Image Wrapper - Stronger shadow + subtle white ring */}
+              <div 
+                className="relative z-10 rounded-lg overflow-hidden shadow-2xl ring-1 ring-white/10"
+                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+              >
                 <img
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmEMlvU17emqIYG-BeQ-9XbsX963d5hcgZtepc4rRYnMu5R-bvCSBMG-bFmUtPE9YBC7jAXpdfSJmLEueJ6hlIFUWQod6nFPKx4AXrTpslzdxbSjNOiG4kMzUEdZHx9rJlf3Io4UcfBZE5sogJFMoL_WNY0znMfPBwna9O_d69lwhpglMasgtpry5LroPfQyzRwqTvc1Q-uY6lNebDkA22Udi1cRAVycHu5da9W9c2J2f4hJcPT7XfAfDeLsn_R4SHnQ6XEL_PDUhc"
                   alt="Modern high-tech office interior with professionals using sleek communication devices"
                   className="w-full h-96 md:h-[500px] object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-600/20"></div>
+                <div 
+                  className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a2e2a]/40"
+                ></div>
               </div>
 
               {/* Info Card */}
@@ -173,7 +203,7 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            WHY CHOOSE SECTION
+            WHY CHOOSE SECTION (unchanged)
             ============================================ */}
         <section className="py-24 px-6 bg-slate-100">
           <div className="max-w-6xl mx-auto">
@@ -268,7 +298,7 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            SOLUTIONS SECTION
+            SOLUTIONS SECTION (unchanged)
             ============================================ */}
         <section className="py-24 px-6 bg-slate-50">
           <div className="max-w-6xl mx-auto">
@@ -371,7 +401,7 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            BENEFITS SECTION
+            BENEFITS SECTION (unchanged)
             ============================================ */}
         <section className="relative py-24 px-6 bg-slate-100 overflow-hidden">
           {/* Blur Background */}

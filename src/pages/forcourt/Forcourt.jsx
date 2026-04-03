@@ -91,24 +91,27 @@ export default function Forecourt() {
       />
 
       <div className="bg-[#f7f9fb] font-[Inter] text-[#191c1e] antialiased min-h-screen">
-        {/* ── Header ────────────────────────────────────────── */}
-       
 
         <main className="pt-20">
           {/* ── Hero ──────────────────────────────────────────── */}
-          <section className="relative px-6 py-12 md:py-24 overflow-hidden">
+          <section
+            className="relative px-6 py-12 md:py-24 overflow-hidden"
+            style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+          >
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left */}
               <div className="z-10">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-widest uppercase mb-6">
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#00d27b]/20 text-[#00d27b] text-xs font-bold tracking-widest uppercase mb-6">
                   FuelTorque Partnership
                 </span>
-                <h1 className="font-[Manrope] text-4xl md:text-6xl font-extrabold text-[#191c1e] leading-tight tracking-tight mb-6">
-                  Forecourt &  <br />  
-                  <span className="text-emerald-700">Payment Automation</span>
+                <h1 className="font-[Manrope] text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
+                  Forecourt &amp; <br />
+                  <span className="text-[#00d27b]">Payment Automation</span>
                 </h1>
-                <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-lg">
-                  In partnership with FuelTorque, a cutting-edge solution for real-time management and monitoring of fuel station activities, alongside comprehensive inventory management for store items and groceries. Supports hybrid cloud-based and on-premise deployment.
+                <p className="text-lg text-white/65 leading-relaxed mb-10 max-w-lg">
+                  In partnership with FuelTorque, a cutting-edge solution for real-time management and
+                  monitoring of fuel station activities, alongside comprehensive inventory management
+                  for store items and groceries. Supports hybrid cloud-based and on-premise deployment.
                 </p>
               </div>
 
@@ -125,8 +128,8 @@ export default function Forecourt() {
               </div>
             </div>
 
-            {/* Background glow */}
-            <div className="absolute top-0 right-0 -z-10 w-1/2 h-1/2 bg-emerald-100/40 blur-[120px] rounded-full" />
+            {/* Subtle teal glow — blends with the gradient */}
+            <div className="absolute top-0 right-0 -z-10 w-1/2 h-1/2 bg-[#00d27b]/10 blur-[120px] rounded-full pointer-events-none" />
           </section>
 
           {/* ── Solution Overview ──────────────────────────────── */}
@@ -154,7 +157,7 @@ export default function Forecourt() {
                   {
                     icon: "visibility",
                     title: "Real-Time Visibility",
-                    desc: "Complete oversight of fuel station activitie",
+                    desc: "Complete oversight of fuel station activities",
                   },
                   {
                     icon: "account_tree",
@@ -166,7 +169,7 @@ export default function Forecourt() {
                     title: "Cost Optimization",
                     desc: "Significant cost reduction through smart automation",
                   },
-                   {
+                  {
                     icon: "trending_down",
                     title: "Self-Service at Pump",
                     desc: "Enables efficient self-service operations",
@@ -318,12 +321,8 @@ export default function Forecourt() {
             </div>
           </section>
 
-          {/* ── CTA ───────────────────────────────────────────── */}
-          
         </main>
 
-        {/* ── Footer ────────────────────────────────────────── */}
-       
       </div>
     </>
   );

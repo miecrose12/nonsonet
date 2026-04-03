@@ -7,49 +7,117 @@ const Surround = () => {
     <>
       <Navbar />
       <main className="surround3-main-content">
-        {/* Hero Section */}
-        <section className="surround3-hero-section">
-          {/* Background Decoration */}
-          <div className="surround3-hero-gradient"></div>
+        {/* Hero Section - Dark gradient background + all white text (detailed) */}
+        <section 
+          className="surround3-hero-section"
+          style={{ 
+            background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' 
+          }}
+        >
+          {/* Background Decoration - Enhanced for new dark gradient */}
+          <div 
+            className="surround3-hero-gradient"
+            style={{ 
+              background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)',
+              opacity: 1 
+            }}
+          />
 
           <div className="surround3-hero-wrapper">
-            {/* Left Content */}
+            {/* Left Content - All text forced to white with enhanced contrast */}
             <div className="surround3-hero-left">
-              {/* Innovation Badge */}
-              <div className="surround3-badge">
-                <span className="surround3-badge-dot"></span>
-                <span className="surround3-badge-text">INTELLIGENT INNOVATION</span>
+              {/* Innovation Badge - Dark-mode version for maximum visibility */}
+              <div 
+                className="surround3-badge"
+                style={{ 
+                  backgroundColor: 'rgba(255,255,255,0.12)', 
+                  color: '#ffffff',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+                }}
+              >
+                <span 
+                  className="surround3-badge-dot"
+                  style={{ backgroundColor: '#62f595', animation: 'pulse 2s infinite' }}
+                ></span>
+                <span 
+                  className="surround3-badge-text"
+                  style={{ color: '#ffffff', fontWeight: 700 }}
+                >
+                  INTELLIGENT INNOVATION
+                </span>
               </div>
 
-              {/* Main Title */}
-              <h1 className="surround3-hero-title">
+              {/* Main Title - Pure white with elegant emerald-to-white gradient on brand name */}
+              <h1 
+                className="surround3-hero-title"
+                style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+              >
                 Elevate Your Audio Experience with{' '}
-                <span className="surround3-text-primary-dark">Nonsonet Technologies</span>
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontWeight: 800
+                  }}
+                >
+                  Nonsonet Technologies
+                </span>
               </h1>
 
-              {/* Description */}
-              <p className="surround3-hero-description">
+              {/* Description - High-contrast white with subtle transparency for depth */}
+              <p 
+                className="surround3-hero-description"
+                style={{ 
+                  color: 'rgba(255,255,255,0.92)',
+                  textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+                }}
+              >
                 Transform any space into a high-fidelity auditory sanctuary. Our surround sound
                 ecosystems bridge the gap between technical precision and emotional resonance.
               </p>
 
-              {/* CTA Buttons */}
+              {/* CTA Buttons - (kept as-is, now visible on dark background) */}
              
             </div>
 
-            {/* Right Image Section */}
+            {/* Right Image Section - Enhanced shadow & ring for dark hero */}
             <div className="surround3-hero-image-container">
               <img
                 alt="High-end home theater setup"
                 className="surround3-hero-image"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyh1vbkt7W0xGc4e0ph9WIi1wRSQKURhSu5AvTgCVa531ylFntRYee58-nKWGFetcKrjq5OQZ3ef78vvEOAsLc8Qm-Gthd3wAzAIyRrPBPLU15c12mxbDVVdnMRtxGb_Vw0HFQPCT9mOo_R08RYTgOuy7CRXNNdTh9LI8qwamYGpYIH0WFqoDVVo2oKnc26XhNZU_gtayqSnroa2edRQ6gcHi1enig3LHII3eiANLfdC48ZOYqWNka-qhQ2KNlwErxmBurnst_28p"
+                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
               />
-              <div className="surround3-hero-overlay"></div>
+              <div 
+                className="surround3-hero-overlay"
+                style={{ 
+                  background: 'linear-gradient(to top, rgba(13,27,42,0.65), transparent 60%)' 
+                }}
+              />
 
-              {/* Glass Effect Card */}
-              <div className="surround3-glass-card">
-                <p className="surround3-glass-card-title">Elite Acoustic Series</p>
-                <p className="surround3-glass-card-description">
+              {/* Glass Effect Card - Updated for dark hero (semi-transparent dark glass) */}
+              <div 
+                className="surround3-glass-card"
+                style={{ 
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(16px)',
+                  color: '#ffffff'
+                }}
+              >
+                <p 
+                  className="surround3-glass-card-title"
+                  style={{ color: '#ffffff' }}
+                >
+                  Elite Acoustic Series
+                </p>
+                <p 
+                  className="surround3-glass-card-description"
+                  style={{ color: 'rgba(255,255,255,0.85)' }}
+                >
                   Custom-calibrated for your unique architectural footprint.
                 </p>
               </div>
@@ -57,7 +125,7 @@ const Surround = () => {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
+        {/* Why Choose Us Section - Unchanged */}
         <section className="surround3-why-choose-section">
           <div className="surround3-container">
             {/* Section Header */}
@@ -151,7 +219,7 @@ const Surround = () => {
           </div>
         </section>
 
-        {/* Our Solutions Section */}
+        {/* Our Solutions Section - Unchanged */}
         <section className="surround3-solutions-section">
           <div className="surround3-container">
             {/* Section Header */}
@@ -239,7 +307,7 @@ const Surround = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* Benefits Section - Unchanged */}
         <section className="surround3-benefits-section">
           <div className="surround3-benefits-wrapper">
             <div className="surround3-benefits-card">

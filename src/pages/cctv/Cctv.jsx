@@ -71,65 +71,88 @@ export default function Cctv() {
 
       <main className="pt-20">
 
-        <section className="relative overflow-hidden bg-white px-6 pt-16 pb-24
-                            lg:px-16 xl:px-24 lg:pt-24 lg:pb-32">
-
-          <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-1/2 opacity-5">
+        {/* ============================================
+            HERO SECTION – Dark gradient + all white text
+            ============================================ */}
+        <section 
+          className="relative overflow-hidden px-6 pt-16 pb-24 lg:px-16 xl:px-24 lg:pt-24 lg:pb-32"
+          style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+        >
+          {/* Decorative background image – slightly increased opacity for dramatic dark effect */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-1/2 opacity-10">
             <img src={HERO_BG} alt="" className="h-full w-full object-cover" />
           </div>
 
-          <div className="absolute left-0 top-0 hidden h-full w-1.5 bg-green-700 lg:block" />
+          <div className="absolute left-0 top-0 hidden h-full w-1.5 bg-emerald-400 lg:block" />
 
-          <div className="mx-auto max-w-[1440px]
-                          lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+          <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
 
-            {/* ── Text column ── */}
+            {/* ── Text column – ALL WHITE ── */}
             <div>
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-200
-                               bg-green-50 px-4 py-1 text-xs font-bold uppercase tracking-widest text-green-800">
+              {/* Badge – Dark mode version */}
+              <span 
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-inner"
+              >
+                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
                 🛡 Trusted Security Partner
               </span>
 
+              {/* Title – Pure white with elegant gradient on brand name */}
               <h1
-                className="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-green-900
-                           lg:text-5xl xl:text-6xl"
+                className="mb-6 text-4xl font-extrabold leading-tight tracking-tight drop-shadow-md lg:text-5xl xl:text-6xl"
                 style={hl}
               >
                 Protect What Matters Most with{' '}
-                <span className="text-green-600">Nonsonet Technologies</span>{' '}
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Nonsonet Technologies
+                </span>{' '}
                 CCTV Solutions
               </h1>
 
-              <p className="mb-8 text-lg leading-relaxed text-gray-500 lg:text-xl">
+              {/* Description – High-contrast white */}
+              <p 
+                className="mb-8 text-lg leading-relaxed drop-shadow-sm lg:text-xl"
+                style={{ color: 'rgba(255,255,255,0.92)' }}
+              >
                 Elevate your security with high-definition monitoring and intelligent surveillance
                 infrastructure designed for absolute clarity and reliability.
               </p>
 
-
+              {/* Stats row – White text */}
               <div className="mt-12 hidden gap-10 lg:flex">
                 {[['500+', 'Installations'], ['99.9%', 'Uptime SLA'], ['24/7', 'Support']].map(
                   ([val, label]) => (
                     <div key={label}>
-                      <p className="text-2xl font-black text-green-900" style={hl}>{val}</p>
-                      <p className="text-sm text-gray-400">{label}</p>
+                      <p className="text-2xl font-black text-white" style={hl}>{val}</p>
+                      <p className="text-sm text-white/70">{label}</p>
                     </div>
                   )
                 )}
               </div>
             </div>
 
+            {/* ── Right image column – Enhanced for dark hero ── */}
             <div className="mt-14 lg:mt-0">
-              <div className="relative overflow-hidden rounded-2xl border-l-8 border-green-700
-                              shadow-2xl lg:rounded-3xl">
+              <div 
+                className="relative overflow-hidden rounded-2xl border-l-8 border-emerald-400 shadow-2xl lg:rounded-3xl ring-1 ring-white/10"
+                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+              >
                 <img
                   src={HERO_IMG}
                   alt="Security specialist monitoring CCTV feeds"
                   className="aspect-video w-full object-cover lg:aspect-[4/3]"
                 />
 
-                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full
-                                bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
+                {/* Live badge – already dark-friendly, kept as-is */}
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
                   LIVE MONITORING ACTIVE
                 </div>
               </div>
@@ -137,6 +160,10 @@ export default function Cctv() {
 
           </div>
         </section>
+
+        {/* ============================================
+            REMAINING SECTIONS UNCHANGED
+            ============================================ */}
 
         <section className="bg-gray-50 px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
@@ -148,10 +175,8 @@ export default function Cctv() {
               <p className="text-gray-500">Why industry leaders trust our surveillance architecture.</p>
             </div>
 
-            {/* Grid: 2 cols on mobile → 4 cols on desktop */}
             <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
 
-              {/* High-Res ── wide: 2 of 2 mobile | 2 of 4 desktop */}
               <div className="col-span-2 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
                 <Camera className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-2 text-lg font-bold">High-Res Cameras</h3>
@@ -160,14 +185,12 @@ export default function Cctv() {
                 </p>
               </div>
 
-              {/* Wide Range */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
                 <Globe className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-1 font-bold">Wide Range</h3>
                 <p className="text-xs text-gray-500">Comprehensive coverage across any terrain.</p>
               </div>
 
-              {/* Remote Access */}
               <div className="rounded-2xl border border-green-100 bg-green-50 p-8 shadow-sm">
                 <Monitor className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-1 font-bold">Remote Access</h3>
@@ -186,8 +209,7 @@ export default function Cctv() {
                 <p className="text-xs text-gray-500">Full-color thermal and IR imaging in total darkness.</p>
               </div>
 
-              <div className="col-span-2 rounded-2xl border-2 border-green-900/10 bg-white p-8
-                              shadow-lg shadow-green-900/5">
+              <div className="col-span-2 rounded-2xl border-2 border-green-900/10 bg-white p-8 shadow-lg shadow-green-900/5">
                 <Layers className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-2 text-lg font-bold text-green-900">Scalable Solutions</h3>
                 <p className="text-sm text-gray-500">
@@ -203,8 +225,7 @@ export default function Cctv() {
           <div className="mx-auto max-w-[1440px]">
 
             <h2
-              className="mb-16 text-center text-3xl font-bold text-green-900
-                         lg:mb-20 lg:text-4xl"
+              className="mb-16 text-center text-3xl font-bold text-green-900 lg:mb-20 lg:text-4xl"
               style={hl}
             >
               Engineered Systems
@@ -215,22 +236,17 @@ export default function Cctv() {
               {cameraProducts.map((cam, i) => (
                 <div
                   key={cam.title}
-                  className={`group flex flex-col gap-8
-                    lg:flex-row lg:items-center lg:gap-16
-                    ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+                  className={`group flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16 ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
                 >
-                  <div className="relative w-full flex-shrink-0 overflow-hidden rounded-2xl
-                                  shadow-2xl shadow-black/10 lg:w-1/2">
+                  <div className="relative w-full flex-shrink-0 overflow-hidden rounded-2xl shadow-2xl shadow-black/10 lg:w-1/2">
                     <div className="aspect-square lg:aspect-[4/3]">
                       <img
                         src={cam.img}
                         alt={cam.title}
-                        className="h-full w-full object-cover transition-transform
-                                   duration-700 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <div className={`absolute top-4 left-4 ${cam.badgeColor} rounded-full
-                                    px-3 py-1 text-xs font-bold text-white shadow-lg`}>
+                    <div className={`absolute top-4 left-4 ${cam.badgeColor} rounded-full px-3 py-1 text-xs font-bold text-white shadow-lg`}>
                       {cam.badge}
                     </div>
                   </div>
@@ -245,28 +261,23 @@ export default function Cctv() {
                       {['4K Resolution', 'AI-Powered', 'Weatherproof', 'Easy Install'].map((tag) => (
                         <li
                           key={tag}
-                          className="rounded-full border border-green-200 bg-green-50
-                                     px-3 py-1 text-xs font-semibold text-green-800"
+                          className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-800"
                         >
                           {tag}
                         </li>
                       ))}
                     </ul>
 
-                  
-
                     <div className="mt-8 h-1 w-14 bg-green-700/30" />
                   </div>
                 </div>
               ))}
+
               <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
-               
-                <div className="group relative flex h-96 flex-col justify-between overflow-hidden
-                                rounded-2xl border border-gray-200/50 bg-gray-100 p-10 lg:h-[440px]">
+                <div className="group relative flex h-96 flex-col justify-between overflow-hidden rounded-2xl border border-gray-200/50 bg-gray-100 p-10 lg:h-[440px]">
                   <div className="z-10">
-                    <span className="mb-3 inline-block rounded-full border border-green-200
-                                     bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
+                    <span className="mb-3 inline-block rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
                       INDOOR SERIES
                     </span>
                     <h3 className="mb-3 text-xl font-bold lg:text-2xl" style={hl}>
@@ -277,25 +288,17 @@ export default function Cctv() {
                       compromising coverage or resolution quality.
                     </p>
                   </div>
-                  
-                  <div className="absolute -bottom-10 -right-10 h-64 w-64 
-                                   duration-500 group-hover:opacity-100">
+                  <div className="absolute -bottom-10 -right-10 h-64 w-64 duration-500 group-hover:opacity-100">
                     <img src={SENSOR_IMG} alt="Indoor sensor" className="h-full w-full object-contain" />
                   </div>
-                  <button className="z-10 self-start rounded-lg border-2 border-gray-300 bg-white
-                                     px-5 py-2.5 text-sm font-bold text-gray-700 transition-all
-                                     hover:border-green-700 hover:text-green-900 active:scale-95">
+                  <button className="z-10 self-start rounded-lg border-2 border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-700 transition-all hover:border-green-700 hover:text-green-900 active:scale-95">
                     Explore Sensors
                   </button>
                 </div>
 
-                
-                <div className="group relative flex h-96 flex-col justify-between overflow-hidden
-                                rounded-2xl border-2 border-green-900/10 bg-white p-10
-                                shadow-lg shadow-green-900/5 lg:h-[440px]">
+                <div className="group relative flex h-96 flex-col justify-between overflow-hidden rounded-2xl border-2 border-green-900/10 bg-white p-10 shadow-lg shadow-green-900/5 lg:h-[440px]">
                   <div className="z-10">
-                    <span className="mb-3 inline-block rounded-full border border-green-200
-                                     bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
+                    <span className="mb-3 inline-block rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
                       STORAGE HARDWARE
                     </span>
                     <h3 className="mb-3 text-xl font-bold text-green-900 lg:text-2xl" style={hl}>
@@ -306,12 +309,9 @@ export default function Cctv() {
                       multi-channel processing with redundant backups.
                     </p>
                   </div>
-               
-                  <div className="absolute bottom-0 right-0 h-1/2 w-full 
-                                   duration-500 group-hover:opacity-70">
+                  <div className="absolute bottom-0 right-0 h-1/2 w-full duration-500 group-hover:opacity-70">
                     <img src={NVR_IMG} alt="NVR hardware" className="h-full w-full object-cover" />
                   </div>
-                 
                 </div>
 
               </div>
@@ -319,9 +319,7 @@ export default function Cctv() {
           </div>
         </section>
 
-
-        <section className="relative border-y border-gray-200/30 bg-gray-50
-                            px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
+        <section className="relative border-y border-gray-200/30 bg-gray-50 px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:gap-20">
 
             <div>
@@ -350,11 +348,9 @@ export default function Cctv() {
               {stats.map(({ val, label, sub }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-5 rounded-2xl border border-gray-200
-                             bg-white p-6 shadow-sm"
+                  className="flex items-center gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
                 >
-                  <div className="flex h-14 w-20 flex-shrink-0 items-center justify-center
-                                  rounded-xl bg-green-50">
+                  <div className="flex h-14 w-20 flex-shrink-0 items-center justify-center rounded-xl bg-green-50">
                     <span className="text-lg font-black text-green-900" style={hl}>{val}</span>
                   </div>
                   <div>

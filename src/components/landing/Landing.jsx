@@ -24,36 +24,38 @@ function Landing() {
     <div className="w-full bg-[#f8f9fa] overflow-x-hidden font-['Manrope',sans-serif] text-[#191c1d] pt-20">
 
       {/* ===== HERO ===== */}
-      {/* ✅ id="hero" — navbar "Home" scrolls here */}
-      <section id="hero" className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-20">
+      <section
+        id="hero"
+        className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-20"
+        style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+      >
         {/* Skewed decorative bg */}
-        <div className="absolute top-0 right-0 bottom-0 w-1/3 bg-[#f3f4f5]/50 skew-x-[12deg] origin-top-right z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 bottom-0 w-1/3 bg-white/5 skew-x-[12deg] origin-top-right z-10 pointer-events-none" />
 
         <div className="relative z-10 max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left */}
           <div className="flex flex-col gap-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00d27b]/15 text-[#006d3d] text-xs font-semibold tracking-[0.06em] uppercase w-fit">
-              <span className="w-2 h-2 rounded-full bg-[#006d3d] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00d27b]/20 text-[#00d27b] text-xs font-semibold tracking-[0.06em] uppercase w-fit">
+              <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
               Technology Redefined
             </div>
 
-            <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em]">
+            <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
               Empowering businesses with{' '}
-              <span className="text-[#006d3d]">intelligent</span>{' '}
+              <span className="text-[#00d27b]">intelligent</span>{' '}
               technology.
             </h1>
 
-            <p className="text-xl text-[#3c4a3f] max-w-[32rem] leading-[1.7]">
+            <p className="text-xl text-white/70 max-w-[32rem] leading-[1.7]">
               Nonsonet Technologies Limited delivers scalable, innovative, and highly reliable IT solutions. From strategic advisory to enterprise infrastructure, we transform how you work.
             </p>
 
-            {/* ✅ FIXED: Both buttons now scroll smoothly within the page */}
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() =>
                   document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#006d3d] text-white rounded-full font-semibold text-base transition-all hover:bg-[#00d27b] hover:text-[#00542e] hover:shadow-[0_8px_24px_rgba(0,109,61,0.28)] active:scale-95 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#00d27b] text-[#00542e] rounded-full font-semibold text-base transition-all hover:bg-white hover:text-[#006d3d] hover:shadow-[0_8px_24px_rgba(0,210,123,0.28)] active:scale-95 cursor-pointer"
               >
                 Explore Solutions
                 <span className="material-symbols-outlined">arrow_forward</span>
@@ -63,27 +65,27 @@ function Landing() {
                 onClick={() =>
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#e1e3e4] text-[#191c1d] rounded-full font-semibold text-base transition-all hover:bg-[#d9dadb] active:scale-95 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white border border-white/20 rounded-full font-semibold text-base transition-all hover:bg-white/20 active:scale-95 cursor-pointer"
               >
                 Contact Us
               </button>
             </div>
 
-            <div className="flex items-center gap-6 pt-8 border-t border-[#bbcbbc]/30">
+            <div className="flex items-center gap-6 pt-8 border-t border-white/15">
               <div>
-                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#006d3d]">
+                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
                   99.8%
                 </div>
-                <div className="text-xs font-semibold text-[#3c4a3f] uppercase tracking-widest">
+                <div className="text-xs font-semibold text-white/50 uppercase tracking-widest">
                   Uptime Statistic
                 </div>
               </div>
-              <div className="w-px h-10 bg-[#bbcbbc]/40" />
+              <div className="w-px h-10 bg-white/20" />
               <div>
-                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#191c1d]">
+                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
                   24/7
                 </div>
-                <div className="text-xs font-semibold text-[#3c4a3f] uppercase tracking-widest">
+                <div className="text-xs font-semibold text-white/50 uppercase tracking-widest">
                   Active Support
                 </div>
               </div>
@@ -100,12 +102,12 @@ function Landing() {
               />
             </div>
 
-            <div className="absolute -bottom-10 -left-10 bg-white border border-[#f3f4f5] rounded-2xl p-6 max-w-[18rem] shadow-xl rotate-[-3deg]">
-              <p className="text-sm italic text-[#3c4a3f] leading-relaxed mb-3">
+            <div className="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-[18rem] shadow-xl rotate-[-3deg]">
+              <p className="text-sm italic text-white/80 leading-relaxed mb-3">
                 "Innovation is not just what we do; it's how we think about
                 the future of connectivity."
               </p>
-              <div className="font-bold text-[#006d3d] text-sm">
+              <div className="font-bold text-[#00d27b] text-sm">
                 Nonsonet Executive Team
               </div>
             </div>
@@ -114,7 +116,6 @@ function Landing() {
       </section>
 
       {/* ===== WHO WE ARE ===== */}
-      {/* ✅ id="who-we-are" — navbar "Who We Are" scrolls here */}
       <section id="who-we-are" className="px-6 py-24 bg-[#edeeef]">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* Images mosaic */}
@@ -215,7 +216,6 @@ function Landing() {
       </section>
 
       {/* ===== SERVICES BENTO ===== */}
-      {/* ✅ id="what-we-do" — "Explore Solutions" hero button scrolls here */}
       <section id="what-we-do" className="px-8 py-20 bg-gradient-to-br from-[#f5f7fa] to-[#e8ecf1]">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
@@ -234,7 +234,6 @@ function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
-            {/* Forecourt - large (kept as featured) */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1 min-h-[280px] md:col-span-2 lg:col-span-1 relative overflow-hidden">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">local_gas_station</span>
@@ -250,14 +249,11 @@ function Landing() {
               </a>
             </div>
 
-            {/* Door Video Bell */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1 min-h-[260px]">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">doorbell</span>
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Door Video Bell Systems</div>
-                <p className="text-base text-[#666] flex-1">
-                  Smart Security at Your Entrance
-                </p>
+                <p className="text-base text-[#666] flex-1">Smart Security at Your Entrance</p>
               </div>
               <a
                 href="/door"
@@ -268,7 +264,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* Managed Print - green */}
             <div className="flex flex-col p-7 bg-gradient-to-br from-[#22c55e] to-[#16a34a] text-white rounded-3xl shadow-md transition-all hover:shadow-[0_8px_32px_rgba(34,197,94,0.25)] hover:-translate-y-1 min-h-[260px]">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-white mb-6">print</span>
@@ -284,7 +279,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* Solar */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">solar_power</span>
@@ -300,7 +294,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* Surround Sound */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">surround_sound</span>
@@ -316,7 +309,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* Water */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">water_drop</span>
@@ -332,7 +324,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* IP-PBX */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">phone_in_talk</span>
@@ -350,7 +341,6 @@ function Landing() {
               </a>
             </div>
 
-            {/* CCTV */}
             <div className="flex flex-col p-7 bg-white rounded-3xl shadow-md transition-all hover:shadow-xl hover:-translate-y-1">
               <div className="flex-1 flex flex-col">
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">videocam</span>
@@ -372,7 +362,6 @@ function Landing() {
       </section>
 
       {/* ===== PARTNERS ===== */}
-      {/* ✅ id="partners" — navbar "Partners" scrolls here */}
       <section id="partners" className="px-6 py-24 bg-[#f8f9fa]">
         <div className="max-w-[1280px] mx-auto">
           <p className="text-xs font-bold text-[#3c4a3f] opacity-50 uppercase tracking-widest text-center mb-12">
@@ -390,7 +379,6 @@ function Landing() {
             ))}
           </div>
 
-          {/* Spotlight */}
           <div className="bg-[#00d27b]/10 rounded-3xl p-8 md:p-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
@@ -432,19 +420,26 @@ function Landing() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      {/* ✅ id="contact" — "Contact Us" hero button scrolls here */}
-      <section id="contact" className="px-6 py-24 bg-[#f8f9fa]">
-        <div className="max-w-[1280px] mx-auto bg-[#191c1d] rounded-3xl p-8 md:p-20 relative overflow-hidden text-white">
-          {/* Deco */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#006d3d]/20 rounded-full blur-3xl pointer-events-none" />
+      <section
+        id="contact"
+        className="px-6 py-24 relative overflow-hidden"
+        style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+      >
+        {/* Deco blobs */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#00d27b]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#006d3d]/15 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10">
+        <div className="max-w-[1280px] mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Left */}
             <div>
-              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl md:text-5xl font-extrabold leading-tight">
+              <div className="text-xs font-bold text-[#00d27b] uppercase tracking-widest mb-4">
+                Get In Touch
+              </div>
+              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl md:text-5xl font-extrabold leading-tight text-white">
                 Ready to transform your IT?
               </h2>
-              <p className="text-base text-white/65 leading-relaxed mt-6">
+              <p className="text-base text-white/60 leading-relaxed mt-6">
                 Our consultants are ready to discuss how we can streamline your
                 operations and secure your infrastructure. Reach out for a
                 tailored technology audit.
@@ -456,7 +451,7 @@ function Landing() {
                     <span className="material-symbols-outlined">mail</span>
                   </div>
                   <div>
-                    <div className="text-xs uppercase tracking-widest text-white/45">Email Us</div>
+                    <div className="text-xs uppercase tracking-widest text-white/40">Email Us</div>
                     <div className="font-semibold text-white">info@nonsonet.com.ng</div>
                   </div>
                 </div>
@@ -466,7 +461,7 @@ function Landing() {
                     <span className="material-symbols-outlined">call</span>
                   </div>
                   <div>
-                    <div className="text-xs uppercase tracking-widest text-white/45">Call Support</div>
+                    <div className="text-xs uppercase tracking-widest text-white/40">Call Support</div>
                     <div className="font-semibold text-white">+234 09077617790</div>
                   </div>
                 </div>

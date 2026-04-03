@@ -8,20 +8,65 @@ const Water = () => {
       <main className="pt-24">
 
         {/* ─── Hero Section ─── */}
-        <section className="relative px-6 py-20 lg:py-32 overflow-hidden">
+        <section 
+          className="relative px-6 py-20 lg:py-32 overflow-hidden"
+          style={{ 
+            background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' 
+          }}
+        >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
 
-            {/* Left copy */}
+            {/* Left copy - ALL TEXT WHITE WITH ENHANCED CONTRAST */}
             <div className="lg:col-span-7 z-10">
-              <span className="inline-block px-3 py-1 rounded-full bg-[#62f595] text-[#006e37] text-[0.75rem] font-bold tracking-widest uppercase mb-6">
+              {/* Badge - Dark mode version for perfect visibility on gradient */}
+              <span 
+                className="inline-block px-3 py-1 rounded-full text-[0.75rem] font-bold tracking-widest uppercase mb-6 border border-white/20 shadow-inner"
+                style={{ 
+                  backgroundColor: 'rgba(255,255,255,0.12)', 
+                  color: '#ffffff' 
+                }}
+              >
+                <span 
+                  className="inline-block w-2 h-2 rounded-full mr-1.5"
+                  style={{ backgroundColor: '#62f595', animation: 'pulse 2s infinite' }}
+                />
                 INTELLIGENT INNOVATION
               </span>
-              <h1 className="text-5xl lg:text-7xl font-extrabold text-[#191c1e] leading-[1.1] tracking-tight mb-8">
+
+              {/* Main Title - Pure white with elegant emerald-to-white gradient on brand name */}
+              <h1 
+                className="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-8 drop-shadow-md"
+                style={{ color: '#ffffff' }}
+              >
                 Pure, Refreshing{' '}
-                <span className="text-[#006d37]">Water Solutions</span>{' '}
-                by Nonsonet Technologies
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Water Solutions
+                </span>{' '}
+                by{' '}
+                <span 
+                  style={{
+                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  Nonsonet Technologies
+                </span>
               </h1>
-              <p className="text-lg lg:text-xl text-[#3d4a3f] leading-relaxed mb-10 max-w-2xl">
+
+              {/* Description - High-contrast white with subtle transparency for depth */}
+              <p 
+                className="text-lg lg:text-xl leading-relaxed mb-10 max-w-2xl drop-shadow-sm"
+                style={{ color: 'rgba(255,255,255,0.92)' }}
+              >
                 Advancing global hydration standards through precision engineering. We provide end-to-end
                 automated systems for bottle and sachet water production that prioritize purity, efficiency,
                 and sustainability.
@@ -29,9 +74,12 @@ const Water = () => {
              
             </div>
 
-            {/* Right image */}
+            {/* Right image - Enhanced shadow & ring for dark hero background */}
             <div className="lg:col-span-5 relative">
-              <div className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl rotate-3">
+              <div 
+                className="aspect-square rounded-[2rem] overflow-hidden shadow-2xl rotate-3 ring-1 ring-white/10"
+                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+              >
                 <img
                   alt="Clean water production"
                   className="w-full h-full object-cover"
@@ -39,21 +87,36 @@ const Water = () => {
                 />
               </div>
 
-              {/* Live stats card */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block">
+              {/* Live stats card - Updated for dark hero (semi-transparent glass effect) */}
+              <div 
+                className="absolute -bottom-8 -left-8 p-6 rounded-xl shadow-xl max-w-xs hidden md:block"
+                style={{ 
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(16px)',
+                  color: '#ffffff'
+                }}
+              >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="w-3 h-3 rounded-full bg-[#62f595]"></span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#006d37]">Live Stats</span>
+                  <span 
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: '#62f595' }}
+                  ></span>
+                  <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#62f595' }}>
+                    Live Stats
+                  </span>
                 </div>
-                <p className="text-sm text-[#3d4a3f]">
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,0.85)' }}>
                   Real-time filtration monitoring active across all automated lines.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Background glow */}
-          <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-l from-[#62f595]/20 to-transparent blur-3xl" />
+          {/* Background glow - Slightly boosted for dramatic effect on dark gradient */}
+          <div 
+            className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-l from-[#62f595]/30 to-transparent blur-3xl" 
+          />
         </section>
 
         {/* ─── Why Choose Us ─── */}

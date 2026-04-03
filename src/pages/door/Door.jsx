@@ -94,13 +94,10 @@ export default function Door() {
 
         {/* ══════════════════════════════════════════════════════
             HERO SECTION
-            Mobile  → stacked: text then image
-            Desktop → 12-col grid: 6 text | 6 image
         ══════════════════════════════════════════════════════ */}
         <section
-          className="relative min-h-[85vh] flex items-center overflow-hidden
-                     px-6 py-16 lg:px-12 lg:py-24"
-          style={{ background: 'radial-gradient(circle at 70% 30%, #f7f9fb 0%, #ffffff 100%)' }}
+          className="relative min-h-[85vh] flex items-center overflow-hidden px-6 py-16 lg:px-12 lg:py-24"
+          style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
         >
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -108,39 +105,37 @@ export default function Door() {
             <div className="lg:col-span-6 space-y-8">
 
               {/* Eyebrow pill */}
-              <div className="inline-flex items-center gap-3 bg-green-700/5 px-4 py-2 rounded-full border border-green-700/10">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[10px] font-extrabold tracking-[0.2em] text-green-700 uppercase"
-                      style={hl}>
+              <div className="inline-flex items-center gap-3 bg-[#00d27b]/15 px-4 py-2 rounded-full border border-[#00d27b]/20">
+                <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+                <span
+                  className="text-[10px] font-extrabold tracking-[0.2em] text-[#00d27b] uppercase"
+                  style={hl}
+                >
                   Smart Home Security
                 </span>
               </div>
 
               <h1
-                className="text-5xl lg:text-[64px] xl:text-[72px] font-extrabold text-gray-900
-                           tracking-tight leading-[1.05]"
+                className="text-5xl lg:text-[64px] xl:text-[72px] font-extrabold text-white tracking-tight leading-[1.05]"
                 style={hl}
               >
                 The New Standard in{' '}
-                <span className="text-green-700 italic">Front Door</span>{' '}
+                <span className="text-[#00d27b] italic">Front Door</span>{' '}
                 Intelligence.
               </h1>
 
-              <p className="text-lg lg:text-xl text-gray-500 max-w-xl leading-relaxed font-medium">
+              <p className="text-lg lg:text-xl text-white/65 max-w-xl leading-relaxed font-medium">
                 Luminous IT's door video bells merge sophisticated hardware with intuitive
                 software, keeping you connected to your home's entrance from anywhere.
               </p>
 
-              {/* CTAs */}
-              
-
               {/* Trust row — desktop only */}
-              <div className="hidden lg:flex items-center gap-8 pt-4">
+              <div className="hidden lg:flex items-center gap-8 pt-4 border-t border-white/10">
                 {[['4K', 'Ultra HD Video'], ['30ft', 'Night Vision Range'], ['256-bit', 'Encryption']].map(
                   ([val, label]) => (
                     <div key={label} className="flex flex-col">
-                      <span className="text-xl font-black text-green-700" style={hl}>{val}</span>
-                      <span className="text-xs text-gray-400 font-medium">{label}</span>
+                      <span className="text-xl font-black text-[#00d27b]" style={hl}>{val}</span>
+                      <span className="text-xs text-white/45 font-medium">{label}</span>
                     </div>
                   )
                 )}
@@ -152,8 +147,8 @@ export default function Door() {
 
               {/* Main card */}
               <div
-                className="relative z-10 rounded-[2.5rem] overflow-hidden bg-white p-3 lg:p-4"
-                style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.12)' }}
+                className="relative z-10 rounded-[2.5rem] overflow-hidden bg-white/10 p-3 lg:p-4 border border-white/10"
+                style={{ boxShadow: '0 20px 50px -12px rgba(0,0,0,0.4)' }}
               >
                 <img
                   src={IMG_HERO}
@@ -165,30 +160,29 @@ export default function Door() {
               {/* Float AI card */}
               <div
                 className="absolute -bottom-6 -right-2 lg:-bottom-10 lg:-right-6
-                           bg-white/95 backdrop-blur-md p-5 lg:p-6 rounded-3xl
-                           border border-white/80 max-w-[240px] lg:max-w-[260px] z-20"
-                style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.12)' }}
+                           bg-white/10 backdrop-blur-md p-5 lg:p-6 rounded-3xl
+                           border border-white/20 max-w-[240px] lg:max-w-[260px] z-20"
+                style={{ boxShadow: '0 20px 50px -12px rgba(0,0,0,0.3)' }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-green-400/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    {/* Person search icon */}
-                    <svg className="w-5 h-5 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-10 h-10 bg-[#00d27b]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-[#00d27b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                         d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-green-700 uppercase tracking-wider">AI Identification</p>
-                    <p className="text-sm font-extrabold text-gray-900">Delivery Detected</p>
+                    <p className="text-[10px] font-bold text-[#00d27b] uppercase tracking-wider">AI Identification</p>
+                    <p className="text-sm font-extrabold text-white">Delivery Detected</p>
                   </div>
                 </div>
-                <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="w-2/3 h-full bg-green-400 rounded-full" />
+                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div className="w-2/3 h-full bg-[#00d27b] rounded-full" />
                 </div>
               </div>
 
               {/* Decorative blurred orb */}
-              <div className="absolute -top-8 -left-8 w-48 h-48 bg-green-400/10 rounded-full blur-3xl -z-10" />
+              <div className="absolute -top-8 -left-8 w-48 h-48 bg-[#00d27b]/10 rounded-full blur-3xl -z-10" />
             </div>
 
           </div>
@@ -197,13 +191,10 @@ export default function Door() {
 
         {/* ══════════════════════════════════════════════════════
             CORE FEATURES GRID
-            Mobile  → stacked
-            Desktop → 3-col grid + wide cloud card
         ══════════════════════════════════════════════════════ */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
 
-            {/* Section header */}
             <div className="max-w-3xl mb-16 lg:mb-20">
               <p className="text-green-700 font-bold text-sm tracking-widest uppercase mb-4">
                 Core Technology
@@ -217,24 +208,20 @@ export default function Door() {
               <div className="h-1.5 w-24 bg-green-400 rounded-full" />
             </div>
 
-            {/* Feature cards grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
-              {/* Image-based feature cards */}
               {coreFeatures.map((feat) => (
                 <div
                   key={feat.title}
                   className="p-8 lg:p-10 rounded-[2rem] bg-gray-50 hover:bg-white
                              border border-transparent hover:border-gray-200/60
                              transition-all duration-500 group"
-                  style={{ transition: 'all 0.4s ease' }}
                 >
                   <div className="w-full aspect-video rounded-2xl overflow-hidden mb-7 lg:mb-8">
                     <img
                       src={feat.img}
                       alt={feat.title}
-                      className="w-full h-full object-cover transition-transform duration-700
-                                 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-extrabold mb-3 lg:mb-4" style={hl}>
@@ -246,7 +233,7 @@ export default function Door() {
                 </div>
               ))}
 
-              {/* Night Vision — icon card */}
+              {/* Night Vision */}
               <div
                 className="p-8 lg:p-10 rounded-[2rem] bg-gray-50 hover:bg-white
                            border border-transparent hover:border-gray-200/60
@@ -258,7 +245,6 @@ export default function Door() {
                              group-hover:bg-green-700 group-hover:text-white transition-all duration-300"
                   style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
                 >
-                  {/* Visibility icon */}
                   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -275,20 +261,16 @@ export default function Door() {
                 </p>
               </div>
 
-              {/* Cloud / Encryption — wide card spans 2 on md+ */}
+              {/* Cloud / Encryption */}
               <div
                 className="md:col-span-2 bg-green-700 p-10 lg:p-12 rounded-[2.5rem]
                            flex flex-col md:flex-row items-center gap-8 lg:gap-10
                            overflow-hidden relative group"
               >
-                {/* Glow orb */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/10 rounded-full
                                 -mr-32 -mt-32 blur-3xl group-hover:scale-150 transition-transform duration-700" />
-
                 <div className="relative z-10 space-y-4 md:w-3/5">
-                  <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-400 rounded-xl flex items-center
-                                  justify-center mb-2">
-                    {/* Cloud done icon */}
+                  <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-400 rounded-xl flex items-center justify-center mb-2">
                     <svg className="w-7 h-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                         d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806
@@ -307,11 +289,9 @@ export default function Door() {
                     security before it ever reaches the cloud.
                   </p>
                 </div>
-
                 <div className="relative z-10 md:w-2/5 flex justify-center">
                   <button className="bg-white text-green-700 px-8 py-4 rounded-full font-bold shadow-xl
-                                     hover:bg-green-400 hover:text-green-900 transition-all duration-300
-                                     active:scale-95">
+                                     hover:bg-green-400 hover:text-green-900 transition-all duration-300 active:scale-95">
                     Secure Storage Info
                   </button>
                 </div>
@@ -323,18 +303,14 @@ export default function Door() {
 
         {/* ══════════════════════════════════════════════════════
             PRODUCT SOLUTIONS
-            Mobile  → stacked
-            Desktop → sticky sidebar left | scrolling products right
         ══════════════════════════════════════════════════════ */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
 
-              {/* Sticky sidebar */}
               <div className="lg:w-1/3 lg:sticky lg:top-32">
                 <h2
-                  className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900
-                             mb-6 lg:mb-8 leading-tight"
+                  className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-6 lg:mb-8 leading-tight"
                   style={hl}
                 >
                   Tailored Video Bell Solutions
@@ -343,7 +319,6 @@ export default function Door() {
                   We offer a spectrum of hardware options designed to fit seamlessly into any
                   architectural style or infrastructure requirement.
                 </p>
-
                 <div className="space-y-4 lg:space-y-6">
                   {[
                     { title: 'Precision Installation', sub: 'Expert mounting and calibration.' },
@@ -354,7 +329,6 @@ export default function Door() {
                       className="flex items-start gap-4 p-4 lg:p-5 rounded-2xl bg-gray-50 border border-gray-100"
                       style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.06)' }}
                     >
-                      {/* Check icon */}
                       <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none"
                            viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
@@ -369,133 +343,78 @@ export default function Door() {
                 </div>
               </div>
 
-              {/* Products list */}
               <div className="lg:w-2/3 flex flex-col gap-10 lg:gap-12">
 
-                {/* Wireless */}
                 <div
                   className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row group"
                   style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
                 >
                   <div className="md:w-1/2 h-56 md:h-auto overflow-hidden">
-                    <img
-                      src={IMG_WIRELESS}
-                      alt="Wireless battery-powered video doorbell"
-                      className="w-full h-full object-cover transition-transform duration-700
-                                 group-hover:scale-110"
-                    />
+                    <img src={IMG_WIRELESS} alt="Wireless battery-powered video doorbell"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                   <div className="p-8 lg:p-10 md:w-1/2 flex flex-col justify-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">
-                      Wireless Series
-                    </span>
-                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>
-                      Wireless Door Video Bells
-                    </h4>
+                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">Wireless Series</span>
+                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>Wireless Door Video Bells</h4>
                     <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">
-                      Versatile, battery-powered systems that install in minutes. Ideal for renters
-                      and heritage properties.
+                      Versatile, battery-powered systems that install in minutes. Ideal for renters and heritage properties.
                     </p>
-                    <a
-                      href="#"
-                      className="text-green-700 font-bold flex items-center gap-2
-                                 group-hover:gap-4 transition-all duration-300 w-fit"
-                    >
+                    <a href="#" className="text-green-700 font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
                       Product Details
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </a>
                   </div>
                 </div>
 
-                {/* Wired — reversed on desktop */}
                 <div
                   className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row-reverse group"
                   style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
                 >
                   <div className="md:w-1/2 h-56 md:h-auto overflow-hidden">
-                    <img
-                      src={IMG_WIRED}
-                      alt="Hardwired professional grade video doorbell"
-                      className="w-full h-full object-cover transition-transform duration-700
-                                 group-hover:scale-110"
-                    />
+                    <img src={IMG_WIRED} alt="Hardwired professional grade video doorbell"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                   <div className="p-8 lg:p-10 md:w-1/2 flex flex-col justify-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">
-                      Wired Pro Series
-                    </span>
-                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>
-                      Hardwired High-Performance
-                    </h4>
+                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">Wired Pro Series</span>
+                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>Hardwired High-Performance</h4>
                     <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">
-                      Continuous power delivery for zero-latency recording and faster response
-                      times. Never worry about recharging.
+                      Continuous power delivery for zero-latency recording and faster response times. Never worry about recharging.
                     </p>
-                    <a
-                      href="#"
-                      className="text-green-700 font-bold flex items-center gap-2
-                                 group-hover:gap-4 transition-all duration-300 w-fit"
-                    >
+                    <a href="#" className="text-green-700 font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
                       Product Details
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </a>
                   </div>
                 </div>
 
-                {/* Smart Lock + Multi-Unit — 2-col mini grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-
-                  {/* Smart Lock Sync */}
-                  <div
-                    className="bg-white p-8 lg:p-10 rounded-[2rem]"
-                    style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
-                  >
-                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center
-                                    justify-center mb-5 lg:mb-6">
+                  <div className="bg-white p-8 lg:p-10 rounded-[2rem]" style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 lg:mb-6">
                       <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                           d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>
-                      Smart Lock Sync
-                    </h4>
-                    <img
-                      src={IMG_LOCK}
-                      alt="Smart lock interface"
-                      className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6"
-                    />
+                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>Smart Lock Sync</h4>
+                    <img src={IMG_LOCK} alt="Smart lock interface" className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6" />
                     <p className="text-gray-500 text-sm leading-relaxed">
                       One-touch unlocking for verified guests directly from your live video feed.
                     </p>
                   </div>
 
-                  {/* Multi-Unit Console */}
-                  <div
-                    className="bg-white p-8 lg:p-10 rounded-[2rem]"
-                    style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
-                  >
-                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center
-                                    justify-center mb-5 lg:mb-6">
+                  <div className="bg-white p-8 lg:p-10 rounded-[2rem]" style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}>
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 lg:mb-6">
                       <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                           d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                     </div>
-                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>
-                      Multi-Unit Console
-                    </h4>
-                    <img
-                      src={IMG_MULTI}
-                      alt="Multi-unit intercom system"
-                      className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6"
-                    />
+                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>Multi-Unit Console</h4>
+                    <img src={IMG_MULTI} alt="Multi-unit intercom system" className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6" />
                     <p className="text-gray-500 text-sm leading-relaxed">
                       Enterprise-grade solutions for apartments and corporate gated facilities.
                     </p>
@@ -510,54 +429,35 @@ export default function Door() {
 
         {/* ══════════════════════════════════════════════════════
             VISUAL BENEFITS SECTION
-            Mobile  → stacked tall cards
-            Desktop → 4-col row of tall hover cards
         ══════════════════════════════════════════════════════ */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
-
             <div className="text-center mb-16 lg:mb-24">
-              <h2
-                className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5 lg:mb-6"
-                style={hl}
-              >
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5 lg:mb-6" style={hl}>
                 Security Meets Serenity
               </h2>
               <p className="text-lg lg:text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
-                Beyond hardware, we provide the peace of mind that allows you to focus on what
-                truly matters.
+                Beyond hardware, we provide the peace of mind that allows you to focus on what truly matters.
               </p>
             </div>
 
-            {/* Cards: 1 col mobile → 2 col tablet → 4 col desktop */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 lg:gap-10">
               {benefitCards.map((card) => (
                 <div
                   key={card.title}
-                  className="group relative h-[380px] lg:h-[450px] rounded-[3rem] overflow-hidden
-                             transition-transform duration-500 hover:-translate-y-2"
+                  className="group relative h-[380px] lg:h-[450px] rounded-[3rem] overflow-hidden transition-transform duration-500 hover:-translate-y-2"
                   style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
                 >
                   <img
                     src={card.img}
                     alt={card.title}
-                    className="absolute inset-0 w-full h-full object-cover grayscale
-                               group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   />
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t ${card.overlayClass}
-                                to-transparent flex flex-col justify-end p-8 lg:p-10`}
-                  >
-                    <h5
-                      className={`text-xl lg:text-2xl font-extrabold ${card.titleColor} mb-2 lg:mb-3`}
-                      style={hl}
-                    >
+                  <div className={`absolute inset-0 bg-gradient-to-t ${card.overlayClass} to-transparent flex flex-col justify-end p-8 lg:p-10`}>
+                    <h5 className={`text-xl lg:text-2xl font-extrabold ${card.titleColor} mb-2 lg:mb-3`} style={hl}>
                       {card.title}
                     </h5>
-                    <p
-                      className={`${card.descColor} text-sm leading-relaxed
-                                  opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                    >
+                    <p className={`${card.descColor} text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500`}>
                       {card.desc}
                     </p>
                   </div>
@@ -567,23 +467,7 @@ export default function Door() {
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            FINAL CTA SECTION
-            Mobile  → centered, stacked
-            Desktop → centered, side-by-side buttons, bigger type
-        ══════════════════════════════════════════════════════ */}
-       
-
       </main>
-
-
-      {/* ══════════════════════════════════════════════════════
-          FOOTER
-          Mobile  → stacked
-          Desktop → brand left | links right
-      ══════════════════════════════════════════════════════ */}
-      
 
     </div>
   );

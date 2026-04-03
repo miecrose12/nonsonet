@@ -89,59 +89,60 @@ const Printer = () => {
         <Navbar />
       <main className="pt-24">
         {/* ==================== HERO SECTION ==================== */}
-        <section className="relative min-h-[707px] flex items-center overflow-hidden px-6 lg:px-12 py-12">
+        <section 
+          className="relative min-h-[707px] flex items-center overflow-hidden px-6 lg:px-12 py-12 bg-[linear-gradient(to_right,#0d1b2a,#0a2e2a)]"
+        >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
             {/* Left Content */}
             <div className="lg:col-span-7 z-10 animate-fade-in">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-primary font-label text-xs font-bold tracking-widest mb-8 border border-emerald-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              {/* Badge - Updated for dark hero background */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white font-label text-xs font-bold tracking-widest mb-8 border border-white/20 shadow-inner">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 MANAGED PRINT SERVICES
               </div>
 
-              {/* Heading */}
-              <h1 className="font-headline text-5xl lg:text-6xl xl:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight mb-8">
+              {/* Heading - Fully white with enhanced contrast */}
+              <h1 className="font-headline text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight tracking-tight mb-8 drop-shadow-md">
                 Streamline Your Printing Operations with{' '}
-                <span className="text-primary bg-gradient-to-r from-primary to-emerald-500 bg-clip-text text-transparent">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-emerald-400">
                   Nonsonet Technologies
                 </span>
               </h1>
 
-              {/* Description */}
-              <p className="text-gray-600 text-lg lg:text-xl leading-relaxed max-w-2xl mb-10 font-body">
+              {/* Description - Light white/gray for perfect readability on dark gradient */}
+              <p className="text-white/90 text-lg lg:text-xl leading-relaxed max-w-2xl mb-10 font-body drop-shadow-sm">
                 Optimize your entire document lifecycle with a centralized, secure, and sustainable print infrastructure. We transform printing from a hidden cost into a strategic asset.
               </p>
 
-          
             </div>
 
-            {/* Right Image */}
+            {/* Right Image - Enhanced with stronger shadow for dark background */}
             <div className="lg:col-span-5 relative">
-              {/* Animated Background Blur */}
+              {/* Animated Background Blur - Slightly adjusted opacity for dramatic effect on dark hero */}
               <div
-                className="aspect-square rounded-full bg-gradient-to-br from-primary/20 to-emerald-200/20 absolute -top-10 -right-10 blur-3xl w-full h-full animate-pulse"
+                className="aspect-square rounded-full bg-gradient-to-br from-emerald-400/30 to-white/10 absolute -top-10 -right-10 blur-3xl w-full h-full animate-pulse"
                 style={{ animationDuration: '4s' }}
               ></div>
 
               {/* Main Image Container */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500 ring-1 ring-white/10">
                 <img
                   alt="Modern Office Setup with Printer"
                   className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWQaLVx9GblnFxgfD-asT-2w34raI7EZVoFa-MindqmZBvVUnA7LvVt5-9GSKD4Z3fb8-D2whgWNRckGbDnU7pqjiLCm5JKjkxQxrcxnbyBDRbikfRwdJvXqq4e8JwWSlIP_8Y1xqnSt5Wp59g2ec-3jYw-7WYf2CxAvmVoJVf_v7JqE5w5fiheAKYXgzXcJ0RAGH8XRufE0G6IKmKX8vjecqyIQgTpwQ7CTwOrpfj0cqO6iC41rQ8k4ctUcFDpGlP5trYRT7oR1l"
                 />
 
-                {/* Stats Card Overlay */}
-                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-md bg-white/60 rounded-2xl border border-white/30 shadow-xl">
+                {/* Stats Card Overlay - Updated for dark hero: semi-transparent dark glass with white text */}
+                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-emerald-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-white flex items-center justify-center text-white text-2xl shadow-lg ring-2 ring-white/30">
                       📈
                     </div>
                     <div>
-                      <p className="text-xs font-label font-bold text-primary tracking-widest uppercase">
+                      <p className="text-xs font-label font-bold text-emerald-300 tracking-widest uppercase drop-shadow-sm">
                         Average Savings
                       </p>
-                      <p className="text-3xl font-headline font-extrabold text-gray-900">
+                      <p className="text-3xl font-headline font-extrabold text-white drop-shadow-sm">
                         30% Reductions
                       </p>
                     </div>
