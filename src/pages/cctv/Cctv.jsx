@@ -7,8 +7,6 @@ import {
   Moon,
   Layers,
 } from 'lucide-react';
-
-/* ─── Image constants ─────────────────────────────────────────────────── */
 const HERO_BG =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAX0rRhSABBgwEIMh2fzI82iwBmapc60WTRwF_BSzqalXkb7b5eNjzwFprT8tkyqDYM5VVs_cSqCsjMf2smf95ZOLSvzhEqSYRes5XiWKUDWMeguwLt-h8sMkqiQjdoIFal9HcCAqkgPWVGbl9PhAHjzPnEX4n9tnKwrw5vp857rxuORLlakR-X3oGrQx_nThTtRF4oUQIfr-J8Nx6y8KnCDzyIkGGWucRHJRmoyDIIGpCki7b02-3StGbtJr0Lnx9hqIyUvPSQWPxl';
 const HERO_IMG =
@@ -63,33 +61,23 @@ const stats = [
   { val: '5 yr',   label: 'Warranty Coverage',    sub: 'On all hardware components' },
 ];
 
-/* shared style shorthand */
 const hl = { fontFamily: 'Manrope, sans-serif' };
 
-/* ─── Component ───────────────────────────────────────────────────────── */
 export default function Cctv() {
   return (
     <div className="bg-white text-gray-900 selection:bg-green-200 selection:text-green-900">
 
-      {/* ── Navbar imported from project ── */}
       <Navbar />
 
       <main className="pt-20">
 
-        {/* ══════════════════════════════════════════════════════
-            HERO
-            Mobile  → stacked: text block then image
-            Desktop → 2-col grid: text left | image right
-        ══════════════════════════════════════════════════════ */}
         <section className="relative overflow-hidden bg-white px-6 pt-16 pb-24
                             lg:px-16 xl:px-24 lg:pt-24 lg:pb-32">
 
-          {/* Watermark schematic – top-right, barely visible */}
           <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-1/2 opacity-5">
             <img src={HERO_BG} alt="" className="h-full w-full object-cover" />
           </div>
 
-          {/* Green accent bar on left edge (desktop only) */}
           <div className="absolute left-0 top-0 hidden h-full w-1.5 bg-green-700 lg:block" />
 
           <div className="mx-auto max-w-[1440px]
@@ -97,7 +85,6 @@ export default function Cctv() {
 
             {/* ── Text column ── */}
             <div>
-              {/* Eyebrow */}
               <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-green-200
                                bg-green-50 px-4 py-1 text-xs font-bold uppercase tracking-widest text-green-800">
                 🛡 Trusted Security Partner
@@ -118,10 +105,7 @@ export default function Cctv() {
                 infrastructure designed for absolute clarity and reliability.
               </p>
 
-              {/* CTA buttons */}
-           
 
-              {/* Trust micro-stats – desktop only */}
               <div className="mt-12 hidden gap-10 lg:flex">
                 {[['500+', 'Installations'], ['99.9%', 'Uptime SLA'], ['24/7', 'Support']].map(
                   ([val, label]) => (
@@ -134,7 +118,6 @@ export default function Cctv() {
               </div>
             </div>
 
-            {/* ── Image column ── */}
             <div className="mt-14 lg:mt-0">
               <div className="relative overflow-hidden rounded-2xl border-l-8 border-green-700
                               shadow-2xl lg:rounded-3xl">
@@ -143,7 +126,7 @@ export default function Cctv() {
                   alt="Security specialist monitoring CCTV feeds"
                   className="aspect-video w-full object-cover lg:aspect-[4/3]"
                 />
-                {/* Live badge overlay */}
+
                 <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full
                                 bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
                   <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
@@ -155,12 +138,6 @@ export default function Cctv() {
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            ADVANCED INTELLIGENCE / FEATURES GRID
-            Mobile  → 2-col grid
-            Desktop → 4-col grid; "wide" cards span 2 cols
-        ══════════════════════════════════════════════════════ */}
         <section className="bg-gray-50 px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
 
@@ -197,21 +174,18 @@ export default function Cctv() {
                 <p className="text-xs text-green-800">Monitor from anywhere in the world instantly.</p>
               </div>
 
-              {/* Motion Detection */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
                 <Target className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-1 font-bold">Motion Detection</h3>
                 <p className="text-xs text-gray-500">AI-powered alerts that filter out false positives.</p>
               </div>
 
-              {/* Night Vision */}
               <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
                 <Moon className="mb-4 h-10 w-10 text-green-700" />
                 <h3 className="mb-1 font-bold">Night Vision</h3>
                 <p className="text-xs text-gray-500">Full-color thermal and IR imaging in total darkness.</p>
               </div>
 
-              {/* Scalable ── wide: 2 of 2 mobile | 2 of 4 desktop */}
               <div className="col-span-2 rounded-2xl border-2 border-green-900/10 bg-white p-8
                               shadow-lg shadow-green-900/5">
                 <Layers className="mb-4 h-10 w-10 text-green-700" />
@@ -225,12 +199,6 @@ export default function Cctv() {
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            ENGINEERED SYSTEMS
-            Mobile  → stacked full-width cards
-            Desktop → alternating image ↔ text rows (flex-row / flex-row-reverse)
-        ══════════════════════════════════════════════════════ */}
         <section className="bg-white px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
 
@@ -244,7 +212,6 @@ export default function Cctv() {
 
             <div className="space-y-24 lg:space-y-32">
 
-              {/* ── Camera product rows ── */}
               {cameraProducts.map((cam, i) => (
                 <div
                   key={cam.title}
@@ -252,7 +219,6 @@ export default function Cctv() {
                     lg:flex-row lg:items-center lg:gap-16
                     ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
                 >
-                  {/* Image */}
                   <div className="relative w-full flex-shrink-0 overflow-hidden rounded-2xl
                                   shadow-2xl shadow-black/10 lg:w-1/2">
                     <div className="aspect-square lg:aspect-[4/3]">
@@ -268,8 +234,6 @@ export default function Cctv() {
                       {cam.badge}
                     </div>
                   </div>
-
-                  {/* Text */}
                   <div className="flex flex-col justify-center lg:w-1/2">
                     <h3 className="mb-4 text-2xl font-bold text-green-900 lg:text-3xl" style={hl}>
                       {cam.title}
@@ -277,8 +241,6 @@ export default function Cctv() {
                     <p className="mb-6 text-base leading-relaxed text-gray-500 lg:text-lg">
                       {cam.desc}
                     </p>
-
-                    {/* Feature tags */}
                     <ul className="mb-8 flex flex-wrap gap-2">
                       {['4K Resolution', 'AI-Powered', 'Weatherproof', 'Easy Install'].map((tag) => (
                         <li
@@ -291,18 +253,15 @@ export default function Cctv() {
                       ))}
                     </ul>
 
-                    {/* Actions */}
                   
 
                     <div className="mt-8 h-1 w-14 bg-green-700/30" />
                   </div>
                 </div>
               ))}
-
-              {/* ── Indoor Sensors + NVR side-by-side on desktop ── */}
               <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
-                {/* Discreet Indoor Sensors – FIXED: clearer image (higher opacity, no faded look) */}
+               
                 <div className="group relative flex h-96 flex-col justify-between overflow-hidden
                                 rounded-2xl border border-gray-200/50 bg-gray-100 p-10 lg:h-[440px]">
                   <div className="z-10">
@@ -318,7 +277,7 @@ export default function Cctv() {
                       compromising coverage or resolution quality.
                     </p>
                   </div>
-                  {/* Decorative image – FIXED: increased base opacity so image is no longer faded/blurry */}
+                  
                   <div className="absolute -bottom-10 -right-10 h-64 w-64 
                                    duration-500 group-hover:opacity-100">
                     <img src={SENSOR_IMG} alt="Indoor sensor" className="h-full w-full object-contain" />
@@ -330,7 +289,7 @@ export default function Cctv() {
                   </button>
                 </div>
 
-                {/* NVR & DVR – FIXED: clearer image (higher opacity + removed grayscale) */}
+                
                 <div className="group relative flex h-96 flex-col justify-between overflow-hidden
                                 rounded-2xl border-2 border-green-900/10 bg-white p-10
                                 shadow-lg shadow-green-900/5 lg:h-[440px]">
@@ -347,7 +306,7 @@ export default function Cctv() {
                       multi-channel processing with redundant backups.
                     </p>
                   </div>
-                  {/* Decorative image – FIXED: increased base opacity + removed grayscale so image is sharp and clear */}
+               
                   <div className="absolute bottom-0 right-0 h-1/2 w-full 
                                    duration-500 group-hover:opacity-70">
                     <img src={NVR_IMG} alt="NVR hardware" className="h-full w-full object-cover" />
@@ -361,16 +320,10 @@ export default function Cctv() {
         </section>
 
 
-        {/* ══════════════════════════════════════════════════════
-            BENEFITS / VALUE OF VIGILANCE
-            Mobile  → stacked numbered list
-            Desktop → 2-col: numbered list left | stat cards right
-        ══════════════════════════════════════════════════════ */}
         <section className="relative border-y border-gray-200/30 bg-gray-50
                             px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:gap-20">
 
-            {/* Left: benefits list */}
             <div>
               <h2 className="mb-12 text-3xl font-bold text-green-900 lg:text-4xl" style={hl}>
                 The Value of Vigilance
@@ -393,7 +346,6 @@ export default function Cctv() {
               </div>
             </div>
 
-            {/* Right: spec stat cards – desktop only */}
             <div className="mt-16 hidden flex-col justify-center gap-5 lg:flex">
               {stats.map(({ val, label, sub }) => (
                 <div
@@ -416,23 +368,7 @@ export default function Cctv() {
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            CTA SECTION
-            Mobile  → centered, stacked buttons
-            Desktop → horizontal split: copy left | buttons right
-        ══════════════════════════════════════════════════════ */}
-
       </main>
-
-
-      {/* ══════════════════════════════════════════════════════
-          FOOTER
-          Mobile  → stacked centered
-          Desktop → brand left | nav links center | tagline right
-      ══════════════════════════════════════════════════════ */}
-      
-
     </div>
   );
 }

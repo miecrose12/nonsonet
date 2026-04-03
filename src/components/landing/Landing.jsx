@@ -44,24 +44,29 @@ function Landing() {
             </h1>
 
             <p className="text-xl text-[#3c4a3f] max-w-[32rem] leading-[1.7]">
-              Nonsonet Technologies Limited delivers precision infrastructure
-              and automation for modern enterprises.
+              Nonsonet Technologies Limited delivers scalable, innovative, and highly reliable IT solutions. From strategic advisory to enterprise infrastructure, we transform how you work.
             </p>
 
+            {/* ✅ FIXED: Both buttons now scroll smoothly within the page */}
             <div className="flex flex-wrap gap-4">
-              <a
-                href="/services"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#006d3d] text-white rounded-full font-semibold text-base transition-all hover:bg-[#00d27b] hover:text-[#00542e] hover:shadow-[0_8px_24px_rgba(0,109,61,0.28)] active:scale-95"
+              <button
+                onClick={() =>
+                  document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#006d3d] text-white rounded-full font-semibold text-base transition-all hover:bg-[#00d27b] hover:text-[#00542e] hover:shadow-[0_8px_24px_rgba(0,109,61,0.28)] active:scale-95 cursor-pointer"
               >
                 Explore Solutions
                 <span className="material-symbols-outlined">arrow_forward</span>
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#e1e3e4] text-[#191c1d] rounded-full font-semibold text-base transition-all hover:bg-[#d9dadb] active:scale-95"
+              </button>
+
+              <button
+                onClick={() =>
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#e1e3e4] text-[#191c1d] rounded-full font-semibold text-base transition-all hover:bg-[#d9dadb] active:scale-95 cursor-pointer"
               >
                 Contact Us
-              </a>
+              </button>
             </div>
 
             <div className="flex items-center gap-6 pt-8 border-t border-[#bbcbbc]/30">
@@ -138,26 +143,24 @@ function Landing() {
                   2016
                 </div>
                 <div className="text-sm text-[#3c4a3f] mt-1">
-                  Established and Innovating
+                  Established
                 </div>
               </div>
-            
             </div>
           </div>
 
           {/* Content */}
           <div className="flex flex-col gap-6 order-1 md:order-2">
             <div className="text-xs font-bold text-[#006d3d] uppercase tracking-widest">
-              Our Identity
+              Who Are We
             </div>
             <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl md:text-5xl font-extrabold leading-tight text-[#191c1d]">
               Leading the path in Nigerian Enterprise IT.
             </h2>
             <p className="text-base text-[#3c4a3f] leading-relaxed">
-              Since 2016, Nonsonet Technologies Limited has been at the
-              forefront of digital transformation. We bridge the gap between
-              complex technological needs and seamless business operations,
-              providing local insights with global engineering standards.
+              Founded in 2016 in Lagos, Nigeria, Nonsonet Technologies Limited has grown into a premier Information Technology consultancy firm. We specialize in designing, implementing, and managing robust IT environments that drive business growth.
+
+              Our mission is to bridge the gap between complex technology and practical business needs. Whether you need a virtual CTO, complete network restructuring, or specialized automation systems, our engineering excellence ensures you stay ahead.
             </p>
 
             <div className="flex flex-col gap-5 pt-2">
@@ -166,23 +169,9 @@ function Landing() {
                   <span className="material-symbols-outlined text-3xl">verified</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-base text-[#191c1d] mb-1">Certified Expertise</h4>
+                  <h4 className="font-bold text-base text-[#191c1d] mb-1">Local Insight, Global Standards</h4>
                   <p className="text-sm text-[#3c4a3f] leading-relaxed">
-                    Our team holds top-tier industry certifications across
-                    networking and security.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm text-[#006d3d] flex-shrink-0">
-                  <span className="material-symbols-outlined text-3xl">precision_manufacturing</span>
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-[#191c1d] mb-1">Precision Deployment</h4>
-                  <p className="text-sm text-[#3c4a3f] leading-relaxed">
-                    Every cable and every line of code is optimized for
-                    performance.
+                    Delivering world-class tech tailored for the Nigerian ecosystem.
                   </p>
                 </div>
               </div>
@@ -202,10 +191,10 @@ function Landing() {
 
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { icon: 'location_on', title: 'Local Insight', desc: 'Deep understanding of the Nigerian business landscape and technical challenges.' },
-            { icon: 'engineering', title: 'Engineering Excellence', desc: 'Commitment to the highest standards of technical precision and durability.' },
-            { icon: 'handshake', title: 'Reliability & Trust', desc: 'Building long-term partnerships through transparent and consistent delivery.' },
-            { icon: 'lightbulb', title: 'Innovation with Purpose', desc: 'Forward-thinking solutions designed to solve real-world operational problems.' },
+            { icon: 'location_on', title: 'Local Insight', desc: 'World-class execution adapted perfectly for our region.' },
+            { icon: 'engineering', title: 'Engineering Excellence', desc: 'Meticulous attention to detail in every technical deployment.' },
+            { icon: 'handshake', title: 'Reliability & Trust', desc: 'We build systems and partnerships meant to last.' },
+            { icon: 'lightbulb', title: 'Innovation with Purpose', desc: 'We deploy technology that solves actual business problems.' },
           ].map((v) => (
             <div
               key={v.title}
@@ -226,7 +215,7 @@ function Landing() {
       </section>
 
       {/* ===== SERVICES BENTO ===== */}
-      {/* ✅ id="what-we-do" — navbar "Services" scrolls here */}
+      {/* ✅ id="what-we-do" — "Explore Solutions" hero button scrolls here */}
       <section id="what-we-do" className="px-8 py-20 bg-gradient-to-br from-[#f5f7fa] to-[#e8ecf1]">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
@@ -242,7 +231,6 @@ function Landing() {
                 industry verticals.
               </p>
             </div>
-        
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
@@ -253,7 +241,6 @@ function Landing() {
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Forecourt &amp; Payment</div>
                 <p className="text-base text-[#666] flex-1">Automated fuel management and secure transaction systems.</p>
               </div>
-             
               <a
                 href="/forcourt"
                 className="inline-flex items-center gap-2 mt-6 px-5 py-3 text-[#006d3d] border border-[#006d3d] rounded-xl text-sm font-semibold transition-all hover:bg-[#006d3d] hover:text-white"
@@ -269,7 +256,7 @@ function Landing() {
                 <span className="material-symbols-outlined text-5xl text-[#006d3d] mb-6">doorbell</span>
                 <div className="text-2xl font-bold text-[#1a1a1a] mb-2">Door Video Bell Systems</div>
                 <p className="text-base text-[#666] flex-1">
-                  Real-time video monitoring with two-way communication and biometric integration for enhanced security.
+                  Smart Security at Your Entrance
                 </p>
               </div>
               <a
@@ -392,7 +379,7 @@ function Landing() {
             Strategic Technology Partners
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-12 mb-16 filter grayscale opacity-40 hover:filter-none hover:opacity-100 transition-all">
+          <div className="flex flex-wrap justify-center items-center gap-12 mb-16 filter grayscale hover:filter-none transition-all">
             {['FuelTorque', 'ZKTeco', 'Hikvision', 'CISCO', 'HP Enterprise'].map((p) => (
               <span
                 key={p}
@@ -414,17 +401,15 @@ function Landing() {
                   Forecourt &amp; Payment Automation
                 </h3>
                 <p className="text-base text-[#3c4a3f] leading-relaxed mt-6">
-                  In exclusive partnership with{' '}
-                  <strong className="text-[#006d3d]">FuelTorque</strong>, we provide Nigeria's most reliable automation systems for
-                  downstream oil and gas. Reduce shrinkage, optimize logistics,
-                  and secure your revenue with precision telemetry.
+                  In partnership with Fueltorque, we deliver the ultimate fuel station management and monitoring system. Achieve real-time visibility and unparalleled operational efficiency with our hybrid cloud and on-premise deployments.
                 </p>
 
                 <ul className="mt-8 space-y-4">
                   {[
-                    'Real-time tank gauging integration',
-                    'EMV-compliant outdoor payment terminals',
-                    'Automated dispatch & reconciliation',
+                    'Fueltorque POS (Point of Sale)',
+                    'Fueltorque BOS (Back Office System)',
+                    'Fueltorque FMS (Management System)',
+                    'Hardware independent & highly scalable',
                   ].map((f) => (
                     <li key={f} className="flex items-center gap-3 text-[#3c4a3f]">
                       <span className="material-symbols-outlined text-[#006d3d]">check_circle</span>
@@ -447,7 +432,7 @@ function Landing() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      {/* ✅ id="contact" — navbar "Contact" and "Get Started" scroll here */}
+      {/* ✅ id="contact" — "Contact Us" hero button scrolls here */}
       <section id="contact" className="px-6 py-24 bg-[#f8f9fa]">
         <div className="max-w-[1280px] mx-auto bg-[#191c1d] rounded-3xl p-8 md:p-20 relative overflow-hidden text-white">
           {/* Deco */}

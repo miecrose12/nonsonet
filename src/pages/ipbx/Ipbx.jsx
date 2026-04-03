@@ -167,15 +167,7 @@ const Ipbx = () => {
               </div>
 
               {/* Info Card */}
-              <div className="absolute bottom-0 left-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:-left-12 bg-white p-6 rounded-lg shadow-lg max-w-xs mt-4 md:mt-0">
-                <div className="flex items-center gap-4 mb-3">
-                  <span className="text-emerald-600 text-3xl">⚡</span>
-                  <h3 className="font-bold text-slate-900">Ultra-Low Latency</h3>
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  99.9% uptime guaranteed with our redundant IP infrastructure.
-                </p>
-              </div>
+             
             </div>
           </div>
         </section>
@@ -320,13 +312,7 @@ const Ipbx = () => {
                         <p className="text-slate-600 mb-6 leading-relaxed flex-1">
                           {solution.description}
                         </p>
-                        <a
-                          href="#"
-                          className="inline-flex items-center gap-2 font-bold text-emerald-600 hover:translate-x-1 transition-transform duration-200"
-                        >
-                          Learn More
-                          <span className="material-symbols-outlined">arrow_forward</span>
-                        </a>
+                
                       </div>
                     </div>
                   );
@@ -349,13 +335,6 @@ const Ipbx = () => {
                       <p className="text-slate-600 mb-6 leading-relaxed">
                         {solution.description}
                       </p>
-                      <a
-                        href="#"
-                        className="inline-flex items-center gap-2 font-bold text-emerald-600 hover:translate-x-1 transition-transform duration-200"
-                      >
-                        Learn More
-                        <span className="material-symbols-outlined">arrow_forward</span>
-                      </a>
                     </div>
                   );
                 }
@@ -383,13 +362,6 @@ const Ipbx = () => {
                       <p className="text-slate-600 text-sm mb-6 leading-relaxed flex-1">
                         {solution.description}
                       </p>
-                      <a
-                        href="#"
-                        className="inline-flex items-center gap-2 font-bold text-emerald-600 hover:translate-x-1 transition-transform duration-200"
-                      >
-                        Learn More
-                        <span className="material-symbols-outlined">arrow_forward</span>
-                      </a>
                     </div>
                   </div>
                 );

@@ -104,12 +104,11 @@ export default function Forecourt() {
                   FuelTorque Partnership
                 </span>
                 <h1 className="font-[Manrope] text-4xl md:text-6xl font-extrabold text-[#191c1e] leading-tight tracking-tight mb-6">
-                  Next-Generation <br />
-                  <span className="text-emerald-700">Forecourt Automation</span>
+                  Forecourt &  <br />  
+                  <span className="text-emerald-700">Payment Automation</span>
                 </h1>
                 <p className="text-lg text-slate-500 leading-relaxed mb-10 max-w-lg">
-                  Nonsonet partners with FuelTorque to deliver a unified, high-performance ecosystem
-                  for modern fuel retailers, combining robust hardware with cloud-first management.
+                  In partnership with FuelTorque, a cutting-edge solution for real-time management and monitoring of fuel station activities, alongside comprehensive inventory management for store items and groceries. Supports hybrid cloud-based and on-premise deployment.
                 </p>
               </div>
 
@@ -136,8 +135,7 @@ export default function Forecourt() {
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div className="max-w-2xl">
                   <h2 className="font-[Manrope] text-3xl md:text-4xl font-bold mb-6">
-                    Intelligent Visibility. <br />
-                    Streamlined Performance.
+                    Why Choose This Solution
                   </h2>
                   <p className="text-slate-500 text-lg">
                     We bridge the gap between complex hardware and daily operations, providing a
@@ -156,17 +154,22 @@ export default function Forecourt() {
                   {
                     icon: "visibility",
                     title: "Real-Time Visibility",
-                    desc: "Monitor fuel levels, sales volumes, and site status from anywhere in the world with zero latency.",
+                    desc: "Complete oversight of fuel station activitie",
                   },
                   {
                     icon: "account_tree",
-                    title: "Streamlined Activity",
-                    desc: "Automate reconciliation processes and reduce manual data entry errors by up to 95%.",
+                    title: "Hybrid Deployment",
+                    desc: "Supports both cloud-based and on-premise",
                   },
                   {
                     icon: "trending_down",
                     title: "Cost Optimization",
-                    desc: "Identify inefficiencies in fuel delivery and stock management to maximize your bottom line.",
+                    desc: "Significant cost reduction through smart automation",
+                  },
+                   {
+                    icon: "trending_down",
+                    title: "Self-Service at Pump",
+                    desc: "Enables efficient self-service operations",
                   },
                 ].map(({ icon, title, desc }) => (
                   <div
