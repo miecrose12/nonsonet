@@ -1,6 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 
+/* ─── Network Canvas Animation (exact same as Landing page) ───────────── */
+const networkCanvasRef = (el) => {
+  if (!el) return;
+  const ctx = el.getContext('2d');
+  let dots = [], animId;
+
+  const resize = () => {
+    el.width = el.offsetWidth;
+    el.height = el.offsetHeight;
+    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
+      x: Math.random() * el.width,
+      y: Math.random() * el.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+    }));
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, el.width, el.height);
+    const maxDist = 130;
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.x < 0 || d.x > el.width) d.vx *= -1;
+      if (d.y < 0 || d.y > el.height) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,210,123,0.55)';
+      ctx.fill();
+    }
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  };
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+  return () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('resize', resize);
+  };
+};
+
 const Printer = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeNav, setActiveNav] = useState('Solutions');
@@ -84,67 +142,121 @@ const Printer = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* ==================== HEADER / NAV ==================== */}
-        <Navbar />
-      <main className="pt-24">
-        {/* ==================== HERO SECTION ==================== */}
-        <section 
-          className="relative min-h-[707px] flex items-center overflow-hidden px-6 lg:px-12 py-12 bg-[linear-gradient(to_right,#0d1b2a,#0a2e2a)]"
+    <div className="bg-white text-[#191c1d] selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif]">
+
+      <Navbar />
+
+      <main className="pt-20">
+
+        {/* ============================================
+            HERO SECTION – 100% MATCHING LANDING PAGE
+            ============================================ */}
+        <section
+          id="hero"
+          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
+          style={{ background: '#08111f' }}
         >
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
-            {/* Left Content */}
-            <div className="lg:col-span-7 z-10 animate-fade-in">
-              {/* Badge - Updated for dark hero background */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white font-label text-xs font-bold tracking-widest mb-8 border border-white/20 shadow-inner">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                MANAGED PRINT SERVICES
+          {/* Animated network canvas – exact same as Landing */}
+          <canvas
+            ref={networkCanvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ display: 'block' }}
+          />
+
+          {/* Subtle right-side radial glow – exact same as Landing */}
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
+            }}
+          />
+
+          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
+
+              {/* Left Content – exact Landing typography */}
+              <div className="lg:col-span-7 z-10">
+                {/* Badge – exact same style as Landing */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
+                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+                  Managed Print Services • Lagos, Nigeria
+                </div>
+
+                {/* Headline – exact font, size, weight, tracking as Landing */}
+                <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
+                  Streamline Your Printing Operations with{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    intelligent
+                  </span>{' '}
+                  Managed Print Services
+                </h1>
+
+                {/* Subtext – exact style as Landing */}
+                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
+                  Optimize your entire document lifecycle with a centralized, secure, and sustainable print infrastructure. We transform printing from a hidden cost into a strategic asset.
+                </p>
+
+                {/* Stats row – exact same layout as Landing */}
+                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
+                      30%
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Avg. Cost Reduction
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      100%
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Proactive Support
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      24/7
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Monitoring
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Heading - Fully white with enhanced contrast */}
-              <h1 className="font-headline text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight tracking-tight mb-8 drop-shadow-md">
-                Streamline Your Printing Operations with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-emerald-400">
-                  Nonsonet Technologies
-                </span>
-              </h1>
+              {/* Right Image Section – brand-consistent with your original image + stats overlay */}
+              <div className="lg:col-span-5 relative">
+                <div
+                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
+                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+                >
+                  <img
+                    alt="Modern Office Setup with Printer"
+                    className="w-full h-[500px] object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWQaLVx9GblnFxgfD-asT-2w34raI7EZVoFa-MindqmZBvVUnA7LvVt5-9GSKD4Z3fb8-D2whgWNRckGbDnU7pqjiLCm5JKjkxQxrcxnbyBDRbikfRwdJvXqq4e8JwWSlIP_8Y1xqnSt5Wp59g2ec-3jYw-7WYf2CxAvmVoJVf_v7JqE5w5fiheAKYXgzXcJ0RAGH8XRufE0G6IKmKX8vjecqyIQgTpwQ7CTwOrpfj0cqO6iC41rQ8k4ctUcFDpGlP5trYRT7oR1l"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
+                </div>
 
-              {/* Description - Light white/gray for perfect readability on dark gradient */}
-              <p className="text-white/90 text-lg lg:text-xl leading-relaxed max-w-2xl mb-10 font-body drop-shadow-sm">
-                Optimize your entire document lifecycle with a centralized, secure, and sustainable print infrastructure. We transform printing from a hidden cost into a strategic asset.
-              </p>
-
-            </div>
-
-            {/* Right Image - Enhanced with stronger shadow for dark background */}
-            <div className="lg:col-span-5 relative">
-              {/* Animated Background Blur - Slightly adjusted opacity for dramatic effect on dark hero */}
-              <div
-                className="aspect-square rounded-full bg-gradient-to-br from-emerald-400/30 to-white/10 absolute -top-10 -right-10 blur-3xl w-full h-full animate-pulse"
-                style={{ animationDuration: '4s' }}
-              ></div>
-
-              {/* Main Image Container */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500 ring-1 ring-white/10">
-                <img
-                  alt="Modern Office Setup with Printer"
-                  className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWQaLVx9GblnFxgfD-asT-2w34raI7EZVoFa-MindqmZBvVUnA7LvVt5-9GSKD4Z3fb8-D2whgWNRckGbDnU7pqjiLCm5JKjkxQxrcxnbyBDRbikfRwdJvXqq4e8JwWSlIP_8Y1xqnSt5Wp59g2ec-3jYw-7WYf2CxAvmVoJVf_v7JqE5w5fiheAKYXgzXcJ0RAGH8XRufE0G6IKmKX8vjecqyIQgTpwQ7CTwOrpfj0cqO6iC41rQ8k4ctUcFDpGlP5trYRT7oR1l"
-                />
-
-                {/* Stats Card Overlay - Updated for dark hero: semi-transparent dark glass with white text */}
-                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl">
+                {/* Floating Stats Card – kept from your design, now on-brand */}
+                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-white flex items-center justify-center text-white text-2xl shadow-lg ring-2 ring-white/30">
+                    <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
                       📈
                     </div>
                     <div>
-                      <p className="text-xs font-label font-bold text-emerald-300 tracking-widest uppercase drop-shadow-sm">
-                        Average Savings
-                      </p>
-                      <p className="text-3xl font-headline font-extrabold text-white drop-shadow-sm">
-                        30% Reductions
-                      </p>
+                      <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Average Savings</p>
+                      <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">30% Reductions</p>
                     </div>
                   </div>
                 </div>
@@ -153,37 +265,31 @@ const Printer = () => {
           </div>
         </section>
 
-        {/* ==================== WHY CHOOSE SECTION ==================== */}
+        {/* ==================== WHY CHOOSE SECTION – brand consistent ==================== */}
         <section className="py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-6">
-            {/* Section Header */}
             <div className="text-center mb-20">
-              <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6">
+              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-6">
                 Why Choose Nonsonet for MPS?
               </h2>
-              <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-emerald-400 mx-auto rounded-full"></div>
+              <div className="w-24 h-1.5 bg-[#00d27b] mx-auto rounded-full"></div>
             </div>
 
-            {/* Cards Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {chooseCards.map((card, index) => (
                 <div
                   key={card.id}
-                  className="bg-white overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 group hover:translate-y-[-8px] border border-gray-100"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="bg-white overflow-hidden rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100"
                 >
-                  {/* Image Container */}
-                  <div className="h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-emerald-100">
+                  <div className="h-48 overflow-hidden">
                     <img
                       alt={card.title}
-                      className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       src={card.image}
                     />
                   </div>
-
-                  {/* Content */}
                   <div className="p-8">
-                    <h3 className="font-headline text-xl font-bold mb-3 text-primary group-hover:text-emerald-600 transition-colors">
+                    <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl font-bold mb-3 text-[#006d3d] group-hover:text-[#00d27b] transition-colors">
                       {card.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed text-sm">
@@ -196,47 +302,38 @@ const Printer = () => {
           </div>
         </section>
 
-        {/* ==================== MPS SERVICES SECTION ==================== */}
-        <section className="py-24 overflow-hidden">
+        {/* ==================== MPS SERVICES SECTION – brand consistent ==================== */}
+        <section className="py-24 overflow-hidden bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
               {/* Right - Images Grid */}
               <div className="relative order-2 lg:order-1">
-                {/* Decorative Blur */}
-                <div className="absolute -left-12 -top-12 w-64 h-64 bg-gradient-to-br from-primary/20 to-emerald-100/30 rounded-full blur-3xl"></div>
+                <div className="absolute -left-12 -top-12 w-64 h-64 bg-[#00d27b]/10 rounded-full blur-3xl"></div>
 
-                {/* Images Grid */}
                 <div className="relative grid grid-cols-2 gap-4">
-                  {/* Top Left - Tall Image */}
                   <div className="space-y-4 pt-12">
-                    <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                       <img
                         alt="Printer Fleet Management"
                         className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-500"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu8lgw-lNoKsJDNg1-Plcg1W59VDsi8ZnoLqf5tVlMe3ya5wlaf7JUpxMmHtFyf3sFEBBPxamqRwoNiUTVggKEF2bhYpo9POLqCSeg6YjUzSRCqr-Fh5GSknN_0zRsbkbCginlQ7EhfKuVf4OtA3KQmI1JgPqOkP129AbVAhchdDXQ7uP4LhgEM0q1j0qxxsM6HyZI2cYZVw5XeHTXRHlQwJ-bPKyrNRrUN9qJDi1b8ILl8X_mzD0kzWcnlJaIv2CC68tgJY3JG1M4"
                       />
                     </div>
-
-                    {/* Stats Card */}
-                    <div className="bg-gradient-to-br from-primary to-emerald-600 p-8 rounded-2xl text-white shadow-lg hover:shadow-xl transition-shadow">
-                      <p className="text-4xl font-headline font-bold mb-2">100%</p>
-                      <p className="text-sm font-label opacity-90">Proactive Support</p>
+                    <div className="bg-[#006d3d] p-8 rounded-3xl text-white shadow-lg hover:shadow-xl transition-shadow">
+                      <p className="text-4xl font-['Plus_Jakarta_Sans',sans-serif] font-bold mb-2">100%</p>
+                      <p className="text-sm tracking-widest uppercase">Proactive Support</p>
                     </div>
                   </div>
 
-                  {/* Right Column */}
                   <div className="space-y-4">
-                    {/* Square Image */}
-                    <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                       <img
                         alt="Enterprise Multifunction Printer"
                         className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-500"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-G2R8ACZ5rExSwciEKdbuPz5CJ8MgrxStDNtXW6jcIXB8I2suRBByTca6PuPioXoPztwn4EQxMdCxsEFZI4z-wU-6zKiSen1Hdc53eayg-qyOIcOgpbWd7MPVFgXvkfls3NnwnsCgcwkkdQX8ITxxS2dB8qWBnD5agdEGr3_xwjKHEp1fEAgdC5yG6RiDfCNKTBjHyEmFZAGJVvDGEbt2Q7-3DdVo4E6D6CQ6K_bAqm988VfMoChy8RfYxFpkvbAXq-X0hvPI4aNe"
                       />
                     </div>
-
-                    {/* Wide Image */}
-                    <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                       <img
                         alt="Digital Print Analytics Dashboard"
                         className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
@@ -249,26 +346,25 @@ const Printer = () => {
 
               {/* Left - Content */}
               <div className="order-1 lg:order-2">
-                <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-gray-900 mb-8 leading-tight">
+                <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-8 leading-tight">
                   Comprehensive MPS Solutions Tailored for You
                 </h2>
 
-                {/* Services List */}
                 <div className="space-y-8">
-                  {mpsServices.map((service, index) => (
-                    <div key={service.id} className="flex gap-6 group hover:bg-primary/5 p-4 rounded-xl transition-all duration-300">
-                      {/* Thumbnail */}
-                      <div className="mt-1 flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group-hover:scale-110 duration-300">
+                  {mpsServices.map((service) => (
+                    <div
+                      key={service.id}
+                      className="flex gap-6 group hover:bg-[#00d27b]/5 p-4 rounded-3xl transition-all duration-300"
+                    >
+                      <div className="mt-1 flex-shrink-0 w-24 h-24 rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group-hover:scale-110 duration-300">
                         <img
                           alt={service.title}
                           className="w-full h-full object-cover"
                           src={service.image}
                         />
                       </div>
-
-                      {/* Text */}
                       <div className="flex-1">
-                        <h4 className="font-headline text-xl font-bold mb-2 text-gray-900 group-hover:text-primary transition-colors">
+                        <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl font-bold mb-2 text-[#191c1d] group-hover:text-[#006d3d] transition-colors">
                           {service.title}
                         </h4>
                         <p className="text-gray-600 text-sm leading-relaxed">
@@ -283,12 +379,7 @@ const Printer = () => {
           </div>
         </section>
 
-        {/* ==================== CTA SECTION ==================== */}
-        
       </main>
-
-      {/* ==================== FOOTER ==================== */}
-      
     </div>
   );
 };

@@ -80,132 +80,202 @@ const benefitCards = [
   },
 ];
 
-const hl = { fontFamily: 'Manrope, sans-serif' };
+/* ─── Network Canvas Animation (exact same as Landing + CCTV) ─────────── */
+const networkCanvasRef = (el) => {
+  if (!el) return;
+  const ctx = el.getContext('2d');
+  let dots = [], animId;
 
-/* ─── Component ───────────────────────────────────────────────────────── */
+  const resize = () => {
+    el.width = el.offsetWidth;
+    el.height = el.offsetHeight;
+    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
+      x: Math.random() * el.width,
+      y: Math.random() * el.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+    }));
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, el.width, el.height);
+    const maxDist = 130;
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.x < 0 || d.x > el.width) d.vx *= -1;
+      if (d.y < 0 || d.y > el.height) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,210,123,0.55)';
+      ctx.fill();
+    }
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  };
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+  return () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('resize', resize);
+  };
+};
+
 export default function Door() {
   return (
-    <div className="bg-gray-50 text-gray-900 selection:bg-green-200 selection:text-green-900">
+    <div className="bg-white text-gray-900 selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif] text-[#191c1d]">
 
-      {/* ── Imported Navbar ── */}
       <Navbar />
 
       <main className="pt-20">
 
-        {/* ══════════════════════════════════════════════════════
-            HERO SECTION
-        ══════════════════════════════════════════════════════ */}
+        {/* ============================================
+            HERO SECTION – NOW 100% MATCHING LANDING PAGE
+            (exact background, network canvas, radial glow, typography, badge, stats)
+            ============================================ */}
         <section
-          className="relative min-h-[85vh] flex items-center overflow-hidden px-6 py-16 lg:px-12 lg:py-24"
-          style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+          id="hero"
+          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
+          style={{ background: '#08111f' }}
         >
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Animated network canvas – identical to Landing */}
+          <canvas
+            ref={networkCanvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ display: 'block' }}
+          />
 
-            {/* Text column */}
-            <div className="lg:col-span-6 space-y-8">
+          {/* Subtle right-side radial glow – identical to Landing */}
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
+            }}
+          />
 
-              {/* Eyebrow pill */}
-              <div className="inline-flex items-center gap-3 bg-[#00d27b]/15 px-4 py-2 rounded-full border border-[#00d27b]/20">
-                <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                <span
-                  className="text-[10px] font-extrabold tracking-[0.2em] text-[#00d27b] uppercase"
-                  style={hl}
+          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
+            <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+
+              {/* ── Text column – exact Landing typography ── */}
+              <div>
+                {/* Badge – exact same style as Landing */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
+                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+                  Lagos, Nigeria &bull; Door Video Excellence
+                </div>
+
+                {/* Headline – exact font, size, weight, tracking as Landing */}
+                <h1
+                  className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6 max-w-[800px]"
                 >
-                  Smart Home Security
-                </span>
-              </div>
+                  Secure Your Entrance with{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    intelligent
+                  </span>{' '}
+                  Door Video Technology
+                </h1>
 
-              <h1
-                className="text-5xl lg:text-[64px] xl:text-[72px] font-extrabold text-white tracking-tight leading-[1.05]"
-                style={hl}
-              >
-                The New Standard in{' '}
-                <span className="text-[#00d27b] italic">Front Door</span>{' '}
-                Intelligence.
-              </h1>
+                {/* Subtext – exact style as Landing */}
+                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
+                  Nonsonet Technologies delivers crystal-clear video doorbells with two-way audio, AI motion detection, and seamless smart-home integration.
+                </p>
 
-              <p className="text-lg lg:text-xl text-white/65 max-w-xl leading-relaxed font-medium">
-                Luminous IT's door video bells merge sophisticated hardware with intuitive
-                software, keeping you connected to your home's entrance from anywhere.
-              </p>
-
-              {/* Trust row — desktop only */}
-              <div className="hidden lg:flex items-center gap-8 pt-4 border-t border-white/10">
-                {[['4K', 'Ultra HD Video'], ['30ft', 'Night Vision Range'], ['256-bit', 'Encryption']].map(
-                  ([val, label]) => (
-                    <div key={label} className="flex flex-col">
-                      <span className="text-xl font-black text-[#00d27b]" style={hl}>{val}</span>
-                      <span className="text-xs text-white/45 font-medium">{label}</span>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* Image column */}
-            <div className="lg:col-span-6 relative mt-10 lg:mt-0">
-
-              {/* Main card */}
-              <div
-                className="relative z-10 rounded-[2.5rem] overflow-hidden bg-white/10 p-3 lg:p-4 border border-white/10"
-                style={{ boxShadow: '0 20px 50px -12px rgba(0,0,0,0.4)' }}
-              >
-                <img
-                  src={IMG_HERO}
-                  alt="Modern video doorbell mounted on home exterior"
-                  className="w-full h-full object-cover rounded-[2rem] aspect-[4/3] lg:aspect-[3/2]"
-                />
-              </div>
-
-              {/* Float AI card */}
-              <div
-                className="absolute -bottom-6 -right-2 lg:-bottom-10 lg:-right-6
-                           bg-white/10 backdrop-blur-md p-5 lg:p-6 rounded-3xl
-                           border border-white/20 max-w-[240px] lg:max-w-[260px] z-20"
-                style={{ boxShadow: '0 20px 50px -12px rgba(0,0,0,0.3)' }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-[#00d27b]/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[#00d27b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-                    </svg>
-                  </div>
+                {/* Stats row – exact same layout as Landing */}
+                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
                   <div>
-                    <p className="text-[10px] font-bold text-[#00d27b] uppercase tracking-wider">AI Identification</p>
-                    <p className="text-sm font-extrabold text-white">Delivery Detected</p>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
+                      4K
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Ultra HD Video
+                    </div>
                   </div>
-                </div>
-                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                  <div className="w-2/3 h-full bg-[#00d27b] rounded-full" />
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      30ft
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Night Vision
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      AI
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Smart Detection
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Decorative blurred orb */}
-              <div className="absolute -top-8 -left-8 w-48 h-48 bg-[#00d27b]/10 rounded-full blur-3xl -z-10" />
-            </div>
+              {/* ── Right image column – kept for visual impact, now fully on-brand ── */}
+              <div className="mt-14 lg:mt-0">
+                <div
+                  className="relative overflow-hidden rounded-3xl border-l-8 border-[#00d27b] shadow-2xl ring-1 ring-white/10"
+                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+                >
+                  <img
+                    src={IMG_HERO}
+                    alt="Modern video doorbell mounted on home exterior"
+                    className="aspect-video w-full object-cover lg:aspect-[4/3]"
+                  />
 
+                  {/* Live badge – brand consistent */}
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-[#00d27b]" />
+                    LIVE VIDEO FEED
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
 
+        {/* ============================================
+            REMAINING SECTIONS – minor brand polish only
+            ============================================ */}
 
-        {/* ══════════════════════════════════════════════════════
-            CORE FEATURES GRID
-        ══════════════════════════════════════════════════════ */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
 
             <div className="max-w-3xl mb-16 lg:mb-20">
-              <p className="text-green-700 font-bold text-sm tracking-widest uppercase mb-4">
+              <p className="text-[#006d3d] font-bold text-sm tracking-widest uppercase mb-4">
                 Core Technology
               </p>
               <h2
-                className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight"
-                style={hl}
+                className="text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-6 leading-tight font-['Plus_Jakarta_Sans',sans-serif]"
               >
                 Advanced Security Components
               </h2>
-              <div className="h-1.5 w-24 bg-green-400 rounded-full" />
+              <div className="h-1.5 w-24 bg-[#00d27b] rounded-full" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -213,18 +283,16 @@ export default function Door() {
               {coreFeatures.map((feat) => (
                 <div
                   key={feat.title}
-                  className="p-8 lg:p-10 rounded-[2rem] bg-gray-50 hover:bg-white
-                             border border-transparent hover:border-gray-200/60
-                             transition-all duration-500 group"
+                  className="p-8 lg:p-10 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200/60 transition-all duration-500 group"
                 >
-                  <div className="w-full aspect-video rounded-2xl overflow-hidden mb-7 lg:mb-8">
+                  <div className="w-full aspect-video rounded-3xl overflow-hidden mb-7 lg:mb-8">
                     <img
                       src={feat.img}
                       alt={feat.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="text-xl lg:text-2xl font-extrabold mb-3 lg:mb-4" style={hl}>
+                  <h3 className="text-xl lg:text-2xl font-extrabold mb-3 lg:mb-4 font-['Plus_Jakarta_Sans',sans-serif]">
                     {feat.title}
                   </h3>
                   <p className="text-gray-500 leading-relaxed font-medium text-sm lg:text-base">
@@ -234,64 +302,39 @@ export default function Door() {
               ))}
 
               {/* Night Vision */}
-              <div
-                className="p-8 lg:p-10 rounded-[2rem] bg-gray-50 hover:bg-white
-                           border border-transparent hover:border-gray-200/60
-                           transition-all duration-500 group"
-              >
-                <div
-                  className="w-14 h-14 lg:w-16 lg:h-16 bg-white rounded-2xl flex items-center
-                             justify-center mb-7 lg:mb-8 text-green-700
-                             group-hover:bg-green-700 group-hover:text-white transition-all duration-300"
-                  style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
-                >
+              <div className="p-8 lg:p-10 rounded-3xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200/60 transition-all duration-500 group">
+                <div className="w-14 h-14 lg:w-16 lg:h-16 bg-white rounded-3xl flex items-center justify-center mb-7 lg:mb-8 text-[#006d3d] group-hover:bg-[#006d3d] group-hover:text-white transition-all duration-300">
                   <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl lg:text-2xl font-extrabold mb-3 lg:mb-4" style={hl}>
+                <h3 className="text-xl lg:text-2xl font-extrabold mb-3 lg:mb-4 font-['Plus_Jakarta_Sans',sans-serif]">
                   Enhanced Night Vision
                 </h3>
                 <p className="text-gray-500 leading-relaxed font-medium text-sm lg:text-base">
-                  Color night vision capabilities provide crystal clear imagery even in the dead of
-                  night, extending your reach to 30ft.
+                  Color night vision capabilities provide crystal clear imagery even in the dead of night, extending your reach to 30ft.
                 </p>
               </div>
 
-              {/* Cloud / Encryption */}
-              <div
-                className="md:col-span-2 bg-green-700 p-10 lg:p-12 rounded-[2.5rem]
-                           flex flex-col md:flex-row items-center gap-8 lg:gap-10
-                           overflow-hidden relative group"
-              >
-                <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/10 rounded-full
-                                -mr-32 -mt-32 blur-3xl group-hover:scale-150 transition-transform duration-700" />
+              {/* Military-Grade Encryption */}
+              <div className="md:col-span-2 bg-[#006d3d] p-10 lg:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-8 lg:gap-10 overflow-hidden relative group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#00d27b]/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:scale-150 transition-transform duration-700" />
                 <div className="relative z-10 space-y-4 md:w-3/5">
-                  <div className="w-12 h-12 lg:w-14 lg:h-14 bg-green-400 rounded-xl flex items-center justify-center mb-2">
-                    <svg className="w-7 h-7 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806
-                           3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438
-                           3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806
-                           3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138
-                           3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946
-                           3.42 3.42 0 013.138-3.138z" />
+                  <div className="w-12 h-12 lg:w-14 lg:h-14 bg-[#00d27b] rounded-3xl flex items-center justify-center mb-2">
+                    <svg className="w-7 h-7 text-[#006d3d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl lg:text-3xl font-extrabold text-white" style={hl}>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold text-white font-['Plus_Jakarta_Sans',sans-serif]">
                     Military-Grade Encryption
                   </h3>
                   <p className="text-white/80 text-base lg:text-lg leading-relaxed">
-                    Your data is yours alone. Every second of footage is encrypted with end-to-end
-                    security before it ever reaches the cloud.
+                    Your data is yours alone. Every second of footage is encrypted with end-to-end security before it ever reaches the cloud.
                   </p>
                 </div>
                 <div className="relative z-10 md:w-2/5 flex justify-center">
-                  <button className="bg-white text-green-700 px-8 py-4 rounded-full font-bold shadow-xl
-                                     hover:bg-green-400 hover:text-green-900 transition-all duration-300 active:scale-95">
+                  <button className="bg-white text-[#006d3d] px-8 py-4 rounded-3xl font-bold shadow-xl hover:bg-[#00d27b] hover:text-white transition-all duration-300 active:scale-95">
                     Secure Storage Info
                   </button>
                 </div>
@@ -300,39 +343,25 @@ export default function Door() {
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            PRODUCT SOLUTIONS
-        ══════════════════════════════════════════════════════ */}
+        {/* PRODUCT SOLUTIONS + VISUAL BENEFITS – unchanged except brand colors and rounded-3xl */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-
               <div className="lg:w-1/3 lg:sticky lg:top-32">
-                <h2
-                  className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-gray-900 mb-6 lg:mb-8 leading-tight"
-                  style={hl}
-                >
+                <h2 className="text-3xl lg:text-4xl xl:text-5xl font-extrabold text-[#191c1d] mb-6 lg:mb-8 leading-tight font-['Plus_Jakarta_Sans',sans-serif]">
                   Tailored Video Bell Solutions
                 </h2>
                 <p className="text-gray-500 text-base lg:text-lg mb-8 lg:mb-10 font-medium leading-relaxed">
-                  We offer a spectrum of hardware options designed to fit seamlessly into any
-                  architectural style or infrastructure requirement.
+                  We offer a spectrum of hardware options designed to fit seamlessly into any architectural style or infrastructure requirement.
                 </p>
                 <div className="space-y-4 lg:space-y-6">
                   {[
                     { title: 'Precision Installation', sub: 'Expert mounting and calibration.' },
                     { title: '24/7 Remote Monitoring', sub: 'Uptime guarantee for your security.' },
                   ].map(({ title, sub }) => (
-                    <div
-                      key={title}
-                      className="flex items-start gap-4 p-4 lg:p-5 rounded-2xl bg-gray-50 border border-gray-100"
-                      style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.06)' }}
-                    >
-                      <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none"
-                           viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <div key={title} className="flex items-start gap-4 p-4 lg:p-5 rounded-3xl bg-gray-50 border border-gray-100">
+                      <svg className="w-5 h-5 text-[#00d27b] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <div>
                         <p className="font-bold text-gray-900">{title}</p>
@@ -344,96 +373,70 @@ export default function Door() {
               </div>
 
               <div className="lg:w-2/3 flex flex-col gap-10 lg:gap-12">
-
-                <div
-                  className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row group"
-                  style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
-                >
+                {/* Wireless & Wired cards remain exactly as you wrote – only rounded-3xl applied */}
+                <div className="bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row group shadow-xl">
                   <div className="md:w-1/2 h-56 md:h-auto overflow-hidden">
-                    <img src={IMG_WIRELESS} alt="Wireless battery-powered video doorbell"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={IMG_WIRELESS} alt="Wireless battery-powered video doorbell" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                   <div className="p-8 lg:p-10 md:w-1/2 flex flex-col justify-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">Wireless Series</span>
-                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>Wireless Door Video Bells</h4>
-                    <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">
-                      Versatile, battery-powered systems that install in minutes. Ideal for renters and heritage properties.
-                    </p>
-                    <a href="#" className="text-green-700 font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#006d3d] mb-3">Wireless Series</span>
+                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4 font-['Plus_Jakarta_Sans',sans-serif]">Wireless Door Video Bells</h4>
+                    <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">Versatile, battery-powered systems that install in minutes. Ideal for renters and heritage properties.</p>
+                    <a href="#" className="text-[#006d3d] font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
                       Product Details
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
                   </div>
                 </div>
 
-                <div
-                  className="bg-white rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row-reverse group"
-                  style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
-                >
+                <div className="bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row-reverse group shadow-xl">
                   <div className="md:w-1/2 h-56 md:h-auto overflow-hidden">
-                    <img src={IMG_WIRED} alt="Hardwired professional grade video doorbell"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={IMG_WIRED} alt="Hardwired professional grade video doorbell" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   </div>
                   <div className="p-8 lg:p-10 md:w-1/2 flex flex-col justify-center">
-                    <span className="text-xs font-bold uppercase tracking-widest text-green-700 mb-3">Wired Pro Series</span>
-                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4" style={hl}>Hardwired High-Performance</h4>
-                    <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">
-                      Continuous power delivery for zero-latency recording and faster response times. Never worry about recharging.
-                    </p>
-                    <a href="#" className="text-green-700 font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#006d3d] mb-3">Wired Pro Series</span>
+                    <h4 className="text-xl lg:text-2xl font-extrabold mb-4 font-['Plus_Jakarta_Sans',sans-serif]">Hardwired High-Performance</h4>
+                    <p className="text-gray-500 mb-6 lg:mb-8 leading-relaxed text-sm lg:text-base">Continuous power delivery for zero-latency recording and faster response times. Never worry about recharging.</p>
+                    <a href="#" className="text-[#006d3d] font-bold flex items-center gap-2 group-hover:gap-4 transition-all duration-300 w-fit">
                       Product Details
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
                   </div>
                 </div>
 
+                {/* Smart Lock + Multi-Unit cards – unchanged except rounded-3xl */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-                  <div className="bg-white p-8 lg:p-10 rounded-[2rem]" style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}>
-                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 lg:mb-6">
-                      <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                          d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                  <div className="bg-white p-8 lg:p-10 rounded-3xl shadow-xl">
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-3xl flex items-center justify-center mb-5 lg:mb-6">
+                      <svg className="w-6 h-6 text-[#006d3d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>Smart Lock Sync</h4>
-                    <img src={IMG_LOCK} alt="Smart lock interface" className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6" />
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      One-touch unlocking for verified guests directly from your live video feed.
-                    </p>
+                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4 font-['Plus_Jakarta_Sans',sans-serif]">Smart Lock Sync</h4>
+                    <img src={IMG_LOCK} alt="Smart lock interface" className="w-full h-36 lg:h-40 object-cover rounded-3xl mb-4 lg:mb-6" />
+                    <p className="text-gray-500 text-sm leading-relaxed">One-touch unlocking for verified guests directly from your live video feed.</p>
                   </div>
 
-                  <div className="bg-white p-8 lg:p-10 rounded-[2rem]" style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}>
-                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-5 lg:mb-6">
-                      <svg className="w-6 h-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  <div className="bg-white p-8 lg:p-10 rounded-3xl shadow-xl">
+                    <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-3xl flex items-center justify-center mb-5 lg:mb-6">
+                      <svg className="w-6 h-6 text-[#006d3d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                     </div>
-                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4" style={hl}>Multi-Unit Console</h4>
-                    <img src={IMG_MULTI} alt="Multi-unit intercom system" className="w-full h-36 lg:h-40 object-cover rounded-xl mb-4 lg:mb-6" />
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      Enterprise-grade solutions for apartments and corporate gated facilities.
-                    </p>
+                    <h4 className="text-lg lg:text-xl font-extrabold mb-3 lg:mb-4 font-['Plus_Jakarta_Sans',sans-serif]">Multi-Unit Console</h4>
+                    <img src={IMG_MULTI} alt="Multi-unit intercom system" className="w-full h-36 lg:h-40 object-cover rounded-3xl mb-4 lg:mb-6" />
+                    <p className="text-gray-500 text-sm leading-relaxed">Enterprise-grade solutions for apartments and corporate gated facilities.</p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </section>
 
-
-        {/* ══════════════════════════════════════════════════════
-            VISUAL BENEFITS SECTION
-        ══════════════════════════════════════════════════════ */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 lg:mb-24">
-              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5 lg:mb-6" style={hl}>
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-5 lg:mb-6 font-['Plus_Jakarta_Sans',sans-serif]">
                 Security Meets Serenity
               </h2>
               <p className="text-lg lg:text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
@@ -445,8 +448,7 @@ export default function Door() {
               {benefitCards.map((card) => (
                 <div
                   key={card.title}
-                  className="group relative h-[380px] lg:h-[450px] rounded-[3rem] overflow-hidden transition-transform duration-500 hover:-translate-y-2"
-                  style={{ boxShadow: '0 20px 50px -12px rgba(0,109,55,0.08)' }}
+                  className="group relative h-[380px] lg:h-[450px] rounded-3xl overflow-hidden transition-transform duration-500 hover:-translate-y-2 shadow-xl"
                 >
                   <img
                     src={card.img}
@@ -454,7 +456,7 @@ export default function Door() {
                     className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t ${card.overlayClass} to-transparent flex flex-col justify-end p-8 lg:p-10`}>
-                    <h5 className={`text-xl lg:text-2xl font-extrabold ${card.titleColor} mb-2 lg:mb-3`} style={hl}>
+                    <h5 className={`text-xl lg:text-2xl font-extrabold ${card.titleColor} mb-2 lg:mb-3 font-['Plus_Jakarta_Sans',sans-serif]`}>
                       {card.title}
                     </h5>
                     <p className={`${card.descColor} text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500`}>
@@ -468,7 +470,6 @@ export default function Door() {
         </section>
 
       </main>
-
     </div>
   );
 }

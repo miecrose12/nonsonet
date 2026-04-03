@@ -30,7 +30,7 @@ function Footer() {
     <footer
       className="font-sans"
       style={{
-        background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)',
+        background: '#08111f',                    // ← exact hero background
         borderTop: '1px solid rgba(255,255,255,0.08)',
         color: '#ffffff',
         fontFamily: "'Manrope', sans-serif",
@@ -191,11 +191,8 @@ function Footer() {
         <div className="max-w-7xl mx-auto px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h4
-              className="text-[1.1rem] font-bold mb-1"
-              style={{ 
-                fontFamily: "'Manrope', sans-serif", 
-                color: '#ffffff' 
-              }}
+              className="font-['Plus_Jakarta_Sans',sans-serif] text-[1.1rem] font-bold mb-1"
+              style={{ color: '#ffffff' }}
             >
               Stay ahead of the curve
             </h4>
@@ -278,11 +275,9 @@ function Footer() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = '#00d27b';
-                e.currentTarget.style.opacity = '1';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
-                e.currentTarget.style.opacity = '0.55';
               }}
             >
               {label}

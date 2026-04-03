@@ -2,6 +2,64 @@ import React, { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 
+/* ─── Network Canvas Animation (exact same as Landing) ───────────── */
+const networkCanvasRef = (el) => {
+  if (!el) return;
+  const ctx = el.getContext('2d');
+  let dots = [], animId;
+
+  const resize = () => {
+    el.width = el.offsetWidth;
+    el.height = el.offsetHeight;
+    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
+      x: Math.random() * el.width,
+      y: Math.random() * el.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+    }));
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, el.width, el.height);
+    const maxDist = 130;
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.x < 0 || d.x > el.width) d.vx *= -1;
+      if (d.y < 0 || d.y > el.height) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,210,123,0.55)';
+      ctx.fill();
+    }
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  };
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+  return () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('resize', resize);
+  };
+};
+
 const Ipbx = () => {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
@@ -118,99 +176,130 @@ const Ipbx = () => {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen bg-slate-50 font-sans text-slate-900">
-        
+
+      <main className="pt-20 font-['Manrope',sans-serif] text-[#191c1d]">
+
         {/* ============================================
-            HERO SECTION (Dark gradient + all white text)
+            HERO SECTION – 100% MATCHING LANDING PAGE
             ============================================ */}
-        <section 
-          className="relative overflow-hidden py-20 md:py-32 px-6"
-          style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+        <section
+          id="hero"
+          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
+          style={{ background: '#08111f' }}
         >
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Left Content - ALL TEXT WHITE */}
-            <div className="flex flex-col gap-8 z-10">
-              {/* Badge - Dark mode version */}
-              <div 
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full w-fit border border-white/20 shadow-inner"
-                style={{ backgroundColor: 'rgba(255,255,255,0.12)', color: '#ffffff' }}
-              >
-                <span 
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-[#62f595] animate-pulse"
-                ></span>
-                <span className="text-xs font-bold tracking-widest uppercase">
-                  Intelligent Innovation
-                </span>
-              </div>
+          {/* Animated network canvas – exact same as Landing */}
+          <canvas
+            ref={networkCanvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ display: 'block' }}
+          />
 
-              {/* Title - Pure white with emerald-to-white gradient on brand name */}
-              <h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight drop-shadow-md"
-                style={{ color: '#ffffff' }}
-              >
-                Revolutionize Your Business Communications with{' '}
-                <span 
-                  style={{
-                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}
+          {/* Subtle right-side radial glow – exact same as Landing */}
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
+            }}
+          />
+
+          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
+            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+              {/* Left Content – exact Landing typography */}
+              <div className="flex flex-col gap-8 z-10">
+                {/* Badge – exact same style as Landing */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide">
+                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+                  Lagos, Nigeria &bull; Unified Communications
+                </div>
+
+                {/* Headline – exact font, size, weight, tracking as Landing */}
+                <h1 
+                  className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white"
                 >
-                  Nonsonet Technologies
-                </span>
-              </h1>
+                  Revolutionize Your Business Communications with{' '}
+                  <span 
+                    style={{
+                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    intelligent
+                  </span>{' '}
+                  IP-PBX
+                </h1>
 
-              {/* Description - High-contrast white */}
-              <p 
-                className="text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-sm"
-                style={{ color: 'rgba(255,255,255,0.92)' }}
-              >
-                Experience the power of Unified Communication. Our IP-PBX systems integrate voice, video, and messaging into one seamless interface, designed for the modern enterprise.
-              </p>
+                {/* Subtext – exact style as Landing */}
+                <p 
+                  className="text-xl text-white/60 max-w-[34rem] leading-[1.75]"
+                >
+                  Experience the power of Unified Communication. Our IP-PBX systems integrate voice, video, and messaging into one seamless interface, designed for the modern enterprise.
+                </p>
 
-              {/* Buttons */}
-           
-            </div>
-
-            {/* Right Image Section - Enhanced for dark hero */}
-            <div className="relative">
-              {/* Blur Background - Adjusted opacity for dark theme */}
-              <div 
-                className="absolute -top-20 -right-20 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl -z-10"
-              ></div>
-
-              {/* Image Wrapper - Stronger shadow + subtle white ring */}
-              <div 
-                className="relative z-10 rounded-lg overflow-hidden shadow-2xl ring-1 ring-white/10"
-                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-              >
-                <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmEMlvU17emqIYG-BeQ-9XbsX963d5hcgZtepc4rRYnMu5R-bvCSBMG-bFmUtPE9YBC7jAXpdfSJmLEueJ6hlIFUWQod6nFPKx4AXrTpslzdxbSjNOiG4kMzUEdZHx9rJlf3Io4UcfBZE5sogJFMoL_WNY0znMfPBwna9O_d69lwhpglMasgtpry5LroPfQyzRwqTvc1Q-uY6lNebDkA22Udi1cRAVycHu5da9W9c2J2f4hJcPT7XfAfDeLsn_R4SHnQ6XEL_PDUhc"
-                  alt="Modern high-tech office interior with professionals using sleek communication devices"
-                  className="w-full h-96 md:h-[500px] object-cover"
-                />
-                <div 
-                  className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a2e2a]/40"
-                ></div>
+                {/* Stats row – exact same layout as Landing */}
+                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
+                      99.9%
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Uptime SLA
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      24/7
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Support
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      5000+
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Extensions Deployed
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Info Card */}
-             
+              {/* Right Image – brand-consistent styling */}
+              <div className="relative">
+                <div 
+                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
+                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
+                >
+                  <img
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmEMlvU17emqIYG-BeQ-9XbsX963d5hcgZtepc4rRYnMu5R-bvCSBMG-bFmUtPE9YBC7jAXpdfSJmLEueJ6hlIFUWQod6nFPKx4AXrTpslzdxbSjNOiG4kMzUEdZHx9rJlf3Io4UcfBZE5sogJFMoL_WNY0znMfPBwna9O_d69lwhpglMasgtpry5LroPfQyzRwqTvc1Q-uY6lNebDkA22Udi1cRAVycHu5da9W9c2J2f4hJcPT7XfAfDeLsn_R4SHnQ6XEL_PDUhc"
+                    alt="Modern high-tech office interior with professionals using sleek communication devices"
+                    className="w-full h-96 md:h-[500px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a2e2a]/30" />
+                </div>
+
+                {/* Optional floating badge (kept minimal) */}
+                <div className="absolute -bottom-4 -right-4 bg-white text-[#006d3d] px-5 py-3 rounded-3xl shadow-xl flex items-center gap-2 text-sm font-semibold">
+                  <span className="material-symbols-outlined text-[#00d27b]">wifi</span>
+                  LIVE VOIP NETWORK
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ============================================
-            WHY CHOOSE SECTION (unchanged)
+            WHY CHOOSE SECTION – brand consistent
             ============================================ */}
         <section className="py-24 px-6 bg-slate-100">
           <div className="max-w-6xl mx-auto">
-            
-            {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl md:text-4xl lg:text-5xl font-bold text-[#191c1d] mb-4">
                 Why Choose Nonsonet for IP-PBX?
               </h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -218,7 +307,6 @@ const Ipbx = () => {
               </p>
             </div>
 
-            {/* Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[15rem]">
               {whyChooseFeatures.map((feature) => {
                 const isLarge = feature.size === 'large';
@@ -233,56 +321,38 @@ const Ipbx = () => {
                     className={`
                       ${gridCols}
                       col-span-1
-                      p-10 rounded-lg
+                      p-10 rounded-3xl
                       transition-all duration-300
                       relative overflow-hidden
                       flex flex-col justify-between
                       ${isPrimary 
-                        ? 'bg-emerald-600 text-white hover:bg-emerald-700' 
-                        : 'bg-white text-slate-900 hover:shadow-lg'
+                        ? 'bg-[#006d3d] text-white hover:bg-[#00d27b]' 
+                        : 'bg-white text-[#191c1d] hover:shadow-xl border border-gray-100'
                       }
                     `}
                     onMouseEnter={() => setHoveredFeature(feature.id)}
                     onMouseLeave={() => setHoveredFeature(null)}
                   >
-                    {/* Icon */}
-                    <div className={`
-                      w-14 h-14 rounded-lg mb-6
-                      flex items-center justify-center
-                      transition-transform duration-300
-                      ${hoveredFeature === feature.id ? 'scale-110' : 'scale-100'}
-                      ${isPrimary 
-                        ? 'bg-white/20' 
-                        : 'bg-emerald-100'
-                      }
-                    `}>
-                      <span className={`text-2xl material-symbols-outlined ${isPrimary ? 'text-white' : 'text-emerald-600'}`}>
+                    <div className={`w-14 h-14 rounded-3xl mb-6 flex items-center justify-center transition-transform duration-300 ${hoveredFeature === feature.id ? 'scale-110' : 'scale-100'} ${isPrimary ? 'bg-white/20' : 'bg-[#00d27b]/10'}`}>
+                      <span className={`text-3xl material-symbols-outlined ${isPrimary ? 'text-white' : 'text-[#006d3d]'}`}>
                         {feature.icon}
                       </span>
                     </div>
 
-                    {/* Content */}
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 leading-tight">
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 leading-tight font-['Plus_Jakarta_Sans',sans-serif]">
                         {feature.title}
                       </h3>
                       <p className={`text-base leading-relaxed ${isPrimary ? 'text-white/90' : 'text-slate-600'}`}>
                         {feature.description}
                       </p>
 
-                      {/* Tags */}
                       {feature.tags && (
                         <div className="flex gap-2 flex-wrap mt-6">
                           {feature.tags.map((tag, idx) => (
                             <span
                               key={idx}
-                              className={`
-                                px-3 py-1 rounded text-xs font-bold
-                                ${isPrimary 
-                                  ? 'bg-white/20 text-white' 
-                                  : 'bg-slate-200 text-slate-700'
-                                }
-                              `}
+                              className={`px-3 py-1 rounded-3xl text-xs font-bold ${isPrimary ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'}`}
                             >
                               {tag}
                             </span>
@@ -298,14 +368,12 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            SOLUTIONS SECTION (unchanged)
+            SOLUTIONS SECTION – brand consistent
             ============================================ */}
         <section className="py-24 px-6 bg-slate-50">
           <div className="max-w-6xl mx-auto">
-            
-            {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl md:text-4xl lg:text-5xl font-bold text-[#191c1d] mb-4">
                 Our IP-PBX System Solutions Include
               </h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -313,7 +381,6 @@ const Ipbx = () => {
               </p>
             </div>
 
-            {/* Solutions Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {solutions.map((solution) => {
                 const isLarge = solution.isLarge;
@@ -323,9 +390,8 @@ const Ipbx = () => {
                   return (
                     <div
                       key={solution.id}
-                      className="md:col-span-2 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row"
+                      className="md:col-span-2 bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row"
                     >
-                      {/* Image */}
                       <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
                         <img
                           src={solution.image}
@@ -333,16 +399,13 @@ const Ipbx = () => {
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-
-                      {/* Content */}
                       <div className="p-8 md:w-1/2 flex flex-col justify-center">
-                        <h4 className="text-2xl font-bold text-slate-900 mb-3">
+                        <h4 className="text-2xl font-bold text-[#191c1d] mb-3 font-['Plus_Jakarta_Sans',sans-serif]">
                           {solution.title}
                         </h4>
                         <p className="text-slate-600 mb-6 leading-relaxed flex-1">
                           {solution.description}
                         </p>
-                
                       </div>
                     </div>
                   );
@@ -352,14 +415,12 @@ const Ipbx = () => {
                   return (
                     <div
                       key={solution.id}
-                      className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-start"
+                      className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-start"
                     >
-                      <div className="text-5xl text-emerald-600 mb-4">
-                        <span className="material-symbols-outlined" style={{ fontSize: '3rem' }}>
-                          {solution.icon}
-                        </span>
-                      </div>
-                      <h4 className="text-xl font-bold text-slate-900 mb-3">
+                      <span className="material-symbols-outlined text-[#006d3d] text-5xl mb-4">
+                        {solution.icon}
+                      </span>
+                      <h4 className="text-xl font-bold text-[#191c1d] mb-3 font-['Plus_Jakarta_Sans',sans-serif]">
                         {solution.title}
                       </h4>
                       <p className="text-slate-600 mb-6 leading-relaxed">
@@ -369,13 +430,11 @@ const Ipbx = () => {
                   );
                 }
 
-                // Regular cards
                 return (
                   <div
                     key={solution.id}
-                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
+                    className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
                   >
-                    {/* Image */}
                     <div className="w-full h-48 overflow-hidden bg-slate-200">
                       <img
                         src={solution.image}
@@ -383,10 +442,8 @@ const Ipbx = () => {
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-
-                    {/* Content */}
                     <div className="p-6 flex flex-col flex-1">
-                      <h4 className="text-lg font-bold text-slate-900 mb-3">
+                      <h4 className="text-lg font-bold text-[#191c1d] mb-3 font-['Plus_Jakarta_Sans',sans-serif]">
                         {solution.title}
                       </h4>
                       <p className="text-slate-600 text-sm mb-6 leading-relaxed flex-1">
@@ -401,20 +458,16 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            BENEFITS SECTION (unchanged)
+            BENEFITS SECTION – brand consistent
             ============================================ */}
         <section className="relative py-24 px-6 bg-slate-100 overflow-hidden">
-          {/* Blur Background */}
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-emerald-600/10 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-[#00d27b]/10 rounded-full blur-3xl -z-10"></div>
 
           <div className="max-w-6xl mx-auto relative z-10">
-            <div className="bg-white rounded-lg shadow-lg p-8 md:p-20">
-              
+            <div className="bg-white rounded-3xl shadow-lg p-8 md:p-20">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                
-                {/* Left Column */}
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                  <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl md:text-4xl font-bold text-[#191c1d] mb-4">
                     Unmatched Business Benefits
                   </h2>
                   <p className="text-lg text-slate-600 mb-12 leading-relaxed">
@@ -424,13 +477,13 @@ const Ipbx = () => {
                   <div className="flex flex-col gap-8">
                     {benefits.slice(0, 2).map((benefit) => (
                       <div key={benefit.id} className="flex gap-6">
-                        <div className="flex-shrink-0 w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center">
+                        <div className="flex-shrink-0 w-12 h-12 bg-[#006d3d] text-white rounded-3xl flex items-center justify-center">
                           <span className="material-symbols-outlined text-xl">
                             {benefit.icon}
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h5 className="text-xl font-bold text-slate-900 mb-2">
+                          <h5 className="text-xl font-bold text-[#191c1d] mb-2 font-['Plus_Jakarta_Sans',sans-serif]">
                             {benefit.title}
                           </h5>
                           <p className="text-slate-600 leading-relaxed">
@@ -442,18 +495,17 @@ const Ipbx = () => {
                   </div>
                 </div>
 
-                {/* Right Column */}
                 <div className="flex flex-col gap-8">
                   <div className="flex flex-col gap-8">
                     {benefits.slice(2).map((benefit) => (
                       <div key={benefit.id} className="flex gap-6">
-                        <div className="flex-shrink-0 w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center">
+                        <div className="flex-shrink-0 w-12 h-12 bg-[#006d3d] text-white rounded-3xl flex items-center justify-center">
                           <span className="material-symbols-outlined text-xl">
                             {benefit.icon}
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h5 className="text-xl font-bold text-slate-900 mb-2">
+                          <h5 className="text-xl font-bold text-[#191c1d] mb-2 font-['Plus_Jakarta_Sans',sans-serif]">
                             {benefit.title}
                           </h5>
                           <p className="text-slate-600 leading-relaxed">
@@ -464,28 +516,23 @@ const Ipbx = () => {
                     ))}
                   </div>
 
-                  {/* Testimonial */}
-                  <div className="p-6 bg-emerald-50 border-l-4 border-emerald-600 rounded">
+                  <div className="p-6 bg-[#00d27b]/10 border-l-4 border-[#00d27b] rounded-3xl">
                     <p className="text-slate-800 italic font-medium mb-3 leading-relaxed">
                       "Nonsonet transformed our regional headquarters' communication from a cost-center into a strategic asset."
                     </p>
-                    <p className="font-bold text-emerald-600">
+                    <p className="font-bold text-[#006d3d]">
                       — CTO, Global Logistics Firm
                     </p>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* ============================================
-            CTA SECTION
-            ============================================ */}
-        
-
       </main>
+
+      <Footer />
     </>
   );
 };

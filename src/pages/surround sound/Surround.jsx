@@ -2,130 +2,189 @@ import React from 'react';
 import './surround.css';
 import Navbar from '../../components/navbar/Navbar';
 
+/* ─── Network Canvas Animation (exact same as Printer page) ───────────── */
+const networkCanvasRef = (el) => {
+  if (!el) return;
+  const ctx = el.getContext('2d');
+  let dots = [], animId;
+
+  const resize = () => {
+    el.width = el.offsetWidth;
+    el.height = el.offsetHeight;
+    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
+      x: Math.random() * el.width,
+      y: Math.random() * el.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+    }));
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, el.width, el.height);
+    const maxDist = 130;
+    for (const d of dots) {
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.x < 0 || d.x > el.width) d.vx *= -1;
+      if (d.y < 0 || d.y > el.height) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,210,123,0.55)';
+      ctx.fill();
+    }
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          ctx.beginPath();
+          ctx.moveTo(dots[i].x, dots[i].y);
+          ctx.lineTo(dots[j].x, dots[j].y);
+          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  };
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+  return () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('resize', resize);
+  };
+};
+
 const Surround = () => {
   return (
     <>
       <Navbar />
       <main className="surround3-main-content">
-        {/* Hero Section - Dark gradient background + all white text (detailed) */}
-        <section 
-          className="surround3-hero-section"
-          style={{ 
-            background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' 
-          }}
+
+        {/* ============================================
+            HERO SECTION – 100% MATCHING PRINTER PAGE
+            ============================================ */}
+        <section
+          id="hero"
+          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
+          style={{ background: '#08111f' }}
         >
-          {/* Background Decoration - Enhanced for new dark gradient */}
-          <div 
-            className="surround3-hero-gradient"
-            style={{ 
-              background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)',
-              opacity: 1 
+          {/* Animated network canvas – exact same as Printer */}
+          <canvas
+            ref={networkCanvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ display: 'block' }}
+          />
+
+          {/* Subtle right-side radial glow – exact same as Printer */}
+          <div
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
             }}
           />
 
-          <div className="surround3-hero-wrapper">
-            {/* Left Content - All text forced to white with enhanced contrast */}
-            <div className="surround3-hero-left">
-              {/* Innovation Badge - Dark-mode version for maximum visibility */}
-              <div 
-                className="surround3-badge"
-                style={{ 
-                  backgroundColor: 'rgba(255,255,255,0.12)', 
-                  color: '#ffffff',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
-                }}
-              >
-                <span 
-                  className="surround3-badge-dot"
-                  style={{ backgroundColor: '#62f595', animation: 'pulse 2s infinite' }}
-                ></span>
-                <span 
-                  className="surround3-badge-text"
-                  style={{ color: '#ffffff', fontWeight: 700 }}
-                >
-                  INTELLIGENT INNOVATION
-                </span>
+          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
+
+              {/* Left Content – exact Printer typography */}
+              <div className="lg:col-span-7 z-10">
+                {/* Badge – exact same style as Printer */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
+                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+                  Surround Sound Solutions • Lagos, Nigeria
+                </div>
+
+                {/* Headline – exact font, size, weight, tracking as Printer */}
+                <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
+                  Elevate Your Audio Experience with{' '}
+                  <span
+                    style={{
+                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    intelligent
+                  </span>{' '}
+                  Surround Sound Solutions
+                </h1>
+
+                {/* Subtext – exact style as Printer */}
+                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
+                  Transform any space into a high-fidelity auditory sanctuary. Our surround sound
+                  ecosystems bridge the gap between technical precision and emotional resonance.
+                </p>
+
+                {/* Stats row – exact same layout as Printer (audio-adapted) */}
+                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
+                      360°
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Immersive Audio
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      10+
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Year Warranty
+                    </div>
+                  </div>
+                  <div className="w-px h-10 bg-white/20" />
+                  <div>
+                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                      24/7
+                    </div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                      Support
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Main Title - Pure white with elegant emerald-to-white gradient on brand name */}
-              <h1 
-                className="surround3-hero-title"
-                style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
-              >
-                Elevate Your Audio Experience with{' '}
-                <span 
-                  style={{
-                    background: 'linear-gradient(to right, #62f595, #ffffff, #62f595)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontWeight: 800
-                  }}
+              {/* Right Image Section – brand-consistent with Printer */}
+              <div className="lg:col-span-5 relative">
+                <div
+                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
+                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
                 >
-                  Nonsonet Technologies
-                </span>
-              </h1>
+                  <img
+                    alt="High-end home theater setup"
+                    className="w-full h-[500px] object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyh1vbkt7W0xGc4e0ph9WIi1wRSQKURhSu5AvTgCVa531ylFntRYee58-nKWGFetcKrjq5OQZ3ef78vvEOAsLc8Qm-Gthd3wAzAIyRrPBPLU15c12mxbDVVdnMRtxGb_Vw0HFQPCT9mOo_R08RYTgOuy7CRXNNdTh9LI8qwamYGpYIH0WFqoDVVo2oKnc26XhNZU_gtayqSnroa2edRQ6gcHi1enig3LHII3eiANLfdC48ZOYqWNka-qhQ2KNlwErxmBurnst_28p"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
+                </div>
 
-              {/* Description - High-contrast white with subtle transparency for depth */}
-              <p 
-                className="surround3-hero-description"
-                style={{ 
-                  color: 'rgba(255,255,255,0.92)',
-                  textShadow: '0 2px 10px rgba(0,0,0,0.3)'
-                }}
-              >
-                Transform any space into a high-fidelity auditory sanctuary. Our surround sound
-                ecosystems bridge the gap between technical precision and emotional resonance.
-              </p>
-
-              {/* CTA Buttons - (kept as-is, now visible on dark background) */}
-             
-            </div>
-
-            {/* Right Image Section - Enhanced shadow & ring for dark hero */}
-            <div className="surround3-hero-image-container">
-              <img
-                alt="High-end home theater setup"
-                className="surround3-hero-image"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyh1vbkt7W0xGc4e0ph9WIi1wRSQKURhSu5AvTgCVa531ylFntRYee58-nKWGFetcKrjq5OQZ3ef78vvEOAsLc8Qm-Gthd3wAzAIyRrPBPLU15c12mxbDVVdnMRtxGb_Vw0HFQPCT9mOo_R08RYTgOuy7CRXNNdTh9LI8qwamYGpYIH0WFqoDVVo2oKnc26XhNZU_gtayqSnroa2edRQ6gcHi1enig3LHII3eiANLfdC48ZOYqWNka-qhQ2KNlwErxmBurnst_28p"
-                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-              />
-              <div 
-                className="surround3-hero-overlay"
-                style={{ 
-                  background: 'linear-gradient(to top, rgba(13,27,42,0.65), transparent 60%)' 
-                }}
-              />
-
-              {/* Glass Effect Card - Updated for dark hero (semi-transparent dark glass) */}
-              <div 
-                className="surround3-glass-card"
-                style={{ 
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(16px)',
-                  color: '#ffffff'
-                }}
-              >
-                <p 
-                  className="surround3-glass-card-title"
-                  style={{ color: '#ffffff' }}
-                >
-                  Elite Acoustic Series
-                </p>
-                <p 
-                  className="surround3-glass-card-description"
-                  style={{ color: 'rgba(255,255,255,0.85)' }}
-                >
-                  Custom-calibrated for your unique architectural footprint.
-                </p>
+                {/* Floating Stats Card – exact Printer style, audio-adapted */}
+                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
+                      🎧
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Elite Acoustic Series</p>
+                      <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">Custom-Calibrated</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us Section - Unchanged */}
+        {/* Why Choose Us Section - Unchanged (keeps your surround3- CSS) */}
         <section className="surround3-why-choose-section">
           <div className="surround3-container">
             {/* Section Header */}
@@ -380,8 +439,7 @@ const Surround = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        
+        {/* CTA Section - Ready for your content */}
       </main>
     </>
   );

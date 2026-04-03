@@ -20,95 +20,163 @@ function Landing() {
     setFormData({ fullName: '', company: '', email: '', service: 'Forecourt Automation', message: '' });
   };
 
+  const networkCanvasRef = (el) => {
+    if (!el) return;
+    const ctx = el.getContext('2d');
+    let dots = [], animId;
+
+    const resize = () => {
+      el.width = el.offsetWidth;
+      el.height = el.offsetHeight;
+      dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
+        x: Math.random() * el.width,
+        y: Math.random() * el.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 2 + 1,
+      }));
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, el.width, el.height);
+      const maxDist = 130;
+      for (const d of dots) {
+        d.x += d.vx;
+        d.y += d.vy;
+        if (d.x < 0 || d.x > el.width) d.vx *= -1;
+        if (d.y < 0 || d.y > el.height) d.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,210,123,0.55)';
+        ctx.fill();
+      }
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x;
+          const dy = dots[i].y - dots[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDist) {
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      animId = requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+    window.addEventListener('resize', resize);
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
+  };
+
   return (
     <div className="w-full bg-[#f8f9fa] overflow-x-hidden font-['Manrope',sans-serif] text-[#191c1d] pt-20">
 
       {/* ===== HERO ===== */}
       <section
         id="hero"
-        className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-20"
-        style={{ background: 'linear-gradient(to right, #0d1b2a, #0a2e2a)' }}
+        className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
+        style={{ background: '#08111f' }}
       >
-        {/* Skewed decorative bg */}
-        <div className="absolute top-0 right-0 bottom-0 w-1/3 bg-white/5 skew-x-[12deg] origin-top-right z-10 pointer-events-none" />
+        {/* Animated network canvas */}
+        <canvas
+          ref={networkCanvasRef}
+          className="absolute inset-0 w-full h-full"
+          style={{ display: 'block' }}
+        />
 
-        <div className="relative z-10 max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left */}
-          <div className="flex flex-col gap-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00d27b]/20 text-[#00d27b] text-xs font-semibold tracking-[0.06em] uppercase w-fit">
-              <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-              Technology Redefined
-            </div>
+        {/* Subtle right-side radial glow */}
+        <div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
+          }}
+        />
 
-            <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
-              Empowering businesses with{' '}
-              <span className="text-[#00d27b]">intelligent</span>{' '}
-              technology.
-            </h1>
-
-            <p className="text-xl text-white/70 max-w-[32rem] leading-[1.7]">
-              Nonsonet Technologies Limited delivers scalable, innovative, and highly reliable IT solutions. From strategic advisory to enterprise infrastructure, we transform how you work.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() =>
-                  document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#00d27b] text-[#00542e] rounded-full font-semibold text-base transition-all hover:bg-white hover:text-[#006d3d] hover:shadow-[0_8px_24px_rgba(0,210,123,0.28)] active:scale-95 cursor-pointer"
-              >
-                Explore Solutions
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-
-              <button
-                onClick={() =>
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white border border-white/20 rounded-full font-semibold text-base transition-all hover:bg-white/20 active:scale-95 cursor-pointer"
-              >
-                Contact Us
-              </button>
-            </div>
-
-            <div className="flex items-center gap-6 pt-8 border-t border-white/15">
-              <div>
-                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                  99.8%
-                </div>
-                <div className="text-xs font-semibold text-white/50 uppercase tracking-widest">
-                  Uptime Statistic
-                </div>
-              </div>
-              <div className="w-px h-10 bg-white/20" />
-              <div>
-                <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                  24/7
-                </div>
-                <div className="text-xs font-semibold text-white/50 uppercase tracking-widest">
-                  Active Support
-                </div>
-              </div>
-            </div>
+        <div className="relative z-10 max-w-[1280px] mx-auto w-full">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
+            <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
+            Lagos, Nigeria &bull; Since 2016
           </div>
 
-          {/* Right */}
-          <div className="relative">
-            <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_MQFOiWsoOeEU32Q6vUajgBERoK024NKCTPPY5HfAu4D1KmEQ6YVdWNE2rlMdpFOcEVCBE9Qugz8bXtqy_R22EdPGRk_WvQPeDAIyz8Y22TmRFgWeFjmBt0zCDvh7e0h1kaIH-4kjS-EsglsggFjrkgHJOlKxQbhL9Aay4pqSf-FP7qZ3IMNtCualwrj6s_77tPoq67w0BO0uybj9JCF9A4AbGyCtNpgUmVU3g9kO1SaK8XP1HYsDQgH6bmgZsm1Kiibl67OzDmA"
-                alt="Modern high-tech data center"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Headline */}
+          <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6 max-w-[800px]">
+            Empowering businesses with{' '}
+            <span
+              style={{
+                background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              intelligent
+            </span>{' '}
+            technology.
+          </h1>
 
-            <div className="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-[18rem] shadow-xl rotate-[-3deg]">
-              <p className="text-sm italic text-white/80 leading-relaxed mb-3">
-                "Innovation is not just what we do; it's how we think about
-                the future of connectivity."
-              </p>
-              <div className="font-bold text-[#00d27b] text-sm">
-                Nonsonet Executive Team
+          {/* Subtext */}
+          <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
+            Nonsonet Technologies Limited delivers scalable, innovative, and highly reliable IT solutions. From strategic advisory to enterprise infrastructure, we transform how you work.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 mb-14">
+            <button
+              onClick={() =>
+                document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' })
+              }
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#00d27b] text-[#003d22] rounded-full font-bold text-base transition-all hover:bg-white hover:text-[#006d3d] hover:shadow-[0_8px_24px_rgba(0,210,123,0.28)] active:scale-95 cursor-pointer"
+            >
+              Explore Solutions
+              <span className="material-symbols-outlined">arrow_forward</span>
+            </button>
+
+            <button
+              onClick={() =>
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+              }
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white border border-white/20 rounded-full font-semibold text-base transition-all hover:bg-white/18 active:scale-95 cursor-pointer"
+            >
+              Contact Us
+            </button>
+          </div>
+
+          {/* Stats */}
+          <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
+            <div>
+              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
+                99.8%
+              </div>
+              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                Uptime Statistic
+              </div>
+            </div>
+            <div className="w-px h-10 bg-white/20" />
+            <div>
+              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                24/7
+              </div>
+              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                Active Support
+              </div>
+            </div>
+            <div className="w-px h-10 bg-white/20" />
+            <div>
+              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
+                100+
+              </div>
+              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
+                Projects Done
               </div>
             </div>
           </div>
@@ -227,8 +295,7 @@ function Landing() {
                 What We Do
               </h2>
               <p className="text-xl text-[#666] leading-relaxed mt-4 max-w-md">
-                Comprehensive technological infrastructure tailored for diverse
-                industry verticals.
+                Comprehensive technological infrastructure tailored for diverse industry verticals.
               </p>
             </div>
           </div>
@@ -440,9 +507,7 @@ function Landing() {
                 Ready to transform your IT?
               </h2>
               <p className="text-base text-white/60 leading-relaxed mt-6">
-                Our consultants are ready to discuss how we can streamline your
-                operations and secure your infrastructure. Reach out for a
-                tailored technology audit.
+                Our consultants are ready to discuss how we can streamline your operations and secure your infrastructure. Reach out for a tailored technology audit.
               </p>
 
               <div className="flex flex-col gap-6 mt-12">
