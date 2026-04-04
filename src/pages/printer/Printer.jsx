@@ -1,70 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 
-/* ─── Network Canvas Animation (exact same as Landing page) ───────────── */
-const networkCanvasRef = (el) => {
-  if (!el) return;
-  const ctx = el.getContext('2d');
-  let dots = [], animId;
-
-  const resize = () => {
-    el.width = el.offsetWidth;
-    el.height = el.offsetHeight;
-    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
-      x: Math.random() * el.width,
-      y: Math.random() * el.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 1,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, el.width, el.height);
-    const maxDist = 130;
-    for (const d of dots) {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > el.width) d.vx *= -1;
-      if (d.y < 0 || d.y > el.height) d.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,210,123,0.55)';
-      ctx.fill();
-    }
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw);
-  };
-
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
-  return () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener('resize', resize);
-  };
-};
-
 const Printer = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [activeNav, setActiveNav] = useState('Solutions');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Track scroll position for animations
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -73,15 +12,6 @@ const Printer = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navigation items
-  const navItems = [
-    { label: 'Solutions', id: 'solutions' },
-    { label: 'Benefits', id: 'benefits' },
-    { label: 'Case Studies', id: 'case-studies' },
-    { label: 'Cloud Support', id: 'cloud-support' },
-  ];
-
-  // Why Choose Cards Data
   const chooseCards = [
     {
       id: 1,
@@ -109,7 +39,6 @@ const Printer = () => {
     },
   ];
 
-  // MPS Services Data
   const mpsServices = [
     {
       id: 1,
@@ -149,123 +78,85 @@ const Printer = () => {
       <main className="pt-20">
 
         {/* ============================================
-            HERO SECTION – 100% MATCHING LANDING PAGE
+            HERO SECTION – background matches screenshot
+            Deep dark navy + strong teal top-right glow
             ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – exact same as Landing */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
+       {/* ============================================
+    HERO SECTION – matching screenshot exactly
+    ============================================ */}
+<section
+  id="hero"
+  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+  style={{ background: '#0d1b2a' }}
+>
+  {/* Top-right teal glow */}
+  <div
+    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+    }}
+  />
+  {/* Bottom-left blue glow */}
+  <div
+    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+    }}
+  />
 
-          {/* Subtle right-side radial glow – exact same as Landing */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
+  {/* === BACK NAV === */}
+ 
 
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
+  {/* === MAIN CONTENT === */}
+  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
 
-              {/* Left Content – exact Landing typography */}
-              <div className="lg:col-span-7 z-10">
-                {/* Badge – exact same style as Landing */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Managed Print Services • Lagos, Nigeria
-                </div>
+    {/* Icon + Badge row */}
+    <div className="flex items-center gap-4">
+      <div
+        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+      >
+        <span className="material-symbols-outlined text-[#00d27b] text-2xl">print</span>
+      </div>
 
-                {/* Headline – exact font, size, weight, tracking as Landing */}
-                <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
-                  Streamline Your Printing Operations with{' '}
-                  <span
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  Managed Print Services
-                </h1>
+      <div
+        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+        style={{
+          background: 'rgba(0,210,123,0.15)',
+          border: '1px solid rgba(0,210,123,0.35)',
+          color: '#00d27b',
+        }}
+      >
+        Streamline Your Printing Operations
+      </div>
+    </div>
 
-                {/* Subtext – exact style as Landing */}
-                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-                  Optimize your entire document lifecycle with a centralized, secure, and sustainable print infrastructure. We transform printing from a hidden cost into a strategic asset.
-                </p>
+    {/* Headline */}
+    <h1
+      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+        maxWidth: '800px',
+      }}
+    >
+      Managed Print Services
+    </h1>
 
-                {/* Stats row – exact same layout as Landing */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      30%
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Avg. Cost Reduction
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      100%
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Proactive Support
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      24/7
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Monitoring
-                    </div>
-                  </div>
-                </div>
-              </div>
+    {/* Subtitle */}
+    <p
+      className="text-white/55 leading-relaxed"
+      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+    >
+      Comprehensive Managed Print Services (MPS) designed to optimize your printing
+      environment, reduce waste, ensure seamless operation, and enhance security.
+    </p>
+  </div>
+</section>
 
-              {/* Right Image Section – brand-consistent with your original image + stats overlay */}
-              <div className="lg:col-span-5 relative">
-                <div
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    alt="Modern Office Setup with Printer"
-                    className="w-full h-[500px] object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnWQaLVx9GblnFxgfD-asT-2w34raI7EZVoFa-MindqmZBvVUnA7LvVt5-9GSKD4Z3fb8-D2whgWNRckGbDnU7pqjiLCm5JKjkxQxrcxnbyBDRbikfRwdJvXqq4e8JwWSlIP_8Y1xqnSt5Wp59g2ec-3jYw-7WYf2CxAvmVoJVf_v7JqE5w5fiheAKYXgzXcJ0RAGH8XRufE0G6IKmKX8vjecqyIQgTpwQ7CTwOrpfj0cqO6iC41rQ8k4ctUcFDpGlP5trYRT7oR1l"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
-                </div>
-
-                {/* Floating Stats Card – kept from your design, now on-brand */}
-                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
-                      📈
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Average Savings</p>
-                      <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">30% Reductions</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ==================== WHY CHOOSE SECTION – brand consistent ==================== */}
+        {/* ==================== WHY CHOOSE SECTION ==================== */}
         <section className="py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-20">
@@ -276,7 +167,7 @@ const Printer = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {chooseCards.map((card, index) => (
+              {chooseCards.map((card) => (
                 <div
                   key={card.id}
                   className="bg-white overflow-hidden rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100"
@@ -302,14 +193,14 @@ const Printer = () => {
           </div>
         </section>
 
-        {/* ==================== MPS SERVICES SECTION – brand consistent ==================== */}
+        {/* ==================== MPS SERVICES SECTION ==================== */}
         <section className="py-24 overflow-hidden bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-              {/* Right - Images Grid */}
+
+              {/* Images Grid */}
               <div className="relative order-2 lg:order-1">
                 <div className="absolute -left-12 -top-12 w-64 h-64 bg-[#00d27b]/10 rounded-full blur-3xl"></div>
-
                 <div className="relative grid grid-cols-2 gap-4">
                   <div className="space-y-4 pt-12">
                     <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
@@ -324,7 +215,6 @@ const Printer = () => {
                       <p className="text-sm tracking-widest uppercase">Proactive Support</p>
                     </div>
                   </div>
-
                   <div className="space-y-4">
                     <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                       <img
@@ -344,12 +234,11 @@ const Printer = () => {
                 </div>
               </div>
 
-              {/* Left - Content */}
+              {/* Content */}
               <div className="order-1 lg:order-2">
                 <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-8 leading-tight">
                   Comprehensive MPS Solutions Tailored for You
                 </h2>
-
                 <div className="space-y-8">
                   {mpsServices.map((service) => (
                     <div
@@ -375,6 +264,7 @@ const Printer = () => {
                   ))}
                 </div>
               </div>
+
             </div>
           </div>
         </section>

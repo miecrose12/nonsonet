@@ -62,64 +62,6 @@ const stats = [
   { val: '5 yr',   label: 'Warranty Coverage',    sub: 'On all hardware components' },
 ];
 
-/* ─── Network Canvas Animation (exact same as Landing page) ───────────── */
-const networkCanvasRef = (el) => {
-  if (!el) return;
-  const ctx = el.getContext('2d');
-  let dots = [], animId;
-
-  const resize = () => {
-    el.width = el.offsetWidth;
-    el.height = el.offsetHeight;
-    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
-      x: Math.random() * el.width,
-      y: Math.random() * el.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 1,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, el.width, el.height);
-    const maxDist = 130;
-    for (const d of dots) {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > el.width) d.vx *= -1;
-      if (d.y < 0 || d.y > el.height) d.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,210,123,0.55)';
-      ctx.fill();
-    }
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw);
-  };
-
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
-  return () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener('resize', resize);
-  };
-};
-
 export default function Cctv() {
   return (
     <div className="bg-white text-gray-900 selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif] text-[#191c1d]">
@@ -129,120 +71,91 @@ export default function Cctv() {
       <main className="pt-20">
 
         {/* ============================================
-            HERO SECTION – NOW 100% MATCHING LANDING PAGE
-            (background, canvas animation, radial glow, typography, colors, badge, gradients)
+            HERO SECTION – background matches screenshot
+            Deep dark navy + strong teal top-right glow
             ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – exact same as Landing */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
+        {/* ============================================
+    HERO SECTION – Matching the screenshot design
+    ============================================ */}
+<section
+  id="hero"
+  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+  style={{ background: '#0d1b2a' }}
+>
+  {/* Top-right teal glow */}
+  <div
+    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+    }}
+  />
+  {/* Bottom-left blue glow */}
+  <div
+    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+    }}
+  />
 
-          {/* Subtle right-side radial glow – exact same as Landing */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
+  {/* === BACK NAV === */}
+ 
 
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+  {/* === MAIN CONTENT === */}
+  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
 
-              {/* ── Text column – ALL WHITE + exact Landing typography ── */}
-              <div>
-                {/* Badge – exact same style as Landing page */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Lagos, Nigeria &bull; CCTV Excellence
-                </div>
+    {/* Icon + Badge row */}
+    <div className="flex items-center gap-4">
+      {/* Camera icon box */}
+      <div
+        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d27b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
+      </div>
 
-                {/* Headline – exact font, size, weight, tracking, leading as Landing */}
-                <h1
-                  className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6 max-w-[800px]"
-                >
-                  Protect What Matters Most with{' '}
-                  <span
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  CCTV Solutions
-                </h1>
+      {/* Green pill */}
+      <div
+        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+        style={{
+          background: 'rgba(0,210,123,0.15)',
+          border: '1px solid rgba(0,210,123,0.35)',
+          color: '#00d27b',
+        }}
+      >
+        Protect What Matters Most
+      </div>
+    </div>
 
-                {/* Subtext – exact style as Landing */}
-                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-                  Elevate your security with high-definition monitoring and intelligent surveillance infrastructure designed for absolute clarity and reliability.
-                </p>
+    {/* Headline */}
+    <h1
+      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+        maxWidth: '800px',
+      }}
+    >
+      CCTV Security Systems
+    </h1>
 
-                {/* Stats row – styled exactly like Landing page stats */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      500+
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Installations
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      99.9%
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Uptime SLA
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      24/7
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Monitoring
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Right image column – kept for visual impact but now on brand dark hero ── */}
-              <div className="mt-14 lg:mt-0">
-                <div 
-                  className="relative overflow-hidden rounded-3xl border-l-8 border-[#00d27b] shadow-2xl lg:rounded-3xl ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    src={HERO_IMG}
-                    alt="Security specialist monitoring CCTV feeds"
-                    className="aspect-video w-full object-cover lg:aspect-[4/3]"
-                  />
-
-                  {/* Live badge – updated to brand green */}
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-[#00d27b]" />
-                    LIVE MONITORING ACTIVE
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
+    {/* Subtitle */}
+    <p
+      className="text-white/55 leading-relaxed"
+      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+    >
+      Comprehensive CCTV systems for round-the-clock surveillance of homes, businesses, and
+      properties. Deter criminal activity, monitor operations, and ensure safety of assets.
+    </p>
+  </div>
+</section>
 
         {/* ============================================
-            REMAINING SECTIONS (unchanged except minor brand color consistency)
+            REMAINING SECTIONS (unchanged)
             ============================================ */}
 
         <section className="bg-gray-50 px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
@@ -304,9 +217,7 @@ export default function Cctv() {
         <section className="bg-white px-6 py-24 lg:px-16 xl:px-24 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
 
-            <h2
-              className="mb-16 text-center text-3xl font-bold text-[#006d3d] lg:mb-20 lg:text-4xl font-['Plus_Jakarta_Sans',sans-serif]"
-            >
+            <h2 className="mb-16 text-center text-3xl font-bold text-[#006d3d] lg:mb-20 lg:text-4xl font-['Plus_Jakarta_Sans',sans-serif]">
               Engineered Systems
             </h2>
 
@@ -346,7 +257,6 @@ export default function Cctv() {
                         </li>
                       ))}
                     </ul>
-
                     <div className="mt-8 h-1 w-14 bg-[#00d27b]/30" />
                   </div>
                 </div>
@@ -408,9 +318,7 @@ export default function Cctv() {
               <div className="space-y-10">
                 {benefits.map(({ num, title, desc }) => (
                   <div key={num} className="flex items-start gap-6">
-                    <span
-                      className="flex-shrink-0 text-4xl font-black text-[#00d27b]/20 lg:text-5xl font-['Plus_Jakarta_Sans',sans-serif]"
-                    >
+                    <span className="flex-shrink-0 text-4xl font-black text-[#00d27b]/20 lg:text-5xl font-['Plus_Jakarta_Sans',sans-serif]">
                       {num}
                     </span>
                     <div>

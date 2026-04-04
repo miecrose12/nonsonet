@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './surround.css';
 import Navbar from '../../components/navbar/Navbar';
 
@@ -60,134 +60,108 @@ const networkCanvasRef = (el) => {
   };
 };
 
+/* ─── HERO SECTION – 100% MATCHING THE POLISHED PRINTER HERO ──────────────── */
+/* ─── HERO SECTION – Matching the screenshot design ──────────────────────── */
+const HeroSection = ({ scrollPosition }) => (
+  <section
+    id="hero"
+    className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+    style={{ background: '#0d1b2a' }}
+  >
+    {/* === BACKGROUND GLOWS === */}
+    {/* Top-right teal glow */}
+    <div
+      className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+      }}
+    />
+    {/* Bottom-left blue glow */}
+    <div
+      className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+      }}
+    />
+
+    {/* === BACK NAV === */}
+    
+
+    {/* === MAIN CONTENT === */}
+    <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
+
+      {/* Icon + Badge row */}
+      <div className="flex items-center gap-4">
+        {/* Speaker icon box */}
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+        >
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d27b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          </svg>
+        </div>
+
+        {/* Green pill */}
+        <div
+          className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+          style={{
+            background: 'rgba(0,210,123,0.15)',
+            border: '1px solid rgba(0,210,123,0.35)',
+            color: '#00d27b',
+          }}
+        >
+          Elevate Your Audio Experience
+        </div>
+      </div>
+
+      {/* Headline */}
+      <h1
+        className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+        style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+          maxWidth: '800px',
+        }}
+      >
+        Surround Sound Systems
+      </h1>
+
+      {/* Subtitle */}
+      <p
+        className="text-white/55 leading-relaxed"
+        style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+      >
+        State-of-the-art Surround Sound Systems for home theaters, offices, and commercial settings
+        delivering immersive, crystal-clear audio experiences.
+      </p>
+    </div>
+  </section>
+);
+
+/* ─── Root Component ──────────────────────────────────────────────────────── */
 const Surround = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollPosition(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <Navbar />
       <main className="surround3-main-content">
+        <HeroSection scrollPosition={scrollPosition} />
 
-        {/* ============================================
-            HERO SECTION – 100% MATCHING PRINTER PAGE
-            ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – exact same as Printer */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
-
-          {/* Subtle right-side radial glow – exact same as Printer */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
-
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
-
-              {/* Left Content – exact Printer typography */}
-              <div className="lg:col-span-7 z-10">
-                {/* Badge – exact same style as Printer */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Surround Sound Solutions • Lagos, Nigeria
-                </div>
-
-                {/* Headline – exact font, size, weight, tracking as Printer */}
-                <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
-                  Elevate Your Audio Experience with{' '}
-                  <span
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  Surround Sound Solutions
-                </h1>
-
-                {/* Subtext – exact style as Printer */}
-                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-                  Transform any space into a high-fidelity auditory sanctuary. Our surround sound
-                  ecosystems bridge the gap between technical precision and emotional resonance.
-                </p>
-
-                {/* Stats row – exact same layout as Printer (audio-adapted) */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      360°
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Immersive Audio
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      10+
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Year Warranty
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      24/7
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Support
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Image Section – brand-consistent with Printer */}
-              <div className="lg:col-span-5 relative">
-                <div
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    alt="High-end home theater setup"
-                    className="w-full h-[500px] object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyh1vbkt7W0xGc4e0ph9WIi1wRSQKURhSu5AvTgCVa531ylFntRYee58-nKWGFetcKrjq5OQZ3ef78vvEOAsLc8Qm-Gthd3wAzAIyRrPBPLU15c12mxbDVVdnMRtxGb_Vw0HFQPCT9mOo_R08RYTgOuy7CRXNNdTh9LI8qwamYGpYIH0WFqoDVVo2oKnc26XhNZU_gtayqSnroa2edRQ6gcHi1enig3LHII3eiANLfdC48ZOYqWNka-qhQ2KNlwErxmBurnst_28p"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
-                </div>
-
-                {/* Floating Stats Card – exact Printer style, audio-adapted */}
-                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
-                      🎧
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Elite Acoustic Series</p>
-                      <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">Custom-Calibrated</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us Section - Unchanged (keeps your surround3- CSS) */}
+        {/* Why Choose Us Section - Unchanged (your CSS) */}
         <section className="surround3-why-choose-section">
           <div className="surround3-container">
-            {/* Section Header */}
             <div className="surround3-section-header">
               <h2 className="surround3-section-title">Why Choose Nonsonet for Surround Sound?</h2>
               <p className="surround3-section-subtitle">
@@ -196,14 +170,10 @@ const Surround = () => {
               </p>
             </div>
 
-            {/* Feature Cards Grid 1 */}
             <div className="surround3-features-grid">
-              {/* Feature Card 1 */}
               <div className="surround3-feature-card">
                 <div className="surround3-feature-icon-wrapper">
-                  <span className="surround3-material-icons surround3-feature-icon">
-                    spatial_audio
-                  </span>
+                  <span className="surround3-material-icons surround3-feature-icon">spatial_audio</span>
                 </div>
                 <h4 className="surround3-feature-title">Immersive Audio Quality</h4>
                 <p className="surround3-feature-description">
@@ -211,13 +181,9 @@ const Surround = () => {
                   perfect balance.
                 </p>
               </div>
-
-              {/* Feature Card 2 */}
               <div className="surround3-feature-card">
                 <div className="surround3-feature-icon-wrapper">
-                  <span className="surround3-material-icons surround3-feature-icon">
-                    architecture
-                  </span>
+                  <span className="surround3-material-icons surround3-feature-icon">architecture</span>
                 </div>
                 <h4 className="surround3-feature-title">Custom Design</h4>
                 <p className="surround3-feature-description">
@@ -225,13 +191,9 @@ const Surround = () => {
                   sonic performance.
                 </p>
               </div>
-
-              {/* Feature Card 3 */}
               <div className="surround3-feature-card">
                 <div className="surround3-feature-icon-wrapper">
-                  <span className="surround3-material-icons surround3-feature-icon">
-                    settings_input_composite
-                  </span>
+                  <span className="surround3-material-icons surround3-feature-icon">settings_input_composite</span>
                 </div>
                 <h4 className="surround3-feature-title">Seamless Integration</h4>
                 <p className="surround3-feature-description">
@@ -241,14 +203,10 @@ const Surround = () => {
               </div>
             </div>
 
-            {/* Feature Cards Grid 2 */}
             <div className="surround3-features-grid-horizontal">
-              {/* Feature Card 4 */}
               <div className="surround3-feature-card-horizontal">
                 <div className="surround3-feature-icon-wrapper-small">
-                  <span className="surround3-material-icons surround3-feature-icon">
-                    precision_manufacturing
-                  </span>
+                  <span className="surround3-material-icons surround3-feature-icon">precision_manufacturing</span>
                 </div>
                 <div>
                   <h4 className="surround3-feature-title">Advanced Technology</h4>
@@ -258,13 +216,9 @@ const Surround = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Feature Card 5 */}
               <div className="surround3-feature-card-horizontal">
                 <div className="surround3-feature-icon-wrapper-small">
-                  <span className="surround3-material-icons surround3-feature-icon">
-                    engineering
-                  </span>
+                  <span className="surround3-material-icons surround3-feature-icon">engineering</span>
                 </div>
                 <div>
                   <h4 className="surround3-feature-title">Expert Installation</h4>
@@ -281,7 +235,6 @@ const Surround = () => {
         {/* Our Solutions Section - Unchanged */}
         <section className="surround3-solutions-section">
           <div className="surround3-container">
-            {/* Section Header */}
             <div className="surround3-solutions-header">
               <div className="surround3-solutions-header-left">
                 <h2 className="surround3-solutions-title">Our Surround Sound Solutions Include</h2>
@@ -293,9 +246,7 @@ const Surround = () => {
               <div className="surround3-header-divider"></div>
             </div>
 
-            {/* Solutions Grid */}
             <div className="surround3-solutions-grid">
-              {/* Solution 1 */}
               <div className="surround3-solution-card">
                 <div className="surround3-solution-image-wrapper">
                   <img
@@ -312,7 +263,6 @@ const Surround = () => {
                 </p>
               </div>
 
-              {/* Solution 2 */}
               <div className="surround3-solution-card">
                 <div className="surround3-solution-image-wrapper">
                   <img
@@ -329,7 +279,6 @@ const Surround = () => {
                 </p>
               </div>
 
-              {/* Solution 3 */}
               <div className="surround3-solution-card">
                 <div className="surround3-solution-image-wrapper">
                   <img
@@ -346,7 +295,6 @@ const Surround = () => {
                 </p>
               </div>
 
-              {/* Solution 4 */}
               <div className="surround3-solution-card">
                 <div className="surround3-solution-image-wrapper">
                   <img
@@ -371,7 +319,6 @@ const Surround = () => {
           <div className="surround3-benefits-wrapper">
             <div className="surround3-benefits-card">
               <div className="surround3-benefits-grid">
-                {/* Benefit 1 */}
                 <div className="surround3-benefit-item">
                   <div className="surround3-benefit-header">
                     <div className="surround3-benefit-number-wrapper">
@@ -387,7 +334,6 @@ const Surround = () => {
                   </div>
                 </div>
 
-                {/* Benefit 2 */}
                 <div className="surround3-benefit-item">
                   <div className="surround3-benefit-header">
                     <div className="surround3-benefit-number-wrapper">
@@ -403,7 +349,6 @@ const Surround = () => {
                   </div>
                 </div>
 
-                {/* Benefit 3 */}
                 <div className="surround3-benefit-item">
                   <div className="surround3-benefit-header">
                     <div className="surround3-benefit-number-wrapper">
@@ -419,7 +364,6 @@ const Surround = () => {
                   </div>
                 </div>
 
-                {/* Benefit 4 */}
                 <div className="surround3-benefit-item">
                   <div className="surround3-benefit-header">
                     <div className="surround3-benefit-number-wrapper">

@@ -80,64 +80,6 @@ const benefitCards = [
   },
 ];
 
-/* ─── Network Canvas Animation (exact same as Landing + CCTV) ─────────── */
-const networkCanvasRef = (el) => {
-  if (!el) return;
-  const ctx = el.getContext('2d');
-  let dots = [], animId;
-
-  const resize = () => {
-    el.width = el.offsetWidth;
-    el.height = el.offsetHeight;
-    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
-      x: Math.random() * el.width,
-      y: Math.random() * el.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 1,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, el.width, el.height);
-    const maxDist = 130;
-    for (const d of dots) {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > el.width) d.vx *= -1;
-      if (d.y < 0 || d.y > el.height) d.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,210,123,0.55)';
-      ctx.fill();
-    }
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw);
-  };
-
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
-  return () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener('resize', resize);
-  };
-};
-
 export default function Door() {
   return (
     <div className="bg-white text-gray-900 selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif] text-[#191c1d]">
@@ -147,120 +89,89 @@ export default function Door() {
       <main className="pt-20">
 
         {/* ============================================
-            HERO SECTION – NOW 100% MATCHING LANDING PAGE
-            (exact background, network canvas, radial glow, typography, badge, stats)
+            HERO SECTION – NOW 100% MATCHING CCTV PAGE BACKGROUND
+            (exact same deep navy + multi-layer teal glows, overlays, and contrast)
             ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – identical to Landing */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
+        {/* ============================================
+    HERO SECTION – Matching the screenshot design
+    ============================================ */}
+<section
+  id="hero"
+  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+  style={{ background: '#0d1b2a' }}
+>
+  {/* Top-right teal glow */}
+  <div
+    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+    }}
+  />
+  {/* Bottom-left blue glow */}
+  <div
+    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+    }}
+  />
 
-          {/* Subtle right-side radial glow – identical to Landing */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
+  {/* === BACK NAV === */}
+  
 
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="mx-auto max-w-[1440px] lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+  {/* === MAIN CONTENT === */}
+  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
 
-              {/* ── Text column – exact Landing typography ── */}
-              <div>
-                {/* Badge – exact same style as Landing */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Lagos, Nigeria &bull; Door Video Excellence
-                </div>
+    {/* Icon + Badge row */}
+    <div className="flex items-center gap-4">
+      <div
+        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d27b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="2" width="18" height="20" rx="2" />
+          <line x1="9" y1="12" x2="9.01" y2="12" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      </div>
 
-                {/* Headline – exact font, size, weight, tracking as Landing */}
-                <h1
-                  className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6 max-w-[800px]"
-                >
-                  Secure Your Entrance with{' '}
-                  <span
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  Door Video Technology
-                </h1>
+      <div
+        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+        style={{
+          background: 'rgba(0,210,123,0.15)',
+          border: '1px solid rgba(0,210,123,0.35)',
+          color: '#00d27b',
+        }}
+      >
+        Smart Security at Your Entrance
+      </div>
+    </div>
 
-                {/* Subtext – exact style as Landing */}
-                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-                  Nonsonet Technologies delivers crystal-clear video doorbells with two-way audio, AI motion detection, and seamless smart-home integration.
-                </p>
+    {/* Headline */}
+    <h1
+      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+        maxWidth: '800px',
+      }}
+    >
+      Door Video Bell Systems
+    </h1>
 
-                {/* Stats row – exact same layout as Landing */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      4K
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Ultra HD Video
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      30ft
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Night Vision
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      AI
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Smart Detection
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Right image column – kept for visual impact, now fully on-brand ── */}
-              <div className="mt-14 lg:mt-0">
-                <div
-                  className="relative overflow-hidden rounded-3xl border-l-8 border-[#00d27b] shadow-2xl ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    src={IMG_HERO}
-                    alt="Modern video doorbell mounted on home exterior"
-                    className="aspect-video w-full object-cover lg:aspect-[4/3]"
-                  />
-
-                  {/* Live badge – brand consistent */}
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-[#00d27b]" />
-                    LIVE VIDEO FEED
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
+    {/* Subtitle */}
+    <p
+      className="text-white/55 leading-relaxed"
+      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+    >
+      Advanced Door Video Bell systems providing real-time HD video, two-way audio, and smart
+      technology integration for complete control over your home or business entrance security.
+    </p>
+  </div>
+</section>
 
         {/* ============================================
-            REMAINING SECTIONS – minor brand polish only
+            ALL REMAINING SECTIONS – completely unchanged
             ============================================ */}
 
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
@@ -323,7 +234,7 @@ export default function Door() {
                 <div className="relative z-10 space-y-4 md:w-3/5">
                   <div className="w-12 h-12 lg:w-14 lg:h-14 bg-[#00d27b] rounded-3xl flex items-center justify-center mb-2">
                     <svg className="w-7 h-7 text-[#006d3d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                   </div>
                   <h3 className="text-2xl lg:text-3xl font-extrabold text-white font-['Plus_Jakarta_Sans',sans-serif]">
@@ -343,7 +254,6 @@ export default function Door() {
           </div>
         </section>
 
-        {/* PRODUCT SOLUTIONS + VISUAL BENEFITS – unchanged except brand colors and rounded-3xl */}
         <section className="py-24 px-6 lg:px-12 lg:py-32 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
@@ -373,7 +283,6 @@ export default function Door() {
               </div>
 
               <div className="lg:w-2/3 flex flex-col gap-10 lg:gap-12">
-                {/* Wireless & Wired cards remain exactly as you wrote – only rounded-3xl applied */}
                 <div className="bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row group shadow-xl">
                   <div className="md:w-1/2 h-56 md:h-auto overflow-hidden">
                     <img src={IMG_WIRELESS} alt="Wireless battery-powered video doorbell" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -404,7 +313,6 @@ export default function Door() {
                   </div>
                 </div>
 
-                {/* Smart Lock + Multi-Unit cards – unchanged except rounded-3xl */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
                   <div className="bg-white p-8 lg:p-10 rounded-3xl shadow-xl">
                     <div className="w-12 h-12 lg:w-14 lg:h-14 bg-gray-100 rounded-3xl flex items-center justify-center mb-5 lg:mb-6">

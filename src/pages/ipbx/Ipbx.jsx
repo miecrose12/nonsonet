@@ -2,64 +2,6 @@ import React, { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 
-/* ─── Network Canvas Animation (exact same as Landing) ───────────── */
-const networkCanvasRef = (el) => {
-  if (!el) return;
-  const ctx = el.getContext('2d');
-  let dots = [], animId;
-
-  const resize = () => {
-    el.width = el.offsetWidth;
-    el.height = el.offsetHeight;
-    dots = Array.from({ length: Math.floor((el.width * el.height) / 9000) }, () => ({
-      x: Math.random() * el.width,
-      y: Math.random() * el.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 1,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, el.width, el.height);
-    const maxDist = 130;
-    for (const d of dots) {
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < 0 || d.x > el.width) d.vx *= -1;
-      if (d.y < 0 || d.y > el.height) d.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,210,123,0.55)';
-      ctx.fill();
-    }
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x;
-        const dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(dots[i].x, dots[i].y);
-          ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(0,180,110,${0.18 * (1 - dist / maxDist)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw);
-  };
-
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
-  return () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener('resize', resize);
-  };
-};
-
 const Ipbx = () => {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
@@ -180,121 +122,90 @@ const Ipbx = () => {
       <main className="pt-20 font-['Manrope',sans-serif] text-[#191c1d]">
 
         {/* ============================================
-            HERO SECTION – 100% MATCHING LANDING PAGE
+            HERO SECTION – NOW 100% MATCHING DOOR / CCTV BACKGROUND
+            (exact same deep navy + multi-layer teal glows, overlays, and contrast)
             ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – exact same as Landing */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
+        {/* ============================================
+    HERO SECTION – Matching the screenshot design
+    ============================================ */}
+<section
+  id="hero"
+  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+  style={{ background: '#0d1b2a' }}
+>
+  {/* Top-right teal glow */}
+  <div
+    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+    }}
+  />
+  {/* Bottom-left blue glow */}
+  <div
+    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+    style={{
+      background:
+        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+    }}
+  />
 
-          {/* Subtle right-side radial glow – exact same as Landing */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
+  {/* === BACK NAV === */}
+ 
 
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  {/* === MAIN CONTENT === */}
+  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
 
-              {/* Left Content – exact Landing typography */}
-              <div className="flex flex-col gap-8 z-10">
-                {/* Badge – exact same style as Landing */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Lagos, Nigeria &bull; Unified Communications
-                </div>
+    {/* Icon + Badge row */}
+    <div className="flex items-center gap-4">
+      {/* Phone icon box */}
+      <div
+        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d27b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l1.84-1.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      </div>
 
-                {/* Headline – exact font, size, weight, tracking as Landing */}
-                <h1 
-                  className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white"
-                >
-                  Revolutionize Your Business Communications with{' '}
-                  <span 
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  IP-PBX
-                </h1>
+      {/* Green pill */}
+      <div
+        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+        style={{
+          background: 'rgba(0,210,123,0.15)',
+          border: '1px solid rgba(0,210,123,0.35)',
+          color: '#00d27b',
+        }}
+      >
+        Revolutionize Business Communications
+      </div>
+    </div>
 
-                {/* Subtext – exact style as Landing */}
-                <p 
-                  className="text-xl text-white/60 max-w-[34rem] leading-[1.75]"
-                >
-                  Experience the power of Unified Communication. Our IP-PBX systems integrate voice, video, and messaging into one seamless interface, designed for the modern enterprise.
-                </p>
+    {/* Headline */}
+    <h1
+      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+        maxWidth: '800px',
+      }}
+    >
+      IP-PBX Systems
+    </h1>
 
-                {/* Stats row – exact same layout as Landing */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      99.9%
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Uptime SLA
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      24/7
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Support
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      5000+
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Extensions Deployed
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Image – brand-consistent styling */}
-              <div className="relative">
-                <div 
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmEMlvU17emqIYG-BeQ-9XbsX963d5hcgZtepc4rRYnMu5R-bvCSBMG-bFmUtPE9YBC7jAXpdfSJmLEueJ6hlIFUWQod6nFPKx4AXrTpslzdxbSjNOiG4kMzUEdZHx9rJlf3Io4UcfBZE5sogJFMoL_WNY0znMfPBwna9O_d69lwhpglMasgtpry5LroPfQyzRwqTvc1Q-uY6lNebDkA22Udi1cRAVycHu5da9W9c2J2f4hJcPT7XfAfDeLsn_R4SHnQ6XEL_PDUhc"
-                    alt="Modern high-tech office interior with professionals using sleek communication devices"
-                    className="w-full h-96 md:h-[500px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a2e2a]/30" />
-                </div>
-
-                {/* Optional floating badge (kept minimal) */}
-                <div className="absolute -bottom-4 -right-4 bg-white text-[#006d3d] px-5 py-3 rounded-3xl shadow-xl flex items-center gap-2 text-sm font-semibold">
-                  <span className="material-symbols-outlined text-[#00d27b]">wifi</span>
-                  LIVE VOIP NETWORK
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+    {/* Subtitle */}
+    <p
+      className="text-white/55 leading-relaxed"
+      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+    >
+      Cutting-edge IP-PBX systems that transform organizational communication by unifying voice,
+      video, messaging, and data into a single cost-effective platform for any team size.
+    </p>
+  </div>
+</section>
 
         {/* ============================================
-            WHY CHOOSE SECTION – brand consistent
+            WHY CHOOSE SECTION – unchanged
             ============================================ */}
         <section className="py-24 px-6 bg-slate-100">
           <div className="max-w-6xl mx-auto">
@@ -368,7 +279,7 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            SOLUTIONS SECTION – brand consistent
+            SOLUTIONS SECTION – unchanged
             ============================================ */}
         <section className="py-24 px-6 bg-slate-50">
           <div className="max-w-6xl mx-auto">
@@ -458,7 +369,7 @@ const Ipbx = () => {
         </section>
 
         {/* ============================================
-            BENEFITS SECTION – brand consistent
+            BENEFITS SECTION – unchanged
             ============================================ */}
         <section className="relative py-24 px-6 bg-slate-100 overflow-hidden">
           <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-[#00d27b]/10 rounded-full blur-3xl -z-10"></div>

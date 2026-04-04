@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 
-/* ─── Network Canvas Animation (exact same as Printer / Landing page) ───────────── */
+/* ─── Network Canvas Animation ───────────── */
 const networkCanvasRef = (el) => {
   if (!el) return;
   const ctx = el.getContext('2d');
@@ -59,7 +59,6 @@ const networkCanvasRef = (el) => {
   };
 };
 
-// ─── Google Fonts injected via style tag (kept for Why + Solutions sections) ─────
 const FontLoader = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
@@ -92,133 +91,87 @@ const FontLoader = () => (
   `}</style>
 );
 
-// ─── Image assets ─────────────────────────────────────────────────────────────
 const heroImg =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBGugUzo66x53KZPxl-ZoY8ONVsGOdWAgN9mHK3ySAngSpvNKWs6w5C3V7wa4Qvii8INMiAlrxF0K3EqTfZ5YGvtGXzGxBPN93-eAtgsmSYKvfsPjKOY3o3AP00qXdXWqzVLrAiqV1BWXdZuwFwxX0vGCNKvD3Ip1YQDBePl-x2Kyq66v9NFf99JVDhIIaJfrj0FSqCUC8bmlayec64M724ZJmxBf18bPQamO_nQzVu44vkHlu6ZE_6XXgMAy_wRf5ao5uGCzUVDNvU';
 
-// ─── Icon helper ──────────────────────────────────────────────────────────────
 const Icon = ({ name, className = '' }) => (
   <span className={`material-symbols-outlined ${className}`}>{name}</span>
 );
 
-// ─── HERO SECTION – 100% matching Printer page typography + background ────────
+/* ─── Hero Section ───────────── */
 const HeroSection = () => (
   <section
     id="hero"
-    className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-    style={{ background: '#08111f' }}
+    className="relative overflow-hidden px-12 pt-9 pb-20"
+    style={{ background: '#0b1623' }}
   >
-    {/* Animated network canvas – exact same as Printer */}
+    {/* Network canvas */}
     <canvas
       ref={networkCanvasRef}
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full pointer-events-none"
       style={{ display: 'block' }}
     />
 
-    {/* Subtle right-side radial glow – exact same as Printer */}
+    {/* Background layers */}
     <div
-      className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+      className="absolute top-0 right-0 w-[750px] h-[650px] pointer-events-none"
       style={{
-        background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
+        background:
+          'radial-gradient(ellipse at top right, rgba(0,130,90,0.60) 0%, rgba(0,90,65,0.30) 35%, transparent 68%)',
+      }}
+    />
+    <div
+      className="absolute top-1/4 right-0 w-[500px] h-[500px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at right, rgba(0,160,100,0.18) 0%, transparent 60%)',
+      }}
+    />
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background:
+          'linear-gradient(105deg, rgba(8,16,30,0.92) 0%, rgba(8,16,30,0.70) 45%, rgba(5,30,25,0.10) 100%)',
+      }}
+    />
+    <div
+      className="absolute bottom-0 left-0 w-[450px] h-[350px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at bottom left, rgba(10,30,70,0.55) 0%, transparent 65%)',
       }}
     />
 
-    <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
+    {/* Back link */}
+  
 
-        {/* Left Content – exact Printer typography & colors */}
-        <div className="lg:col-span-7 z-10">
-          {/* Badge – exact same style as Printer */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-            <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-            Solar Inverter Solutions • Lagos, Nigeria
-          </div>
-
-          {/* Headline – exact font, size, weight, tracking as Printer */}
-          <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
-            Power Your Future with{' '}
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              intelligent
-            </span>{' '}
-            Solar Inverter Solutions
-          </h1>
-
-          {/* Subtext – exact style as Printer */}
-          <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-            Experience the peak of atmospheric clarity and technical rigor. Our next-generation solar inverters transform raw sunlight into high-efficiency electrical power for a sustainable, resilient future.
-          </p>
-
-          {/* Stats row – exact same layout as Printer (solar-adapted) */}
-          <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-            <div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                98%
-              </div>
-              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                Avg. Efficiency
-              </div>
-            </div>
-            <div className="w-px h-10 bg-white/20" />
-            <div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                25
-              </div>
-              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                Year Warranty
-              </div>
-            </div>
-            <div className="w-px h-10 bg-white/20" />
-            <div>
-              <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                24/7
-              </div>
-              <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                Monitoring
-              </div>
-            </div>
-          </div>
+    {/* Content */}
+    <div className="relative z-10 max-w-[860px]">
+      {/* Icon + pill */}
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-14 h-14 bg-white/[0.08] border border-white/[0.12] rounded-[14px] flex items-center justify-center">
+          <span className="material-symbols-outlined text-[#00d27b] text-2xl">light_mode</span>
         </div>
-
-        {/* Right Image Section – brand-consistent with Printer design */}
-        <div className="lg:col-span-5 relative">
-          <div
-            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
-            style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-          >
-            <img
-              alt="Modern solar panel array on a contemporary building roof under a bright blue sky"
-              className="w-full h-[500px] object-cover"
-              src={heroImg}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
-          </div>
-
-          {/* Floating Stats Card – kept from Printer design, solar-adapted */}
-          <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
-                ⚡
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Peak Performance</p>
-                <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">98% Efficiency</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#00d27b]/15 border border-[#00d27b]/35 text-[#00d27b] text-sm font-semibold font-['Plus_Jakarta_Sans',sans-serif]">
+          Power Your Future with Renewable Energy
+        </span>
       </div>
+
+      {/* Headline */}
+      <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-[clamp(48px,6vw,80px)] font-extrabold leading-[1.05] tracking-[-0.025em] text-white mb-7">
+        Solar Inverter Systems
+      </h1>
+
+      {/* Description */}
+      <p className="text-[17px] text-white/55 max-w-[680px] leading-[1.75]">
+        Advanced Solar Inverter Systems that convert DC generated by solar panels into AC for homes
+        and businesses, ensuring reliable and efficient energy supply for energy independence.
+      </p>
     </div>
   </section>
 );
 
-// ─── Why Choose Us (unchanged) ────────────────────────────────────────────────
+/* ─── Why Choose Us ───────────── */
 const whyCards = [
   {
     id: 'efficiency',
@@ -266,7 +219,6 @@ const whyCards = [
 const WhySection = () => (
   <section className="py-24" style={{ backgroundColor: '#f2f4f6' }}>
     <div className="max-w-7xl mx-auto px-6">
-      {/* Header */}
       <div className="mb-16 text-center lg:text-left lg:max-w-2xl">
         <h2
           className="font-headline font-bold leading-tight mb-6"
@@ -279,7 +231,6 @@ const WhySection = () => (
         </p>
       </div>
 
-      {/* Bento grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {whyCards.map((card) => {
           const isPrimary = card.variant === 'primary';
@@ -288,14 +239,8 @@ const WhySection = () => (
               key={card.id}
               className={`why-card rounded-lg overflow-hidden transition-shadow duration-200 ${
                 card.span === 2 ? 'md:col-span-2' : 'md:col-span-1'
-              } ${
-                isPrimary
-                  ? ''
-                  : 'shadow-sm hover:shadow-md'
-              }`}
-              style={{
-                backgroundColor: isPrimary ? '#006d37' : '#ffffff',
-              }}
+              } ${isPrimary ? '' : 'shadow-sm hover:shadow-md'}`}
+              style={{ backgroundColor: isPrimary ? '#006d37' : '#ffffff' }}
             >
               <div className="p-10 h-full flex flex-col justify-between">
                 <div>
@@ -317,7 +262,6 @@ const WhySection = () => (
                     {card.body}
                   </p>
                 </div>
-
                 {card.link && (
                   <div className="mt-8">
                     <span
@@ -338,18 +282,37 @@ const WhySection = () => (
   </section>
 );
 
-// ─── Solutions Section (unchanged) ────────────────────────────────────────────
+/* ─── Solutions Section ───────────── */
 const solutions = [
-  { id: 'string',  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuARzPJWcIklTGRdRnEA296uhbBPA5gBdGfFnTHx33PhslVQFoKf_FMUSU_tfkPDmZdWBCoJP2pJ8KrvQDhxHCq16vEd8x7kkD8e1FQWjWzTppbXGWC6Ol-_b3RGAVZYYTdk816N9_-onwiEMGnN3TGPzku7pD9r8A96QiNt1PWvYbIaxmTIgYG_C1JQENyz3U6kLb93CYh5MTiXxxyagDQqe-eYVqsUk-OWDgKBwr5JSLkUBfL1Hb4XbC6KfjAqNVnZAWT5tqk8XX0I',  title: 'String Inverters',  body: 'Ideal for residential and commercial rooftop installations with uniform sun exposure.' },
-  { id: 'central', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrc3BV0TlY8Ec4ILarQpwzW0khjy2VCvsA15muhTR2S84lLk2-e_qEaIt8bvRw15wpS7xxgBNFw8xokV4svXad3MOkDRbWUOgnFRknlAWbXaBtCcurWnTxFwwHyjD1ndsKw-BwPP1vHXrB4hZWhRzoRoss6HgNhCTq0kxhOMxIfbsgiFfdglEWzWczEGbIzgsyPBb6fb4M3syvLTs4soDM61q67d1JDjG-HGS9D9YdiFMHaQoFptn2dhqDNIIs_Ze9yGKNG6Z169yo', title: 'Central Inverters',  body: 'Robust power conversion for utility-scale ground-mount solar arrays.' },
-  { id: 'hybrid',  img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCGkrivqjPM8Ag2vHSxoFiLnB9UWO902LsGAR4_zV3HVDARhEZvFPxqmdeWjZkNKA1Unpb3xnxgn10u4UfOrkCuLKNnUQF7BxAPxZC2RzKiKVnankBK6aRGh5vcmVJ4XZNSzACl87L9oRrPFmtrkvDYObUZsu4A60rIZxWEvZxwf0lBRNrvcmSoQIAiHflG3f-b2zPr7AdtXiAdyfw6fl555IEY1Lvh0lNQdsF0sMkQHpqF1wbhFM0mtMijhelhgnK9W257YfGdlL0b',  title: 'Hybrid Inverters',   body: 'Intelligent management for both solar panels and battery storage systems.' },
-  { id: 'micro',   img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuexcqn8ok9BcJDaj9GCYIjD-OX1Ty1aqthTij-9BfWB5OwDB3JVpxHw1EDUuzajaQqTjztVtIxTCU5mG1_4rg28XJsGjRTrP70qkykfXPIR2QUF3SkLCBiNecMtwSWos6fBgLaVSSw9VzheHIRp4HNH1RMZLpqggRxnCO6DBwT75jE7nivoPz5ILyjtqs-930ooCwI0hwPg9GMIil1Kte0AsjRYXkc_-9eDSoj2RDtKA6-MChPWEfIj4lViOoSD4-_8lzajnKH2Md',   title: 'Microinverters',     body: 'Panel-level optimization to maximize output on shaded or complex roofs.' },
+  {
+    id: 'string',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuARzPJWcIklTGRdRnEA296uhbBPA5gBdGfFnTHx33PhslVQFoKf_FMUSU_tfkPDmZdWBCoJP2pJ8KrvQDhxHCq16vEd8x7kkD8e1FQWjWzTppbXGWC6Ol-_b3RGAVZYYTdk816N9_-onwiEMGnN3TGPzku7pD9r8A96QiNt1PWvYbIaxmTIgYG_C1JQENyz3U6kLb93CYh5MTiXxxyagDQqe-eYVqsUk-OWDgKBwr5JSLkUBfL1Hb4XbC6KfjAqNVnZAWT5tqk8XX0I',
+    title: 'String Inverters',
+    body: 'Ideal for residential and commercial rooftop installations with uniform sun exposure.',
+  },
+  {
+    id: 'central',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrc3BV0TlY8Ec4ILarQpwzW0khjy2VCvsA15muhTR2S84lLk2-e_qEaIt8bvRw15wpS7xxgBNFw8xokV4svXad3MOkDRbWUOgnFRknlAWbXaBtCcurWnTxFwwHyjD1ndsKw-BwPP1vHXrB4hZWhRzoRoss6HgNhCTq0kxhOMxIfbsgiFfdglEWzWczEGbIzgsyPBb6fb4M3syvLTs4soDM61q67d1JDjG-HGS9D9YdiFMHaQoFptn2dhqDNIIs_Ze9yGKNG6Z169yo',
+    title: 'Central Inverters',
+    body: 'Robust power conversion for utility-scale ground-mount solar arrays.',
+  },
+  {
+    id: 'hybrid',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCGkrivqjPM8Ag2vHSxoFiLnB9UWO902LsGAR4_zV3HVDARhEZvFPxqmdeWjZkNKA1Unpb3xnxgn10u4UfOrkCuLKNnUQF7BxAPxZC2RzKiKVnankBK6aRGh5vcmVJ4XZNSzACl87L9oRrPFmtrkvDYObUZsu4A60rIZxWEvZxwf0lBRNrvcmSoQIAiHflG3f-b2zPr7AdtXiAdyfw6fl555IEY1Lvh0lNQdsF0sMkQHpqF1wbhFM0mtMijhelhgnK9W257YfGdlL0b',
+    title: 'Hybrid Inverters',
+    body: 'Intelligent management for both solar panels and battery storage systems.',
+  },
+  {
+    id: 'micro',
+    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuexcqn8ok9BcJDaj9GCYIjD-OX1Ty1aqthTij-9BfWB5OwDB3JVpxHw1EDUuzajaQqTjztVtIxTCU5mG1_4rg28XJsGjRTrP70qkykfXPIR2QUF3SkLCBiNecMtwSWos6fBgLaVSSw9VzheHIRp4HNH1RMZLpqggRxnCO6DBwT75jE7nivoPz5ILyjtqs-930ooCwI0hwPg9GMIil1Kte0AsjRYXkc_-9eDSoj2RDtKA6-MChPWEfIj4lViOoSD4-_8lzajnKH2Md',
+    title: 'Microinverters',
+    body: 'Panel-level optimization to maximize output on shaded or complex roofs.',
+  },
 ];
 
 const SolutionsSection = () => (
   <section className="py-24">
     <div className="max-w-7xl mx-auto px-6">
-      {/* Header row */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
         <div className="max-w-lg">
           <h2
@@ -369,7 +332,6 @@ const SolutionsSection = () => (
         />
       </div>
 
-      {/* 4-column grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {solutions.map((s) => (
           <div key={s.id} className="sol-card cursor-pointer">
@@ -393,8 +355,16 @@ const SolutionsSection = () => (
   </section>
 );
 
-// ─── Root export ──────────────────────────────────────────────────────────────
+/* ─── Root Export ───────────── */
 export default function Surround() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollPosition(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <FontLoader />

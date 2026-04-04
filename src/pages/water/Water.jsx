@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 
 /* ─── Network Canvas Animation (exact same as Printer page) ───────────── */
@@ -59,131 +59,103 @@ const networkCanvasRef = (el) => {
   };
 };
 
+/* ─── HERO SECTION – 100% MATCHING THE POLISHED PRINTER HERO ──────────────── */
+/* ─── HERO SECTION – Matching the screenshot design ──────────────────────── */
+const HeroSection = ({ scrollPosition }) => (
+  <section
+    id="hero"
+    className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+    style={{ background: '#0d1b2a' }}
+  >
+    {/* Top-right teal glow */}
+    <div
+      className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
+      }}
+    />
+    {/* Bottom-left blue glow */}
+    <div
+      className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
+      }}
+    />
+
+    {/* === BACK NAV === */}
+ 
+
+    {/* === MAIN CONTENT === */}
+    <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
+
+      {/* Icon + Badge row */}
+      <div className="flex items-center gap-4">
+        {/* Water drop icon box */}
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
+        >
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d27b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z" />
+          </svg>
+        </div>
+
+        {/* Green pill */}
+        <div
+          className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
+          style={{
+            background: 'rgba(0,210,123,0.15)',
+            border: '1px solid rgba(0,210,123,0.35)',
+            color: '#00d27b',
+          }}
+        >
+          Pure, Refreshing Water for Your Business
+        </div>
+      </div>
+
+      {/* Headline */}
+      <h1
+        className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
+        style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+          maxWidth: '800px',
+        }}
+      >
+        Water Production Solutions
+      </h1>
+
+      {/* Subtitle */}
+      <p
+        className="text-white/55 leading-relaxed"
+        style={{ fontSize: '1.05rem', maxWidth: '560px' }}
+      >
+        Top-tier bottle and sachet water production solutions for entrepreneurs starting new water
+        businesses or established companies upgrading production lines to deliver safe, pure drinking
+        water.
+      </p>
+    </div>
+  </section>
+);
+
+/* ─── Root Component ──────────────────────────────────────────────────────── */
 const Water = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollPosition(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="bg-[#f7f9fb] font-sans text-[#191c1e] min-h-screen">
       <Navbar />
 
       <main className="pt-20">
-
-        {/* ============================================
-            HERO SECTION – 100% MATCHING PRINTER PAGE
-            ============================================ */}
-        <section
-          id="hero"
-          className="relative min-h-[795px] flex items-center overflow-hidden px-6 py-20 md:py-28"
-          style={{ background: '#08111f' }}
-        >
-          {/* Animated network canvas – exact same as Printer */}
-          <canvas
-            ref={networkCanvasRef}
-            className="absolute inset-0 w-full h-full"
-            style={{ display: 'block' }}
-          />
-
-          {/* Subtle right-side radial glow – exact same as Printer */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-            style={{
-              background: 'radial-gradient(circle, rgba(0,210,123,0.07) 0%, transparent 70%)',
-            }}
-          />
-
-          <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
-
-              {/* Left Content – exact Printer typography */}
-              <div className="lg:col-span-7 z-10">
-                {/* Badge – exact same style as Printer */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs font-semibold tracking-wide mb-8">
-                  <span className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse" />
-                  Water Production Solutions • Lagos, Nigeria
-                </div>
-
-                {/* Headline – exact font, size, weight, tracking as Printer */}
-                <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-5xl md:text-[4.25rem] font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6">
-                  Pure, Refreshing Water Solutions with{' '}
-                  <span
-                    style={{
-                      background: 'linear-gradient(90deg, #3b82f6 0%, #00d27b 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    intelligent
-                  </span>{' '}
-                  Production Systems
-                </h1>
-
-                {/* Subtext – exact style as Printer */}
-                <p className="text-xl text-white/60 max-w-[34rem] leading-[1.75] mb-10">
-                  Advancing global hydration standards through precision engineering. We provide end-to-end
-                  automated systems for bottle and sachet water production that prioritize purity, efficiency,
-                  and sustainability.
-                </p>
-
-                {/* Stats row – exact same layout as Printer (water-adapted) */}
-                <div className="flex items-center gap-6 pt-8 border-t border-white/[0.12]">
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-[#00d27b]">
-                      99.9%
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Purity Rate
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      5000+
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Liters/Hour
-                    </div>
-                  </div>
-                  <div className="w-px h-10 bg-white/20" />
-                  <div>
-                    <div className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-bold text-white">
-                      24/7
-                    </div>
-                    <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mt-1">
-                      Monitoring
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Image Section – brand-consistent with Printer */}
-              <div className="lg:col-span-5 relative">
-                <div
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-l-8 border-[#00d27b] ring-1 ring-white/10"
-                  style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.45)' }}
-                >
-                  <img
-                    alt="Clean water production"
-                    className="w-full h-[500px] object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5C20IUyGNthYGl0O8umYT_UyqnYESSQMpLuGatsNXORkZ3WLAUaAS1a_UwutZUPnHu0HZrmuytIEKhycCrrKiaq4cf7tvYel556cgdOJFuVcMWAfrmecdIivb8ebzxpDy45E2q_DQ4dild8UFalSexC2JWWHGVG4ynZaC1u208D8nBNeXoywiUr6dZfI-SOYWyokYvaU_WjYdotMYqsEmyY4vCnBiEP4mUP7wmwJTT1JTOiySy76PJfwl5DUXRrfRw1fzlwK_7aSh"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#08111f]/40" />
-                </div>
-
-                {/* Floating Stats Card – exact Printer style, water-adapted */}
-                <div className="absolute bottom-6 left-6 right-6 p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-[#00d27b] to-white flex items-center justify-center text-white text-3xl shadow-lg">
-                      💧
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold text-[#00d27b] tracking-widest uppercase">Live Purity</p>
-                      <p className="text-3xl font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white">99.9% Real-Time</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroSection scrollPosition={scrollPosition} />
 
         {/* ─── Why Choose Us ─── (unchanged) */}
         <section className="py-24 bg-[#f2f4f6]">
@@ -255,7 +227,7 @@ const Water = () => {
         </section>
 
         {/* ─── Production Solutions Bento Grid ─── (unchanged) */}
-        <section className="py-24">
+        <section id="solutions" className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-20 max-w-3xl mx-auto">
               <h2 className="text-4xl font-bold text-[#191c1e] mb-6">
@@ -363,9 +335,6 @@ const Water = () => {
                 </div>
               </div>
 
-              {/* Quality Control */}
-              
-
             </div>
           </div>
         </section>
@@ -431,8 +400,6 @@ const Water = () => {
         </section>
 
         {/* ─── CTA Section ─── (unchanged - ready for your content) */}
-        
-
       </main>
     </div>
   );
