@@ -203,54 +203,7 @@ function Footer() {
               Get the latest insights on enterprise IT and technology delivered to your inbox.
             </p>
           </div>
-          <form
-            onSubmit={handleNewsletter}
-            className="flex flex-col sm:flex-row gap-3 w-full max-w-md"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email address"
-              className="flex-1 rounded-[0.625rem] px-4 py-[0.7rem] text-sm outline-none transition-all duration-200"
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.25)',
-                color: '#ffffff',
-                fontFamily: "'Manrope', sans-serif",
-              }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#00d27b';
-                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,210,123,0.2)';
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            />
-            <button
-              type="submit"
-              className="rounded-[0.625rem] px-6 py-[0.7rem] text-sm font-bold whitespace-nowrap cursor-pointer transition-all duration-200"
-              style={{
-                backgroundColor: '#006d3d',
-                color: '#ffffff',
-                border: 'none',
-                fontFamily: "'Manrope', sans-serif",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#00d27b';
-                e.currentTarget.style.color = '#0a2a20';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#006d3d';
-                e.currentTarget.style.color = '#ffffff';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              Subscribe
-            </button>
-          </form>
+        
         </div>
       </div>
 

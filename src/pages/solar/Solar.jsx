@@ -158,7 +158,7 @@ const HeroSection = () => (
       </div>
 
       {/* Headline */}
-      <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-[clamp(48px,6vw,80px)] font-extrabold leading-[1.05] tracking-[-0.025em] text-white mb-7">
+      <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-[clamp(28px,6vw,50px)] font-extrabold leading-[1.05] tracking-[-0.025em] text-white mb-7">
         Solar Inverter Systems
       </h1>
 

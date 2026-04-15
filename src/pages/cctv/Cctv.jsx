@@ -1,4 +1,5 @@
 import Navbar from '../../components/navbar/Navbar';
+import nonImage2 from "../../assets/cam.png";
 import {
   Camera,
   Globe,
@@ -20,8 +21,6 @@ const BULLET_IMG =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuAaCkktuGkjBm0tfR9K7JNZnT1FedOXusCPLWsURYqlXKpst6qnkbLzM2Jh00-aAlJwZpX9weAaGj78H64tklRJ6oHjIcOsFfNx5TblTX8KEjgv6_AI53GwuO--vzUIlIjb3JM7dlnKKul2uo8jhwHp6z5EV_oNnkzykx-sN8yNUl6zaQvPjj2xb9sbgUvbGErNt-Y_6NEqMnWHG2HT4uC5MuD2LmCaFY2jOmuM6q3r1AifYDOM4H0O349F7nJdJm5b2RgOnTOpejAy';
 const SENSOR_IMG =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBOC7-KWEXgRVUGCAR8ku25Hh88dyEWHxT4lIjqE6nR6dNy42PMl1myKLWatfbCXJh7Rc4yOjGJYgbKabnfmweVuLwB1PEErdTN_H3cEV4jU2FFudj33DfzSpZ048ohVh-vpc9ERVZHLSyyy8lCwhYBPTyNfmj7ScEpGK3AmEZSRCcEenM_h4_m-iPVmwT1Y5Z1o-VAethzVEdq-iXUl29__KU_MrU-mUxf7nk0xo0WeuGgr0hslvtlGpMqS0Ve56qFodNFTioTeTen';
-const NVR_IMG =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuCD_Ctc2a2B9TSTbvQhKgzqxKqa3X2R8vxEGwaHcaEYzxToAHSwp6LKpYskLdohFpYrLXmC-XD9t6iMklBz2uqM4dJHO9WuJ8im7rUoNyC5YNIv1NeqeOaO1bjPE3HwOF3gUc-ZSBmPq1TYYNvCTC_1mcNZWkLPMJHSY2pEsM-tF6dDyOK1tkFaloonS-TEuq__GfWEHncPmx33iyyvKXqboAEquUXstbRXtvmoz7NN-pB6vQ0y13xcWFco5-ocBYYFAwyNtoLFjgTa';
 
 /* ─── Data ────────────────────────────────────────────────────────────── */
 const cameraProducts = [
@@ -79,7 +78,7 @@ export default function Cctv() {
     ============================================ */}
 <section
   id="hero"
-  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+  className="relative min-h-[420px] md:min-h-[320px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
   style={{ background: '#0d1b2a' }}
 >
   {/* Top-right teal glow */}
@@ -136,8 +135,8 @@ export default function Cctv() {
       className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
       style={{
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-        maxWidth: '800px',
+        fontSize: 'clamp(2.3rem, 4vw, 3.2rem)',
+        maxWidth: '850px',
       }}
     >
       CCTV Security Systems
@@ -262,47 +261,71 @@ export default function Cctv() {
                 </div>
               ))}
 
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-
-                <div className="group relative flex h-96 flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/50 bg-gray-100 p-10 lg:h-[440px]">
-                  <div className="z-10">
-                    <span className="mb-3 inline-block rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
-                      INDOOR SERIES
-                    </span>
-                    <h3 className="mb-3 text-xl font-bold lg:text-2xl font-['Plus_Jakarta_Sans',sans-serif]">
-                      Discreet Indoor Sensors
-                    </h3>
-                    <p className="text-sm leading-relaxed text-gray-500 lg:text-base">
-                      Ultra-compact aesthetic that blends seamlessly into office interiors without
-                      compromising coverage or resolution quality.
-                    </p>
+              <div className="group flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
+                <div className="relative w-full flex-shrink-0 overflow-hidden rounded-3xl shadow-2xl shadow-black/10 lg:w-1/2">
+                  <div className="aspect-square lg:aspect-[4/3]">
+                    <img
+                      src={SENSOR_IMG}
+                      alt="Indoor sensor"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
-                  <div className="absolute -bottom-10 -right-10 h-64 w-64 duration-500 group-hover:opacity-100">
-                    <img src={SENSOR_IMG} alt="Indoor sensor" className="h-full w-full object-contain" />
-                  </div>
-                  <button className="z-10 self-start rounded-3xl border-2 border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-700 transition-all hover:border-[#006d3d] hover:text-[#006d3d] active:scale-95">
-                    Explore Sensors
-                  </button>
-                </div>
-
-                <div className="group relative flex h-96 flex-col justify-between overflow-hidden rounded-3xl border-2 border-green-900/10 bg-white p-10 shadow-lg shadow-green-900/5 lg:h-[440px]">
-                  <div className="z-10">
-                    <span className="mb-3 inline-block rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
-                      STORAGE HARDWARE
-                    </span>
-                    <h3 className="mb-3 text-xl font-bold text-[#006d3d] lg:text-2xl font-['Plus_Jakarta_Sans',sans-serif]">
-                      NVR &amp; DVR Hardware
-                    </h3>
-                    <p className="text-sm leading-relaxed text-gray-500 lg:text-base">
-                      Enterprise-grade storage hardware for 24/7 continuous data retention and
-                      multi-channel processing with redundant backups.
-                    </p>
-                  </div>
-                  <div className="absolute bottom-0 right-0 h-1/2 w-full duration-500 group-hover:opacity-70">
-                    <img src={NVR_IMG} alt="NVR hardware" className="h-full w-full object-cover" />
+                  <div className="absolute top-4 left-4 bg-[#006d3d] rounded-full px-3 py-1 text-xs font-bold text-white shadow-lg">
+                    INDOOR SERIES
                   </div>
                 </div>
+                <div className="flex flex-col justify-center lg:w-1/2">
+                  <h3 className="mb-4 text-2xl font-bold text-[#006d3d] lg:text-3xl font-['Plus_Jakarta_Sans',sans-serif]">
+                    Discreet Indoor Sensors
+                  </h3>
+                  <p className="mb-6 text-base leading-relaxed text-gray-500 lg:text-lg">
+                    Ultra-compact aesthetic that blends seamlessly into office interiors without
+                    compromising coverage or resolution quality.
+                  </p>
+                  <ul className="mb-8 flex flex-wrap gap-2">
+                    {['Compact Design', 'High Resolution', 'Easy Mount', 'Low Profile'].map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-800"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 h-1 w-14 bg-[#00d27b]/30" />
+                </div>
+              </div>
 
+              <div className="group flex flex-col gap-8 lg:flex-row-reverse lg:items-center lg:gap-16">
+                <div className="relative w-full flex-shrink-0 overflow-hidden rounded-3xl shadow-2xl shadow-black/10 lg:w-1/2">
+                  <div className="aspect-square lg:aspect-[4/3]">
+                    <img
+                      src={nonImage2}
+                      alt="NVR hardware"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center lg:w-1/2">
+                  <h3 className="mb-4 text-2xl font-bold text-[#006d3d] lg:text-3xl font-['Plus_Jakarta_Sans',sans-serif]">
+                    IP PTZ Bullet IR Camera
+                  </h3>
+                  <p className="mb-6 text-base leading-relaxed text-gray-500 lg:text-lg">
+                    Enterprise-grade IP PTZ Bullet IR Camera 24/7 continuous data retention and
+                    multi-channel processing with redundant backups.
+                  </p>
+                  <ul className="mb-8 flex flex-wrap gap-2">
+                    {['24/7 Recording', 'Multi-Channel', 'Redundant Backup', 'Enterprise Grade'].map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-800"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 h-1 w-14 bg-[#00d27b]/30" />
+                </div>
               </div>
             </div>
           </div>

@@ -65,7 +65,7 @@ const networkCanvasRef = (el) => {
 const HeroSection = ({ scrollPosition }) => (
   <section
     id="hero"
-    className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+    className="relative min-h-[420px] md:min-h-[320px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
     style={{ background: '#0d1b2a' }}
   >
     {/* === BACKGROUND GLOWS === */}
@@ -124,8 +124,8 @@ const HeroSection = ({ scrollPosition }) => (
         className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-          maxWidth: '800px',
+          fontSize: 'clamp(2.3rem, 4vw, 3.2rem)',
+          maxWidth: '1250px',
         }}
       >
         Surround Sound Systems

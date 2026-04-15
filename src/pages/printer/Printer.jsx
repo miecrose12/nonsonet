@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/navbar/Navbar';
+import { ChevronDown, Check, TrendingUp, Shield, Leaf, Users, Zap, BarChart3, Lock, Wifi, FileText, AlertCircle } from 'lucide-react';
 
-const Printer = () => {
+const ManagedPrintServices = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [activeAccordion, setActiveAccordion] = useState(null);
+  const [selectedService, setSelectedService] = useState('discover');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,266 +14,442 @@ const Printer = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const chooseCards = [
+  // Core benefits data
+  const benefits = [
     {
-      id: 1,
-      title: 'Cost Reduction',
-      description: 'Eliminate unpredictable printing expenses with fixed monthly costs and optimized supply management.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJ0KLCZlQUzflJl0uBdev5HOAG8St_cFv0DlDwFSaVR3p4Bu3W_2gHmBGgfiThbDejfgfxK4-cCZYeJYwibPMZvpPiArq8Y6aPnImWwjpPJxYGloN-WhyBMoy-cwTgbkg04wjglcAkUasQLMnC8F9K_PaOj1Xk7vj4RWBYhFEtU2P2-kUfEQLWxDVhGnbzygjR3KJgV5H-Yri6ScFXomJuP6H243jiQixf47_xLBIC8Os-1bIse6TpccNHxMkiVupViYmjBagaSU_T',
+      icon: TrendingUp,
+      title: 'Drive Productivity',
+      description: 'Improve time and cost efficiency with increased functionality and visibility into document workflows',
+      color: '#00d27b'
     },
     {
-      id: 2,
-      title: 'Enhanced Security',
-      description: 'Protect sensitive data with pull-printing, user authentication, and encrypted hard drives.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFF2crh6HI7_MxtbpHpwf0Kek4Hxtw1AKmR5JTZQq4zXq9N6uHUCbPkTwUAh3t_GtFZhf5gBqnPKvj8slSjJpqcsD_WsTCnGpNjOGz9y4KvrryyqqsGSDgJ7YlkYQOPJpODpWpZ_Z5yWvfHz8Vduyvwp8C_foze2NTha98GWYV28FUofQRIThFxRgdF8hhVlvly098onhKtXTXXbvpqq_3LS7s0VNL9XqfrCD1_-69avp0ePDFbmQmVxJCL140uDK5TdED8ejG_KJz',
+      icon: Users,
+      title: 'Improve Collaboration',
+      description: 'Enable teams to access advanced print and scan capabilities remotely through enhanced connectivity',
+      color: '#00b8d4'
     },
     {
-      id: 3,
-      title: 'Increased Productivity',
-      description: 'Automate workflows and reduce IT burden by offloading maintenance and supplies management.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP4O7uYzjSz2PHUNyJ8wbMvgVshVhAWo_Y_LnzV_smSbWtkkBOLMAylt7g9rFfu9u0cwg2PN8Z4httH9pHrq3yytG91kfIIHEZyA62_Z5e10nuYK5gS8008b9UPhbwjCkBcoqImfthapomC0TMfVXW-kTMocm-kHMv5FkhkbH6xAAhAfj36AQXuxXq7xJp_gDe3DWI-qKojMC5k9_s-gvbJ1LtBgYkVktFPDE30iuOTFFMqkA06Lom1nacuc6xqZu-K0MNCbJF2BEV',
+      icon: Shield,
+      title: 'Strengthen Security',
+      description: 'Maintain compliance standards with robust security infrastructure and authorized access control',
+      color: '#ff6b6b'
     },
     {
-      id: 4,
+      icon: Leaf,
       title: 'Sustainability',
-      description: 'Minimize environmental impact through energy-efficient hardware and reduced paper waste.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDvvu_APDH5Z9yYvi28dC7uVob0JoGhhZuZHwCFFWf2Gp1FW_O4wwH2xNwwEAMn6W9WXGUOZ5TiFQqDTULqfIbME5SMSWxhVgrN9hReH4G3YgbFCnzPYny6HiAXhYWIDsJ5MX5IEk_ZaT-nWyliN-HZajD51tb7UxGjUX4yME4Ma5mFPxBel1EKhRcG0NVvkKuJAcnzFOVPSK2Jw0cML4hAXeVVfhM_YOEJKCdDZdsEWKqeXTeuhwdActmrimQ8PXYi0YhjoVb5wFJt',
-    },
+      description: 'Minimize environmental impact through energy-efficient hardware and reduced paper waste',
+      color: '#ffd93d'
+    }
   ];
 
+  // MPS Services breakdown
   const mpsServices = [
     {
-      id: 1,
-      title: 'Print Assessment',
-      description: 'Deep audit of your current fleet, usage patterns, and hidden costs to establish a performance baseline.',
-      icon: '📊',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAN0XPYnHBCZJianV_h8osAVvUi_SAAqeJKCprVipO60Rm5uQzj3-MtEC1RoJmwInLtCGbjV58O5yc5j-JRjKbw93OIUDgS3vFHiRKDNtU-nFfKkFFKa-tIgdFS7A3n2Yd-NMWt4b6cm9VrQB5umSPfkNvgRRB1oGQL2mxELT1W4h7PRvePmQpsiGXNj5CHDcHYIeF00sv2lpHt5hh2OquP67qi1PxXnmrl7_7fka8GEZM-ZcNQNwT8c0cjaK56XOOXqFUJOywdXu-K',
+      id: 'discover',
+      title: 'Discovery Assessment',
+      icon: FileText,
+      shortDesc: 'Detailed analysis of your print environment',
+      fullDesc: 'Provides comprehensive analyses of your print and scan environment, giving understanding of your fleet and day-to-day user needs. Advanced version includes environment calculations for accurate baseline cost savings.',
+      highlights: ['Fleet inventory', 'Usage pattern analysis', 'Cost baseline', 'Environmental impact'],
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800'
     },
     {
-      id: 2,
-      title: 'Customized Solutions',
-      description: 'Rightsizing your device fleet with state-of-the-art hardware designed for your specific volume and needs.',
-      icon: '⚙️',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAvXvsMjs2t6TJczNLdQsTNT_wULLnVVygHooPfCQ1evPFFDeIN6mPrpseJMX_RaP6j6xC3ZRhPZ5SySNsr0H4WCpnXRzYFL72S53iHtdfpQSaKpdDU5P1iLSOay7OhXj0j4oFdAwRtM5xsZycTeXny0l7hTFonunmcAwftt4ULMYm54p6SE-nz1RLtl_QB3CGyYd2waGaEvbjYDWmKxiIQWMBCyOlZ3eMNNB7KMHdGPRiF53RXAlIt1b-wwkGCqAOscByG57IDvS7Q',
+      id: 'fleet',
+      title: 'Fleet Management',
+      icon: Zap,
+      shortDesc: 'Continuous fleet optimization and availability',
+      fullDesc: 'Ensures fleets remain continually available with sufficient capacity, enabling centralized management for higher productivity. Includes output management, customer reporting, and business relationship management services.',
+      highlights: ['Output management', 'Device monitoring', 'Capacity optimization', 'Performance reporting'],
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800'
     },
     {
-      id: 3,
-      title: 'Proactive Management',
-      description: 'Automatic toner replenishment and remote device monitoring to solve issues before they disrupt work.',
-      icon: '🔄',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiNy7Y_XWXENSsP--1fzM4DRJPD5nlMStPo_vRMO8gzKRSOEhUaLB32DxExG6Osy7R6TjBaZvzwKYsfXpAO5nuDYfwlDpzbllZLBAA7wyEdCGaDZtHyXAUukE4MWJLCPweFI6-sBojjrw2Ee6R23EgkUGYziW5Lc-dtc7qL1ttB0DNFO6psDKz32KsHxHx4VCMZGgEXNfQvtsgwIztoClYezyzlBVHF_0hxZdT5vspUfDtU3Izyu6LhVouEDi3mBW0st1l2HyfocTJ',
+      id: 'security',
+      title: 'Security Services',
+      icon: Lock,
+      shortDesc: 'Comprehensive fleet security solutions',
+      fullDesc: 'Range of security-related services for all organization types to keep MFD and printer fleets secure. Includes device hardening, data removal, and security audits.',
+      highlights: ['Device hardening', 'Data removal service', 'Security audits', 'Compliance management'],
+      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800'
     },
     {
-      id: 4,
-      title: 'Advanced Reporting',
-      description: 'Monthly insight reports detailing device usage, departmental costs, and sustainability metrics.',
-      icon: '📈',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDvLTm9y7RCXRjbQznE17KU-9Nr0Jz1h3Giftn9T9P8LEZCWM8eZdJpkgF9fC2XZHnrR0rJiHPjM-eODweYzkQKnx35UjTpowm8TY_30mTg3xX75cHfrYWg-LCzLQTsppDaWqCGnFqcYTPYlohsJ5KZq1AuCmOyevZ8NWUx0wwMJFqOF-Qc818ykt9VwnkrYkEam5vFaVUg6YEtoW2N6zWJdvzjmYc4DkPZDBHkaG9z58Z1bnyTG1dw-ZsjJta8e7ft4Cghe2OcLPHn',
+      id: 'sustainability',
+      title: 'Sustainability Services',
+      icon: Leaf,
+      shortDesc: 'Achieve your sustainability goals',
+      fullDesc: 'Helps you achieve sustainability goals through Canon and third-party services including carbon neutral printing, reforestation programs, and environmental tracking.',
+      highlights: ['Carbon neutral printing', 'Reforestation programs', 'Waste reduction', 'Eco reporting'],
+      image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=800'
     },
+    {
+      id: 'multivendor',
+      title: 'Multi-vendor Management',
+      icon: Users,
+      shortDesc: 'Unified management across all brands',
+      fullDesc: 'Provides maintenance and consumables management of non-Canon devices, consolidating your entire print fleet into a single contract for simplified operations.',
+      highlights: ['Multi-brand support', 'Unified consumables', 'Consolidated billing', 'Single contract'],
+      image: 'https://images.unsplash.com/photo-1517694712202-14819c9cb6e1?q=80&w=800'
+    },
+    {
+      id: 'enterprise',
+      title: 'Enterprise Service Desk',
+      icon: BarChart3,
+      shortDesc: 'Global centralized support',
+      fullDesc: 'Single point of contact for centralized global software and application support, offering enhanced operational efficiency, reliability and productivity.',
+      highlights: ['24/7 support', 'Global coverage', 'Application support', 'Incident management'],
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800'
+    }
   ];
 
+  // MPS Infrastructure/Tools
+  const tools = [
+    {
+      name: 'uniFLOW',
+      description: 'Integrated software solution managing all your devices, print and scan workflows through one unified platform',
+      features: ['Device management', 'Workflow automation', 'User access control', 'Real-time monitoring']
+    },
+    {
+      name: 'eMaintenance',
+      description: 'Automate time-consuming administration tasks to focus on strategic initiatives',
+      features: ['Automated alerts', 'Predictive maintenance', 'Supply ordering', 'Workload balancing']
+    },
+    {
+      name: 'SiteAudit',
+      description: 'Gain actionable business intelligence with fleet data collection, analysis, alerting and reporting',
+      features: ['Data analytics', 'Performance metrics', 'Cost analysis', 'Trend reporting']
+    },
+    {
+      name: 'CRS Online',
+      description: 'Drive continuous improvement of your print performance through ongoing reporting and insights',
+      features: ['Usage reporting', 'Cost tracking', 'Performance KPIs', 'Recommendations']
+    }
+  ];
+
+  // Five-step approach
+  const approach = [
+    {
+      step: '01',
+      title: 'Assess',
+      description: 'Evaluate your print and document workflows to understand digital maturity and identify improvements'
+    },
+    {
+      step: '02',
+      title: 'Design',
+      description: 'Create a bespoke digital transformation journey tailored to your unique business needs'
+    },
+    {
+      step: '03',
+      title: 'Transition',
+      description: 'Ensure seamless transition leveraging our skills, knowledge and proven experience'
+    },
+    {
+      step: '04',
+      title: 'Maintain',
+      description: 'Proactively support your print environment to ensure optimal fleet and workflow performance'
+    },
+    {
+      step: '05',
+      title: 'Improve',
+      description: 'Make continuous improvements based on service and performance reports'
+    }
+  ];
+
+  const ServiceIcon = ({ Icon }) => <Icon className="w-5 h-5" />;
+
   return (
-    <div className="bg-white text-[#191c1d] selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif]">
+    <div className="min-h-screen bg-white text-[#191c1d] font-['Manrope',sans-serif]">
+      {/* ==================== HERO SECTION ==================== */}
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20" style={{ backgroundColor: '#0a1428' }}>
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-br from-[#00d27b]/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gradient-to-tr from-[#00b8d4]/20 to-transparent rounded-full blur-3xl"></div>
+        </div>
 
-      <Navbar />
-
-      <main className="pt-20">
-
-        {/* ============================================
-            HERO SECTION – background matches screenshot
-            Deep dark navy + strong teal top-right glow
-            ============================================ */}
-       {/* ============================================
-    HERO SECTION – matching screenshot exactly
-    ============================================ */}
-<section
-  id="hero"
-  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
-  style={{ background: '#0d1b2a' }}
->
-  {/* Top-right teal glow */}
-  <div
-    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-    style={{
-      background:
-        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
-    }}
-  />
-  {/* Bottom-left blue glow */}
-  <div
-    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
-    style={{
-      background:
-        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
-    }}
-  />
-
-  {/* === BACK NAV === */}
- 
-
-  {/* === MAIN CONTENT === */}
-  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
-
-    {/* Icon + Badge row */}
-    <div className="flex items-center gap-4">
-      <div
-        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
-      >
-        <span className="material-symbols-outlined text-[#00d27b] text-2xl">print</span>
-      </div>
-
-      <div
-        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
-        style={{
-          background: 'rgba(0,210,123,0.15)',
-          border: '1px solid rgba(0,210,123,0.35)',
-          color: '#00d27b',
-        }}
-      >
-        Streamline Your Printing Operations
-      </div>
-    </div>
-
-    {/* Headline */}
-    <h1
-      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
-      style={{
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-        maxWidth: '800px',
-      }}
-    >
-      Managed Print Services
-    </h1>
-
-    {/* Subtitle */}
-    <p
-      className="text-white/55 leading-relaxed"
-      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
-    >
-      Comprehensive Managed Print Services (MPS) designed to optimize your printing
-      environment, reduce waste, ensure seamless operation, and enhance security.
-    </p>
-  </div>
-</section>
-
-        {/* ==================== WHY CHOOSE SECTION ==================== */}
-        <section className="py-24 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-20">
-              <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-6">
-                Why Choose Nonsonet for MPS?
-              </h2>
-              <div className="w-24 h-1.5 bg-[#00d27b] mx-auto rounded-full"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-24">
+          <div className="space-y-8 max-w-4xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#00d27b]/30 bg-[#00d27b]/10 w-fit">
+              <div className="w-2 h-2 rounded-full bg-[#00d27b] animate-pulse"></div>
+              <span className="text-[#00d27b] text-sm font-medium">Optimized Print Environment</span>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {chooseCards.map((card) => (
-                <div
-                  key={card.id}
-                  className="bg-white overflow-hidden rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border border-gray-100"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      alt={card.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      src={card.image}
-                    />
-                  </div>
-                  <div className="p-8">
-                    <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl font-bold mb-3 text-[#006d3d] group-hover:text-[#00d27b] transition-colors">
-                      {card.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed text-sm">
-                      {card.description}
-                    </p>
+            {/* Headline */}
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Managed Print Services
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-xl text-white/70 leading-relaxed max-w-2xl">
+              Create an optimized, secure and sustainable print and scan environment with our comprehensive services and solutions. Available via cloud, hybrid setup, or on-premise—seamlessly integrated with your hybrid workspace needs.
+            </p>
+
+
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10">
+              <div>
+                <p className="text-3xl font-black text-[#00d27b]">50%</p>
+                <p className="text-white/60 text-sm">Rank MPS in top 3 priorities</p>
+              </div>
+              <div>
+                <p className="text-3xl font-black text-[#00b8d4]">100%</p>
+                <p className="text-white/60 text-sm">Proactive Fleet Support</p>
+              </div>
+              <div>
+                <p className="text-3xl font-black text-[#ffd93d]">24/7</p>
+                <p className="text-white/60 text-sm">Enterprise Monitoring</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== KEY BENEFITS SECTION ==================== */}
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-[#191c1d] mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Why Managed Print Services?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Our MPS solution combines industry-leading technology with strategic services to transform your print environment
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, idx) => (
+              <div
+                key={idx}
+                className="group relative p-8 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="mb-6 relative">
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" style={{ background: `${benefit.color}15` }}></div>
+                  <benefit.icon className="w-12 h-12 transition-colors" style={{ color: benefit.color }} />
+                </div>
+                <h3 className="text-xl font-bold text-[#191c1d] mb-3 group-hover:translate-x-1 transition-transform">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== OUR APPROACH SECTION ==================== */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-[#191c1d] mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Our Five-Step Approach
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              A proven methodology to optimize your print environment and drive digital transformation
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Connection line for desktop */}
+            <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-[#00d27b] via-[#00b8d4] to-[#ffd93d]"></div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 relative">
+              {approach.map((item, idx) => (
+                <div key={idx} className="relative group">
+                  {/* Step number background */}
+                  <div className="relative z-10 bg-white rounded-2xl p-8 border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all text-center h-full flex flex-col justify-center">
+                    <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-[#00d27b] flex items-center justify-center font-black text-white text-xl shadow-lg">
+                      {item.step}
+                    </div>
+                    <h3 className="text-2xl font-black text-[#191c1d] mb-4 mt-4">{item.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ==================== MPS SERVICES SECTION ==================== */}
-        <section className="py-24 overflow-hidden bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      {/* ==================== MPS SERVICES SECTION ==================== */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-[#191c1d] mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Comprehensive MPS Services
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Tailored services designed to fit your business' unique needs
+            </p>
+          </div>
 
-              {/* Images Grid */}
-              <div className="relative order-2 lg:order-1">
-                <div className="absolute -left-12 -top-12 w-64 h-64 bg-[#00d27b]/10 rounded-full blur-3xl"></div>
-                <div className="relative grid grid-cols-2 gap-4">
-                  <div className="space-y-4 pt-12">
-                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                      <img
-                        alt="Printer Fleet Management"
-                        className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-500"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu8lgw-lNoKsJDNg1-Plcg1W59VDsi8ZnoLqf5tVlMe3ya5wlaf7JUpxMmHtFyf3sFEBBPxamqRwoNiUTVggKEF2bhYpo9POLqCSeg6YjUzSRCqr-Fh5GSknN_0zRsbkbCginlQ7EhfKuVf4OtA3KQmI1JgPqOkP129AbVAhchdDXQ7uP4LhgEM0q1j0qxxsM6HyZI2cYZVw5XeHTXRHlQwJ-bPKyrNRrUN9qJDi1b8ILl8X_mzD0kzWcnlJaIv2CC68tgJY3JG1M4"
-                      />
-                    </div>
-                    <div className="bg-[#006d3d] p-8 rounded-3xl text-white shadow-lg hover:shadow-xl transition-shadow">
-                      <p className="text-4xl font-['Plus_Jakarta_Sans',sans-serif] font-bold mb-2">100%</p>
-                      <p className="text-sm tracking-widest uppercase">Proactive Support</p>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                      <img
-                        alt="Enterprise Multifunction Printer"
-                        className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-500"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-G2R8ACZ5rExSwciEKdbuPz5CJ8MgrxStDNtXW6jcIXB8I2suRBByTca6PuPioXoPztwn4EQxMdCxsEFZI4z-wU-6zKiSen1Hdc53eayg-qyOIcOgpbWd7MPVFgXvkfls3NnwnsCgcwkkdQX8ITxxS2dB8qWBnD5agdEGr3_xwjKHEp1fEAgdC5yG6RiDfCNKTBjHyEmFZAGJVvDGEbt2Q7-3DdVo4E6D6CQ6K_bAqm988VfMoChy8RfYxFpkvbAXq-X0hvPI4aNe"
-                      />
-                    </div>
-                    <div className="rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                      <img
-                        alt="Digital Print Analytics Dashboard"
-                        className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmB7WWt4pMlZwBUs1HIqM5vmHvSRL32mL2-90aJ8h-8AOd0GDjkX6rPjiO_4zdGSuGXGL1YYX_PaKf8t0iYk1sKYLkEHPQRs8bc9OIuJA3hQivOT6_V-tWT0RIyZWJNDNxI_g7mbF6e5be-3yiXBRsKruupuEmFeL32hkfHHPOS__vlVfsrLNnri7VDL5N5bpqMGHasXKQe9f1wOuU9RKNUZ2k7WtqmcvIi98cLmNISO4uPbDFJkCye-aY_g50I07ZrFqds6ylUyCc"
-                      />
-                    </div>
-                  </div>
-                </div>
+          {/* Service Tabs */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12">
+            {mpsServices.map((service) => {
+              const Icon = service.icon;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => setSelectedService(service.id)}
+                  className={`p-4 rounded-xl font-bold text-sm transition-all duration-300 flex flex-col items-center gap-2 ${
+                    selectedService === service.id
+                      ? 'bg-[#00d27b] text-white shadow-lg scale-105'
+                      : 'bg-white text-[#191c1d] border border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="hidden sm:inline text-xs">{service.title.split(' ')[0]}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Service Detail Card */}
+          <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-xl">
+            <div className="grid lg:grid-cols-2 gap-12 p-12">
+              {/* Image */}
+              <div className="relative rounded-2xl overflow-hidden">
+                <img
+                  src={mpsServices.find(s => s.id === selectedService)?.image}
+                  alt="Service"
+                  className="w-full h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
 
               {/* Content */}
-              <div className="order-1 lg:order-2">
-                <h2 className="font-['Plus_Jakarta_Sans',sans-serif] text-4xl lg:text-5xl font-extrabold text-[#191c1d] mb-8 leading-tight">
-                  Comprehensive MPS Solutions Tailored for You
-                </h2>
-                <div className="space-y-8">
-                  {mpsServices.map((service) => (
-                    <div
-                      key={service.id}
-                      className="flex gap-6 group hover:bg-[#00d27b]/5 p-4 rounded-3xl transition-all duration-300"
-                    >
-                      <div className="mt-1 flex-shrink-0 w-24 h-24 rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group-hover:scale-110 duration-300">
-                        <img
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                          src={service.image}
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-['Plus_Jakarta_Sans',sans-serif] text-xl font-bold mb-2 text-[#191c1d] group-hover:text-[#006d3d] transition-colors">
-                          {service.title}
-                        </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {service.description}
-                        </p>
-                      </div>
+              <div className="flex flex-col justify-center">
+                <div className="flex items-center gap-4 mb-6">
+                  {(() => {
+                    const service = mpsServices.find(s => s.id === selectedService);
+                    const Icon = service.icon;
+                    return (
+                      <>
+                        <div className="w-16 h-16 rounded-xl bg-[#00d27b]/10 flex items-center justify-center">
+                          <Icon className="w-8 h-8 text-[#00d27b]" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-black text-[#191c1d]">{service.title}</h3>
+                          <p className="text-gray-600 text-sm">{service.shortDesc}</p>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+
+                <p className="text-gray-700 leading-relaxed mb-8">
+                  {mpsServices.find(s => s.id === selectedService)?.fullDesc}
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  {mpsServices.find(s => s.id === selectedService)?.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <Check className="w-5 h-5 text-[#00d27b] flex-shrink-0" />
+                      <span className="text-gray-700 font-medium">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== MPS INFRASTRUCTURE SECTION ==================== */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-[#191c1d] mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              MPS Infrastructure & Tools
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Robust software solutions covering your entire print environment
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {tools.map((tool, idx) => (
+              <div
+                key={idx}
+                className="group relative p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 hover:border-[#00d27b]/50 hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00d27b]/5 rounded-full blur-3xl group-hover:bg-[#00d27b]/10 transition-all -z-10"></div>
+
+                <h3 className="text-2xl font-black text-[#191c1d] mb-3 flex items-center gap-3 group-hover:text-[#00d27b] transition-colors">
+                  <span className="w-2 h-2 rounded-full bg-[#00d27b]"></span>
+                  {tool.name}
+                </h3>
+
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  {tool.description}
+                </p>
+
+                <div className="space-y-2">
+                  {tool.features.map((feature, fidx) => (
+                    <div key={fidx} className="flex items-center gap-3 text-gray-600">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00d27b]"></div>
+                      <span className="text-sm">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* ==================== ADDITIONAL SERVICES SECTION ==================== */}
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-[#191c1d] mb-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Additional Support Services
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Premium options for organizations requiring enhanced support
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition-all">
+              <div className="w-12 h-12 rounded-xl bg-[#ff6b6b]/10 flex items-center justify-center mb-6">
+                <AlertCircle className="w-6 h-6 text-[#ff6b6b]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#191c1d] mb-3">On-site Fleet Maintenance</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Dedicated Canon on-site engineer offering rapid fleet support optimization to ensure high availability and user satisfaction.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition-all">
+              <div className="w-12 h-12 rounded-xl bg-[#00b8d4]/10 flex items-center justify-center mb-6">
+                <Wifi className="w-6 h-6 text-[#00b8d4]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#191c1d] mb-3">On-site Fleet Operations</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Canon support for day-to-day print and scan environment at large sites, providing incident triage and device hygiene activities.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition-all">
+              <div className="w-12 h-12 rounded-xl bg-[#ffd93d]/10 flex items-center justify-center mb-6">
+                <BarChart3 className="w-6 h-6 text-[#ffd93d]" />
+              </div>
+              <h3 className="text-xl font-bold text-[#191c1d] mb-3">Hybrid Workspace Solutions</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Seamless working between home and office environments through one single contract, enabling efficient and productive work anywhere.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </main>
+
     </div>
   );
 };
 
-export default Printer;
+export default ManagedPrintServices;

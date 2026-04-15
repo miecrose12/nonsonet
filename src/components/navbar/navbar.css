@@ -1,21 +1,17 @@
-/* ============================================
-   NAVBAR - LUCID / NONSONET DESIGN SYSTEM
-   ============================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 :root {
-  --primary: #006d3d;
-  --primary-container: #00d27b;
+  /* Updated Primary to match the vibrant green in the image */
+  --primary: #15a34a; 
+  --primary-hover: #108e3d;
   --on-primary: #ffffff;
-  --on-primary-container: #00542e;
-  --secondary: #565e71;
-  --surface: #f8f9fa;
+  
+  --secondary: #4b5563; /* Slightly lighter text for nav links */
+  --on-surface: #0f172a; /* Dark text for logo Nonsonet */
+  --brand-blue: #2563eb; /* Blue for 'Technologies' */
+  
   --surface-container-low: #f3f4f5;
-  --on-surface: #191c1d;
-  --on-surface-variant: #3c4a3f;
-  --outline-variant: #bbcbbc;
   --font-headline: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Manrope', sans-serif;
 }
@@ -27,7 +23,7 @@
 
 /* ========== NAVBAR HEADER ========== */
 .navbar-header {
-  background-color: rgba(255, 255, 255, 0.72);
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   position: fixed;
@@ -35,38 +31,34 @@
   left: 0;
   right: 0;
   z-index: 50;
-  box-shadow: 0 12px 40px rgba(25, 28, 29, 0.06);
-  border-bottom: 1px solid rgba(187, 203, 188, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar-header.scrolled {
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 24px rgba(25, 28, 29, 0.1);
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  max-width: 80rem;
+  padding: 0.75rem 2rem;
+  max-width: 85rem;
   margin: 0 auto;
-  gap: 2rem;
 }
 
 /* ========== LOGO ========== */
 .navbar-logo-section {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
 }
 
-/* Logo is a <button> — strip all button chrome */
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: 12px;
   background: none;
   border: none;
   padding: 0;
@@ -79,18 +71,49 @@
   opacity: 0.85;
 }
 
-.navbar-logo-icon {
-  color: var(--primary);
-  font-size: 1.75rem;
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+/* Made the image circular with a light gray border/background to match the NTL logo */
+.navbar-logo-image {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: #f3f4f6; 
+  transition: transform 0.3s ease;
 }
 
-.navbar-logo-text {
+.navbar-logo:hover .navbar-logo-image {
+  transform: scale(1.05);
+}
+
+/* Stacked text layout */
+.navbar-logo-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.navbar-logo-title {
   font-family: var(--font-headline);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: -0.04em;
   color: var(--on-surface);
+  letter-spacing: -0.02em;
+}
+
+.navbar-logo-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-blue);
+}
+
+/* ========== RIGHT SECTION (Links + Button) ========== */
+.navbar-right-section {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 /* ========== DESKTOP NAV LINKS ========== */
@@ -100,30 +123,23 @@
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .navbar-links-desktop {
     display: flex;
   }
 }
 
-/*
- * Both <a> (react-router Link) and <button> (scroll triggers) share
- * the exact same visual appearance. We style them together.
- */
 .nav-link {
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--secondary);
   text-decoration: none;
-  transition: color 0.2s ease;
-  position: relative;
-  /* button resets */
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  line-height: inherit;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover {
@@ -132,72 +148,23 @@
 
 .nav-link.active-nav-link {
   color: var(--primary);
-  font-weight: 600;
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 2px;
 }
 
 /* ========== NAVBAR ACTIONS ========== */
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-}
-
-/* Search */
-.navbar-search {
-  position: relative;
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .navbar-search {
-    display: block;
-  }
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.875rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--secondary);
-  font-size: 1.1rem;
-  pointer-events: none;
-}
-
-.search-input {
-  background-color: var(--surface-container-low);
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  padding: 0.45rem 1rem 0.45rem 2.5rem;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--on-surface);
-  width: 13rem;
-  transition: all 0.25s ease;
-}
-
-.search-input::placeholder {
-  color: var(--secondary);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--primary);
-  background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(0, 109, 61, 0.12);
 }
 
 /* CTA Button */
 .navbar-cta-button {
   background-color: var(--primary);
   color: var(--on-primary);
-  padding: 0.6rem 1.5rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 9999px;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-size: 0.9rem;
   border: none;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -205,9 +172,8 @@
 }
 
 .navbar-cta-button:hover {
-  background-color: var(--primary-container);
-  color: var(--on-primary-container);
-  box-shadow: 0 4px 16px rgba(0, 109, 61, 0.25);
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(21, 163, 74, 0.25);
 }
 
 .navbar-cta-button:active {
@@ -224,11 +190,12 @@
   color: var(--on-surface);
   cursor: pointer;
   padding: 0.5rem;
+  margin-left: 1rem;
   border-radius: 9999px;
   transition: background-color 0.2s ease;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .mobile-menu-toggle {
     display: none;
   }
@@ -240,8 +207,8 @@
 
 /* ========== MOBILE MENU ========== */
 .mobile-menu {
-  background-color: rgba(255, 255, 255, 0.97);
-  border-top: 1px solid rgba(187, 203, 188, 0.3);
+  background-color: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -253,169 +220,64 @@
   max-height: 30rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .mobile-menu {
     display: none !important;
   }
 }
 
-/*
- * Mobile nav items — both <a> (Link) and <button> (scroll triggers)
- * must look and behave identically. All properties are declared once
- * on both selectors so neither can accidentally override the other.
- */
-.mobile-nav-link,
 .mobile-nav-btn {
-  /* layout */
   display: block;
   width: 100%;
   box-sizing: border-box;
-  /* spacing */
   padding: 1rem 2rem;
-  /* typography */
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--secondary);
   text-align: left;
-  text-decoration: none;
-  /* button resets */
   background: none;
   border: none;
-  border-bottom: 1px solid rgba(187, 203, 188, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  /* motion */
   transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
 }
 
-.mobile-nav-link:hover,
 .mobile-nav-btn:hover {
   background-color: var(--surface-container-low);
   color: var(--primary);
   padding-left: 2.5rem;
 }
 
-.mobile-nav-link.active-nav-link,
 .mobile-nav-btn.active-nav-link {
   color: var(--primary);
-  font-weight: 600;
-  background-color: rgba(0, 109, 61, 0.04);
+  background-color: rgba(21, 163, 74, 0.04);
 }
 
-/* Get Started row at the bottom of mobile menu */
 .mobile-menu-cta {
   padding: 1rem 2rem;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE MINOR TWEAKS ========== */
 @media (max-width: 640px) {
   .navbar-container {
-    padding: 0.875rem 1rem;
-    gap: 0.5rem;
+    padding: 0.75rem 1rem;
   }
 
-  .navbar-logo-text {
-    font-size: 1rem;
+  .navbar-logo-title {
+    font-size: 1.1rem;
+  }
+  
+  .navbar-logo-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .navbar-logo-image {
+    width: 38px;
+    height: 38px;
   }
 
   .navbar-cta-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.78rem;
+    display: none; /* Hide button on top-level for mobile, keep in hamburger */
   }
 }
-
-
-
-
-
-/* ──────────────────────────────────────────────────────────
-   NAVBAR LOGO IMAGE STYLING
-   ────────────────────────────────────────────────────────── */
-
-/* Container for logo button - flex layout for alignment */
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px; /* Space between image and text */
-  padding: 8px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: inherit;
-}
-
-.navbar-logo:hover {
-  opacity: 0.8;
-}
-
-/* ──── IMAGE LOGO STYLING ──── */
-.navbar-logo-image {
-  /* Size: 40px × 40px (adjust as needed) */
-  width: 40px;
-  height: 40px;
-  
-  /* Maintain aspect ratio and fill the square */
-  object-fit: cover;
-  object-position: center;
-  
-  /* Remove any default image styling */
-  display: block;
-  border-radius: 4px; /* Slight rounding (optional) */
-  
-  /* Smooth transitions on hover */
-  transition: transform 0.3s ease;
-}
-
-/* Optional: Add subtle scale on logo hover */
-.navbar-logo:hover .navbar-logo-image {
-  transform: scale(1.05);
-}
-
-/* ──── RESPONSIVE: Mobile adjustments ──── */
-@media (max-width: 768px) {
-  .navbar-logo-image {
-    width: 36px;
-    height: 36px;
-  }
-
-  .navbar-logo {
-    gap: 10px;
-    font-size: 1.1rem;
-  }
-}
-
-/* ──── RESPONSIVE: Extra small screens ──── */
-@media (max-width: 480px) {
-  .navbar-logo-image {
-    width: 32px;
-    height: 32px;
-  }
-
-  .navbar-logo {
-    gap: 8px;
-    font-size: 1rem;
-  }
-}
-
-/* ──── OPTIONAL: Add shadow/border for polish ──── */
-/* Uncomment if you want a subtle shadow around the logo image */
-/*
-.navbar-logo-image {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-*/
-
-/* ──── DARK MODE SUPPORT (if applicable) ──── */
-/* Uncomment if your app has dark mode */
-/*
-@media (prefers-color-scheme: dark) {
-  .navbar-logo-image {
-    opacity: 0.95;
-  }
-}
-*/

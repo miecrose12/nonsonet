@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/navbar/Navbar';
+import nonImage from "../../assets/semi.png";
+import nonImage1 from "../../assets/semii.png";
+import nonImage2 from "../../assets/see.png";
+import nonImage3 from "../../assets/sii.png";
 
 /* ─── Network Canvas Animation (exact same as Printer page) ───────────── */
 const networkCanvasRef = (el) => {
@@ -64,7 +68,7 @@ const networkCanvasRef = (el) => {
 const HeroSection = ({ scrollPosition }) => (
   <section
     id="hero"
-    className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
+    className="relative min-h-[420px] md:min-h-[320px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
     style={{ background: '#0d1b2a' }}
   >
     {/* Top-right teal glow */}
@@ -120,8 +124,8 @@ const HeroSection = ({ scrollPosition }) => (
         className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-          maxWidth: '800px',
+          fontSize: 'clamp(2.3rem, 4vw, 3.2rem)',
+          maxWidth: '1250px',
         }}
       >
         Water Production Solutions
@@ -246,45 +250,40 @@ const Water = () => {
                   <img
                     alt="Water Treatment Unit"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmsM3PuWHgJ5uNB9h6vI48j9IWxb21Dzfyz09-1W1AF9oHYgQVu5T4lwoQj8jAZ-tYpX2n5KOnoqeeBNm90Ko6BeK2KM1Cqc44PRq1sBITnnv_xcFosPQq7SHvs85S6CdZlDNZWcaAn2jf22R9gk8nRkzzkOQzbZD67pBGWEUODfQ7bHOjFXJbgNKkPqvzpobz36zybAld1Y39wllfzSC5rhJm1dxg1pNE3bjQEq7hwkNwLvNDYYdqGgTDcDXKgsfYCF0x3cHDTj6P"
+                    src={nonImage}
                   />
                 </div>
                 <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-4">Water Treatment Systems</h3>
+                  <h3 className="text-2xl font-bold mb-4">Semi-Automatic PET Bottle Blowing Machine</h3>
                   <p className="text-[#3d4a3f] mb-6 text-sm">
-                    Industrial-grade RO systems and carbon filtration units built for longevity and extreme purity levels.
+                    The Semi-Automatic PET Bottle Blowing Machine has an output capacity of 800 bottles per hour. It can blow mineral water in small and large bottles, edible oil bottles, and much more, ranging from 100ml to 20l. It works manually and is available at a cheap price supporting small-scale companies in bottle production.
                   </p>
-                  <ul className="grid grid-cols-2 gap-3">
-                    {['Ozone Tech', 'Carbon Filtration'].map((tag) => (
-                      <li key={tag} className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#006d37]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#006d37]" /> {tag}
-                      </li>
-                    ))}
-                  </ul>
+                
                 </div>
               </div>
 
               {/* Bottling Lines */}
-              <div className="md:col-span-2 lg:col-span-3 bg-[#006d37] text-white rounded-xl shadow-lg flex flex-col overflow-hidden group">
+              <div className="md:col-span-2 lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col overflow-hidden group">
                 <div className="h-64 overflow-hidden relative">
                   <img
                     alt="Bottling Line"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 brightness-75"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9GrbS3RTKEJP1syg-S_KuhGcT0ekflTh1pd8JmOKGjsomG-nQvE5mRq3FoqaCMe0Lod3BVO7otnNtdNesi0RmC5e944-6qWrYP5oIvOFwjTj8IVmnJAy9he3I06FLZ3s0ZFi6dY11D1ld9uf8CwsLzVUNxZ1b0-B1zqD6y1ahVXgCwuP70ok7CXSmqe1tqKSyvezNkQguaVzJWL_A0KiPotq-FEvkXcY4dPgRXwqWaj-6hxKir8CikPs0rlhOUquuXW3ZpelEaWHb"
+                    src={nonImage1}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#006d37]/80 to-transparent" />
+                  <div className="absolute to-transparent" />
                 </div>
                 <div className="p-8 mt-auto">
-                  <h3 className="text-2xl font-bold mb-4">Bottling Lines</h3>
-                  <p className="text-white/80 mb-6 text-sm">
-                    Fully automated washing, filling, and capping monoliths for PET bottles of all sizes, from 330ml to 20L.
+                  <h3 className="text-2xl font-bold mb-4">Fully Automatic PET Bottle Blowing Machine：20ml-2000ml, Max 10000BPH</h3>
+                  <p className="text-black/80 mb-6 text-sm">
+                    Full Automatic PET Bottle Blowing Machine is highly stable and versatile designed two-step blowing equipment.
+
+It is commonly used for bottle production of PET bottles, carbonated drinks, juices, and pesticide packing. It can blow bottles of maxim volume ranging from 20ml to 2l.
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex -space-x-3">
                       {[
                         'https://lh3.googleusercontent.com/aida-public/AB6AXuDuCsF8su40tpRUvu1vUvrSaWBzdb3zSci8qsJChCTjXlNPwTLYJJuF8uTceT2fW0yOZl8fEQMM_MGt3XB8ffh1gnY_FvNdckboQatfiksyXiJ-odTMevmklzJ5Z9iZitpmBtBdr-2aLosBxy7bSy_PXU3ZYyeoFBT0k0PzQYWbaydFcwh1_vyd4-bUNcvoYOnzhBMtyxMUlTZodLoST8MiV0U-JLP6wo26Gbw6V_OdQGVDpaqMXN50DDw-lLFI5Wi1Gbppn0y_HQg7',
                         'https://lh3.googleusercontent.com/aida-public/AB6AXuBmd5IIIp0Bwuw1u3kbM-pj0amZiQABCvo31ZaGK4_-Xt__EHPvlf7WR5mRpYgQp7zH5xJfYjo9FLia-JBKYoIQhPGjSOuNFnXtIXkh3gtnWhUPAAqmS5VkgrH_6vgWO8MvgbY75qechPNAHeNMXbHJYPhDqBCZCHjWBsJryy4dwFvxatccUcrH3w5AmRXXwYj61UcT3FdERmEcdNztFHFa0NN-bZ47rtaQI0P_g9CvG-8CNtDmSHZ4MlTihIaL6Ta34Q9ZP6Kp_gof',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDBI-BfvlzFxh_6FJHru6XDEpvtwTErilx8qDHVVPIHeKEHwyzYtcykz41nSabGCDjVFdP8cH4EFPPfjbP0FGHoxTLkuxAQaSeRwrs582sqf1y9VMteFqjyohLQYcrXEmAvdpExw-1R49x3PZif4FeZQHv1BPJV4VLkZp5crgezPS7sgxY_OzY2wZDcPBlR0l_B8837ufnT0Plmrifo_A_A04JJFdeJdcDUmlehzSP_Iazkm_lEPt-Cl7WJnDg7_lg6sLOo5LETWfpj',
                       ].map((src, i) => (
                         <div key={i} className="w-10 h-10 rounded-full border-2 border-[#006d37] overflow-hidden">
                           <img alt={`Detail ${i + 1}`} className="w-full h-full object-cover" src={src} />
@@ -303,12 +302,36 @@ const Water = () => {
                 <img
                   alt="Sachet Machine"
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUtFxfbTtwP34YtkpjdlfwoAhscMlw6TFhRIgiw-zK7at0zZ8nNdSsOQztOPiY2C-8AmQLT2f3aRuOc1TAQm0I1sk_HuVK69QwW7vmL0IeBu0idXFGJip1ONRFNJ3iB4iUPol_kHaSNNT70KoDJKkJjWeedmR7NahQO6k4PZee_5ofTV-7Ili4hgzqbZPMi4gid4Pr0BqbDgsBkHr0GFIYRp2qf2Q4DyUjTTfvetaGl5YbeD3zomIFO4AQUqkpGBGhlGOzdd41nIZg"
+                  src={nonImage2}
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3">Sachet Packaging</h3>
+                  <h3 className="text-xl font-bold mb-3">Reverse Osmosis Machine 2000L.</h3>
                   <p className="text-[#3d4a3f] text-sm">
-                    High-speed liquid packaging machines for economical sachet distribution across regional markets.
+                    Reverse Osmosis Machine 2000L.
+
+ 
+
+Production Machines for pure water treatment and water purification RO System.
+
+ 
+
+Standard water Reverse Osmosis system
+
+ 
+
+Capacity : 2,000 Litres per hour (8 Membrane)
+
+ 
+
+Power : 3kw Single/Three phase 220/380 volts
+
+ 
+
+Size : 1500 x 650 x 1900
+
+ 
+
+Weight : 160kg
                   </p>
                 </div>
               </div>
@@ -321,17 +344,11 @@ const Water = () => {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBitGVeJKXCd4TZWoxU16d9tvn9TBZUs_BckKlmuKy9yX3PGW7-ya0S8f1JwGAdS-UGhaEX5zVvLIocw6qT-1lrnaECp8Rfhib_CST18Bn5BXmuiYUgk69-05oRggN6NwxSDy--mhUzGMi29s9WjyapH3Tb2pHqai03XLxQSWh0igDfqK5pA2HIJzxrounwNGsxv-i-my3hqe8A-G3ATkdAgyFbFu4sCDIOb3arpjwHwVlhEWjt9Ghyez6KABLm2sf8mgT3V3g9pfC6"
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3">Labeling &amp; Packaging</h3>
+                  <h3 className="text-xl font-bold mb-3">Sachet water machine</h3>
                   <p className="text-[#3d4a3f] text-sm mb-4">
-                    Precision labeling and shrink-wrap systems for professional market presentation.
+                   Pure Water Machine AS1000 series automatic liquid packaging machinery are widely used for various kinds of liquid packaging, such as Sachet Water, milk, soybean milk, fruit juice, ice drink, soy sauce, vinegar and wine. 
                   </p>
-                  <div className="flex gap-2">
-                    {['Automatic', 'Hot-Melt'].map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-[#eceef0] rounded-full text-[10px] font-bold uppercase tracking-tight">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                 
                 </div>
               </div>
 
@@ -339,65 +356,7 @@ const Water = () => {
           </div>
         </section>
 
-        {/* ─── Operational Benefits ─── (unchanged) */}
-        <section className="py-24 bg-[#00210c] text-white">
-          <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-
-            {/* Left copy */}
-            <div>
-              <h2 className="text-4xl font-bold mb-8">Operational Benefits</h2>
-              <p className="text-white/70 text-lg mb-12">
-                Beyond the machinery, Nonsonet delivers long-term business value through strategic partnership.
-              </p>
-              <div className="space-y-8">
-                {[
-                  {
-                    title: 'Scalability',
-                    desc: 'Modular designs allow you to increase capacity as your market presence grows without total system overhauls.',
-                  },
-                  {
-                    title: 'Cost-Effective Solutions',
-                    desc: 'Optimized production flows reduce labor costs and minimize material wastage during the packaging phase.',
-                  },
-                  {
-                    title: 'Expert Support',
-                    desc: '24/7 technical assistance and preventative maintenance scheduling to ensure zero downtime for your production plant.',
-                  },
-                ].map(({ title, desc }) => (
-                  <div key={title} className="flex gap-4">
-                    <div className="mt-1">
-                      <span className="w-4 h-4 rounded-full bg-[#62f595] inline-block" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold mb-2">{title}</h4>
-                      <p className="text-white/60 text-sm">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right image */}
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  alt="Professional Technician"
-                  className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWMDPkL3Xw8dkEDSIjnIwKG_wFM3k4RtJJPShKCaV6l_uXO833CAFIhG9q6Z_7VF9gwc2hdKewZpiOqT6_gd9VOQ-eo8cr63P7FcnRUF8RN2eJTR6vv62jK2gWbqsP5OO07paevDdXuRnFGloOt-K8w5fMW611wWflnjAXDRFj9Nyp1Bt_qZSI4NSyzCCHHtX0SCVpZVHYDZSRGMhzfYqlqyquJxTyAYQc5AvTjj9cSHqKX5DYSs7Ma-adYT2UMP47TSrBQOiPrI0B"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#00210c] via-transparent to-transparent rounded-3xl" />
-              <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                <p className="text-sm font-medium italic">
-                  "Precision engineering is not just about the machine; it's about the consistency of the purity it delivers."
-                </p>
-                <p className="text-xs font-bold mt-2 uppercase tracking-widest text-[#62f595]">
-                  — Chief Technical Officer
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* ─── CTA Section ─── (unchanged - ready for your content) */}
       </main>

@@ -73,94 +73,66 @@ const ProductCard = ({ icon, title, subtitle, checks, imgSrc }) => (
 );
 
 export default function Forecourt() {
-  const [navOpen, setNavOpen] = useState(false); // kept for future use if Navbar is added
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <div className="bg-white text-[#191c1d] selection:bg-green-200 selection:text-green-900 font-['Manrope',sans-serif]">
-
-      <main className="pt-20">
-
+      <main className="pt-0">
         {/* ============================================
-            HERO SECTION – NOW 100% MATCHING DOOR / CCTV BACKGROUND
-            (exact same deep navy + multi-layer teal glows, overlays, and contrast)
+            HERO SECTION – 100% MATCHING SCREENSHOT
             ============================================ */}
-       {/* ============================================
-    HERO SECTION – matching screenshot exactly
-    ============================================ */}
-<section
-  id="hero"
-  className="relative min-h-[420px] md:min-h-[520px] flex flex-col overflow-hidden px-6 md:px-12 pt-8 pb-20"
-  style={{ background: '#0d1b2a' }}
->
-  {/* Top-right teal glow */}
-  <div
-    className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-    style={{
-      background:
-        'radial-gradient(ellipse at top right, rgba(0,120,80,0.55) 0%, rgba(0,80,55,0.28) 40%, transparent 70%)',
-    }}
-  />
-  {/* Bottom-left blue glow */}
-  <div
-    className="absolute bottom-0 left-0 w-[400px] h-[300px] pointer-events-none"
-    style={{
-      background:
-        'radial-gradient(ellipse at bottom left, rgba(10,40,100,0.50) 0%, transparent 65%)',
-    }}
-  />
+        <section className="relative w-full min-h-[500px] bg-[#0d1424] overflow-hidden px-6 md:px-12 py-32 flex flex-col">
+          {/* Vibrant Top-Right Teal Glow */}
+          <div 
+            className="absolute top-[-20%] right-[-10%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(13,115,102,0.6) 0%, rgba(13,115,102,0.15) 40%, transparent 70%)'
+            }}
+          ></div>
+          
+          {/* Subtle Bottom-Left Navy Glow */}
+          <div 
+            className="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(16,40,90,0.5) 0%, transparent 60%)'
+            }}
+          ></div>
 
-  {/* === BACK NAV === */}
- 
+          <div className="max-w-[1280px] mx-auto w-full relative z-10 flex flex-col mt-4">
+            {/* Back to Solutions Link */}
+            <div className="mb-10 text-[#a0aab2] text-[15px] flex items-center gap-2 cursor-pointer hover:text-white w-fit font-medium transition-colors">
+              <span className="material-symbols-outlined text-[18px]">chevron_left</span>
+              Back to Solutions
+            </div>
 
-  {/* === MAIN CONTENT === */}
-  <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col gap-8">
+            {/* Icon + Badge Row */}
+            <div className="flex items-center gap-5 mb-8">
+              <div className="w-[60px] h-[60px] rounded-[20px] bg-[#222a3a]/80 border border-[#3b4455]/50 flex items-center justify-center backdrop-blur-md shadow-lg">
+                <span className="material-symbols-outlined text-[#00d27b] text-3xl">local_gas_station</span>
+              </div>
+              <div className="px-5 py-2.5 rounded-full border border-[#00d27b]/40 bg-[#00d27b]/10 backdrop-blur-sm">
+                <span className="text-[#00d27b] text-sm font-semibold tracking-wide">
+                  Intelligent Fuel Station Management
+                </span>
+              </div>
+            </div>
 
-    {/* Icon + Badge row */}
-    <div className="flex items-center gap-4">
-      <div
-        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-        style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)' }}
-      >
-        <span className="material-symbols-outlined text-[#00d27b] text-2xl">local_gas_station</span>
-      </div>
+            {/* Headline */}
+            <h1 className="font-['Plus_Jakarta_Sans',sans-serif] text-[40px] md:text-[64px] lg:text-[49px] font-extrabold text-white tracking-[-0.03em] leading-[1.05] mb-6 max-w-230px">
+              Forecourt & Payment Automation
+            </h1>
 
-      <div
-        className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold"
-        style={{
-          background: 'rgba(0,210,123,0.15)',
-          border: '1px solid rgba(0,210,123,0.35)',
-          color: '#00d27b',
-        }}
-      >
-        Intelligent Fuel Station Management
-      </div>
-    </div>
+            {/* Subtitle */}
+            <p className="text-[#c1c8d1] text-[17px] md:text-[19px] leading-[1.6] max-w-[850px] font-medium">
+              In partnership with FuelTorque, a cutting-edge solution for real-time management and 
+              monitoring of fuel station activities, alongside comprehensive inventory management for store 
+              items and groceries. Supports hybrid cloud-based and on-premise deployment.
+            </p>
+          </div>
+        </section>
 
-    {/* Headline */}
-    <h1
-      className="font-extrabold leading-[1.05] tracking-[-0.025em] text-white"
-      style={{
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-        maxWidth: '800px',
-      }}
-    >
-      Forecourt &amp; Payment Automation
-    </h1>
-
-    {/* Subtitle */}
-    <p
-      className="text-white/55 leading-relaxed"
-      style={{ fontSize: '1.05rem', maxWidth: '560px' }}
-    >
-      In partnership with FuelTorque, a cutting-edge solution for real-time management and
-      monitoring of fuel station activities, alongside comprehensive inventory management for store
-      items and groceries. Supports hybrid cloud-based and on-premise deployment.
-    </p>
-  </div>
-</section>
         {/* ============================================
-            ALL REMAINING SECTIONS – unchanged (brand-consistent)
+            REMAINING SECTIONS 
             ============================================ */}
 
         {/* Solution Overview */}
@@ -208,7 +180,7 @@ export default function Forecourt() {
               ].map(({ icon, title, desc }) => (
                 <div
                   key={title}
-                  className="bg-white p-10 rounded-3xl transition-transform hover:-translate-y-2"
+                  className="bg-white p-10 rounded-3xl transition-transform hover:-translate-y-2 shadow-sm"
                 >
                   <div className="w-14 h-14 bg-[#00d27b]/10 rounded-3xl flex items-center justify-center mb-8">
                     <span className="material-symbols-outlined text-[#00d27b] text-3xl">
