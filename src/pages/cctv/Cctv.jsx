@@ -40,9 +40,9 @@ const cameraProducts = [
   },
   {
     img: BULLET_IMG,
-    badge: 'WIRELESS BULLET',
+    badge: 'WIRELESS CAMERA',
     badgeColor: 'bg-[#006d3d]',
-    title: 'Bullet CCTV Systems',
+    title: 'WIRELESS CCTV Systems',
     desc: 'Zero-cable deployments featuring high-visibility deterrent design and long-range night vision. Ideal for outdoor perimeters and entry points.',
   },
 ];

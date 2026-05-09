@@ -4,6 +4,7 @@ import nonImage from "../../assets/semi.png";
 import nonImage1 from "../../assets/semii.png";
 import nonImage2 from "../../assets/see.png";
 import nonImage3 from "../../assets/sii.png";
+import nonImage4 from "../../assets/sachet.jpeg";
 
 /* ─── Network Canvas Animation (exact same as Printer page) ───────────── */
 const networkCanvasRef = (el) => {
@@ -341,7 +342,7 @@ Weight : 160kg
                 <img
                   alt="Labeling Machine"
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBitGVeJKXCd4TZWoxU16d9tvn9TBZUs_BckKlmuKy9yX3PGW7-ya0S8f1JwGAdS-UGhaEX5zVvLIocw6qT-1lrnaECp8Rfhib_CST18Bn5BXmuiYUgk69-05oRggN6NwxSDy--mhUzGMi29s9WjyapH3Tb2pHqai03XLxQSWh0igDfqK5pA2HIJzxrounwNGsxv-i-my3hqe8A-G3ATkdAgyFbFu4sCDIOb3arpjwHwVlhEWjt9Ghyez6KABLm2sf8mgT3V3g9pfC6"
+                  src={nonImage4}
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3">Sachet water machine</h3>
