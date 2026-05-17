@@ -19,18 +19,37 @@ function Footer() {
     { label: 'Water Solutions', to: '/water' },
   ];
 
+  // Mapped to the specific IDs in your Landing component
   const company = [
-    { label: 'About Us', to: '/' },
-    { label: 'Insights', to: '/' },
-    { label: 'Partners', to: '/' },
-    { label: 'Careers', to: '/' },
+    { label: 'About Us', id: 'who-we-are' },
+    { label: 'Insights', id: 'what-we-do' },
+    { label: 'Partners', id: 'partners' },
+    { label: 'Careers', id: 'contact' }, // Routing careers to the contact form 
   ];
+
+  // Helper function to scroll to top for standard route changes
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
+  };
+
+  // Helper function for smooth scrolling to specific sections on the same page
+  const handleSectionScroll = (e, id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      e.preventDefault(); // Prevent default anchor jump
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // If the element isn't on the current page, the standard href="/#id" will navigate there
+  };
 
   return (
     <footer
       className="font-sans"
       style={{
-        background: '#08111f',                    // ← exact hero background
+        background: '#08111f',
         borderTop: '1px solid rgba(255,255,255,0.08)',
         color: '#ffffff',
         fontFamily: "'Manrope', sans-serif",
@@ -38,10 +57,14 @@ function Footer() {
     >
       {/* ===== TOP COLUMNS ===== */}
       <div className="max-w-7xl mx-auto px-8 pt-20 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr] gap-12 lg:gap-16">
-       
+        
         {/* Brand */}
         <div className="flex flex-col gap-5">
-          <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <Link 
+            to="/" 
+            onClick={scrollToTop} 
+            className="flex items-center gap-2.5 no-underline"
+          >
             <span
               className="material-symbols-outlined"
               style={{
@@ -61,39 +84,6 @@ function Footer() {
             dedicated to elevating enterprise productivity through innovative
             engineering and local insight.
           </p>
-          <div className="flex gap-3">
-            {[
-              { icon: 'public', label: 'Website' },
-              { icon: 'share', label: 'LinkedIn' },
-              { icon: 'tag', label: 'Twitter / X' },
-            ].map(({ icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="w-10 h-10 rounded-full flex items-center justify-center no-underline transition-all duration-200"
-                style={{
-                  backgroundColor: 'rgba(255,255,255,0.08)',
-                  color: '#ffffff',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#00d27b';
-                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,210,123,0.3)';
-                  e.currentTarget.style.transform = 'translateY(-1px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#ffffff';
-                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.25)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '1.15rem' }}>
-                  {icon}
-                </span>
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* Expertise */}
@@ -109,6 +99,7 @@ function Footer() {
               <li key={item.label}>
                 <Link
                   to={item.to}
+                  onClick={scrollToTop}
                   className="text-sm font-medium no-underline transition-colors duration-200"
                   style={{ color: 'rgba(255,255,255,0.85)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = '#00d27b')}
@@ -132,15 +123,16 @@ function Footer() {
           <ul className="list-none p-0 m-0 flex flex-col gap-3.5">
             {company.map((item) => (
               <li key={item.label}>
-                <Link
-                  to={item.to}
-                  className="text-sm font-medium no-underline transition-colors duration-200"
+                <a
+                  href={`/#${item.id}`}
+                  onClick={(e) => handleSectionScroll(e, item.id)}
+                  className="text-sm font-medium no-underline transition-colors duration-200 cursor-pointer"
                   style={{ color: 'rgba(255,255,255,0.85)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = '#00d27b')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.85)')}
                 >
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -203,7 +195,6 @@ function Footer() {
               Get the latest insights on enterprise IT and technology delivered to your inbox.
             </p>
           </div>
-        
         </div>
       </div>
 
@@ -217,26 +208,7 @@ function Footer() {
         >
           © {new Date().getFullYear()} Nonsonet Technologies Limited. All rights reserved.
         </p>
-        <div className="flex gap-8">
-          {['Privacy Policy', 'Terms of Use'].map((label) => (
-            <a
-              key={label}
-              href="#"
-              className="text-[0.7rem] font-bold uppercase tracking-[0.08em] no-underline transition-all duration-200"
-              style={{ 
-                color: 'rgba(255,255,255,0.55)' 
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#00d27b';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
-              }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
+       
       </div>
     </footer>
   );

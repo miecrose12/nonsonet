@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /* ─── Floating stat card ─────────────────────────────────── */
 const StatCard = () => (
@@ -100,10 +101,15 @@ export default function Forecourt() {
 
           <div className="max-w-[1280px] mx-auto w-full relative z-10 flex flex-col mt-4">
             {/* Back to Solutions Link */}
-            <div className="mb-10 text-[#a0aab2] text-[15px] flex items-center gap-2 cursor-pointer hover:text-white w-fit font-medium transition-colors">
-              <span className="material-symbols-outlined text-[18px]">chevron_left</span>
-              Back to Solutions
-            </div>
+            <Link
+  to="/"
+  className="mb-10 text-[#a0aab2] text-[15px] flex items-center gap-2 cursor-pointer hover:text-white w-fit font-medium transition-colors"
+>
+  <span className="material-symbols-outlined text-[18px]">
+    chevron_left
+  </span>
+  Back to Solutions
+</Link>
 
             {/* Icon + Badge Row */}
             <div className="flex items-center gap-5 mb-8">

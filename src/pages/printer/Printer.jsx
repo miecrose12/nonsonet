@@ -303,12 +303,6 @@ const ManagedPrintServices = () => {
                         </div>
                       ))}
                     </div>
-
-                    {/* CTA Button */}
-                    <button className="mt-8 flex items-center gap-2 text-[#00d27b] font-bold text-sm hover:gap-3 transition-all duration-300 uppercase tracking-wide group/btn">
-                      Learn More
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
                   </div>
                 </div>
               );
