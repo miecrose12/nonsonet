@@ -3,6 +3,7 @@ import { ChevronDown, Check, TrendingUp, Shield, Leaf, Users, Zap, BarChart3, Lo
 import nonImage from "../../assets/IMG1.jpeg";
 import nonImage1 from "../../assets/canon3.png";
 import nonImage2 from "../../assets/IMG3.jpeg";
+import nonImage3 from "../../assets/canon4.jpeg";
 
 const ManagedPrintServices = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -132,7 +133,7 @@ const ManagedPrintServices = () => {
     },
     {
       name: "Canon imagePRESS V1000",
-      image: nonImage1,
+      image: nonImage3,
       description: "Built for commercial printing facilities and high-demand corporate reprographics departments, this industrial digital press delivers unparalleled color accuracy. It features automated front-to-back registration, inline finishing modules for professional booklet making, and continuous commercial speeds on heavy media.",
       category: "Commercial Press",
       specs: [
