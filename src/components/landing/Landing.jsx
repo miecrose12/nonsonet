@@ -150,7 +150,7 @@ function Landing() {
         <div className="max-w-[1280px] mx-auto">
           <p className="text-xs font-bold text-white opacity-60 uppercase tracking-widest text-center mb-12">Strategic Technology Partners</p>
           <div className="flex flex-wrap justify-center items-center gap-12 mb-16">
-            {['FuelTorque', 'ZKTeco', 'Hikvision', 'CISCO', 'HP Enterprise'].map((p) => (<span key={p} className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-black tracking-[-0.04em] text-white">{p}</span>))}
+            {['FuelTorque', 'TP-link', 'Canon', 'Hikvision', 'CISCO', 'HP Enterprise'].map((p) => (<span key={p} className="font-['Plus_Jakarta_Sans',sans-serif] text-3xl font-black tracking-[-0.04em] text-white">{p}</span>))}
           </div>
           <div className="bg-[#0b131f] rounded-[2.5rem] p-8 md:p-14 shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

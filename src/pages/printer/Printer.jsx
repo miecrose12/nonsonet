@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Check, TrendingUp, Shield, Leaf, Users, Zap, BarChart3, Lock, Wifi, FileText, AlertCircle, Printer, ArrowRight, Cpu, Battery, Globe, Lock as LockIcon } from 'lucide-react';
 import nonImage from "../../assets/IMG1.jpeg";
-import nonImage1 from "../../assets/IMG2.jpeg";
+import nonImage1 from "../../assets/canon2.jpeg";
 import nonImage2 from "../../assets/IMG3.jpeg";
 
 const ManagedPrintServices = () => {
@@ -98,7 +98,7 @@ const ManagedPrintServices = () => {
   const printers = [
     {
       name: "Canon imageRUNNER ADVANCE DX C5870i",
-      image: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=800&auto=format&fit=crop",
+      image: nonImage1,
       description: "Engineered for high-volume corporate environments, this A3 color multifunction workhorse delivers rapid document processing and uncompromised security. It features standard uniFLOW Online Express for cloud-based print management, a 270-ipm single-pass duplex scanner, and self-encrypting drives to protect sensitive enterprise data.",
       category: "Enterprise Multifunction",
       specs: [
