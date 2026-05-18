@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Check, TrendingUp, Shield, Leaf, Users, Zap, BarChart3, Lock, Wifi, FileText, AlertCircle, Printer, ArrowRight, Cpu, Battery, Globe, Lock as LockIcon } from 'lucide-react';
 import nonImage from "../../assets/IMG1.jpeg";
-import nonImage1 from "../../assets/canon2.jpeg";
+import nonImage1 from "../../assets/canon3.png";
 import nonImage2 from "../../assets/IMG3.jpeg";
 
 const ManagedPrintServices = () => {
